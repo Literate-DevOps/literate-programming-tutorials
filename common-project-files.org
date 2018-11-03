@@ -26,8 +26,12 @@ Use this file to manage the files listed in the table below:
 
   ,#+HTML: <img src="https://avatars3.githubusercontent.com/u/24377654?s=200&v=4#.jpg" height=50px>
 
-  ,* Literate Programming Tutorials
+  ,** Description
+
     Welcome to the Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm.
+
+  ,** Project Files
+
     - [[file:LICENSE][LICENSE]]
 
   «common-export-settings»
