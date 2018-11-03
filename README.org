@@ -6,6 +6,20 @@
 
   Welcome to the Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm.
 
+** Useful Resources
+
+*** noweb
+    - [[https://www.cs.tufts.edu/~nr/noweb/][Noweb — A Simple, Extensible Tool for Literate Programming]]
+
+*** org-mode
+
+   - [[https://orgmode.org]]
+     - manual [[https://orgmode.org/manual/][HTML]] [[https://orgmode.org/org.pdf][PDF]]
+       - [[https://orgmode.org/org.html#Noweb-reference-syntax][Noweb reference syntax]]
+       - [[https://orgmode.org/org.html#Working-with-source-code][Working with source code]]
+     - [[https://orgmode.org/worg/org-papers.html][org-papers]]
+     - [[https://orgmode.org/worg/org-tutorials/][org-tutorials]]
+
 ** Project Files
 
   - [[file:LICENSE][LICENSE]]
