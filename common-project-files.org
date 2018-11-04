@@ -774,6 +774,24 @@ Use this file to manage the files listed in the table below:
   <<license-file()>>
 #+END_SRC
 
+
+** Tutorial Template 
+
+#+BEGIN_SRC org :eval never :noweb yes 
+
+  ,#+TITLE: 
+  ,#+HTML: <img src="https://avatars3.githubusercontent.com/u/24377654?s=200&v=4#.jpg" height=50px>
+
+  ,* Summary
+  ,* Concepts
+  ,* Examples
+  ,* Further Study
+  ,* Common Export Settings                                           :noexport:
+
+    «common-export-settings»
+
+#+END_SRC
+
 * Common Export Settings                                           :noexport:
 
 #+NAME: common-export-settings
