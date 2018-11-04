@@ -773,27 +773,12 @@ Use this file to manage the files listed in the table below:
 
 #+END_SRC
 
-** Tutorial Template 
+* Common Project Settings
 
-#+BEGIN_SRC org :eval never :noweb yes 
-
-  ,#+TITLE: 
-  ,#+HTML: <img src="https://avatars3.githubusercontent.com/u/24377654?s=200&v=4#.jpg" height=50px>
-
-  ,* Summary
-  ,* Concepts
-  ,* Examples
-  ,* Further Study
-  ,* Common Export Settings                                           :noexport:
-
-    «common-export-settings»
-
-#+END_SRC
-
-* Common Export Settings                                           :noexport:
+** Common Export Settings                                           
 
 #+NAME: common-export-settings
-#+BEGIN_SRC org :results drawer replace :exports results 
+#+BEGIN_SRC org :results drawer replace :exports both
 
   ,#+OPTIONS: ':nil *:t -:t ::t <:t H:7 \n:nil ^:{} arch:headline
   ,#+OPTIONS: author:t broken-links:nil c:nil creator:nil
@@ -826,3 +811,21 @@ Use this file to manage the files listed in the table below:
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 :END:
+
+** Tutorial Template 
+
+#+BEGIN_SRC org :eval never :noweb yes 
+
+  ,#+TITLE: 
+  ,#+HTML: <img src="https://avatars3.githubusercontent.com/u/24377654?s=200&v=4#.jpg" height=50px>
+
+  ,* Summary
+  ,* Concepts
+  ,* Examples
+  ,* Further Study
+  ,* Common Export Settings                                           :noexport:
+
+    «common-export-settings»
+
+#+END_SRC
+
