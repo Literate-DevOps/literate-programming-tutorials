@@ -28,7 +28,7 @@ Use this file to manage the files listed in the table below:
 
   ,** Description
 
-    Welcome to the Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm.
+    Welcome to Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm.
 
   ,** Useful Resources
 
