@@ -5,62 +5,15 @@ Use this file to manage the files listed in the table below:
 #+NAME: file-list-table
 | Files      |
 |------------|
-| README.org |
 | .gitignore |
 | LICENSE    |
+| README.org |
 
 #+BEGIN_QUOTE
   *Note:* After updating this file, use ~C-c~ ~C-v~ ~t~ or evaluate the ~org-babel-tangle~ function against this file to update the contents of all the files in the table above.
 #+END_QUOTE
 
 * Common Project Files 
-
-** [[file:README.org][README.org]]
-:PROPERTIES:
-:ID:       12162C15-FB1D-4748-B376-9433FFB50D79
-:END:
-
-#+NAME: readme-file
-#+BEGIN_SRC org :eval never :exports none  :tangle README.org :noweb yes 
-  ,#+TITLE: Literate Programming Tutorials
-
-  ,#+HTML: <img src="https://avatars3.githubusercontent.com/u/24377654?s=200&v=4#.jpg" height=50px>
-
-  ,** Description
-
-    Welcome to Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm[fn:1].
-
-  ,** Tutorials
-
-  ,*** Literate Programming using org-mode
-
-
-  ,** Useful Resources
-
-  ,*** noweb
-      - [[https://www.cs.tufts.edu/~nr/noweb/][Noweb — A Simple, Extensible Tool for Literate Programming]]
-
-  ,*** org-mode
-
-     - [[https://orgmode.org]]
-       - manual [[https://orgmode.org/manual/][HTML]] [[https://orgmode.org/org.pdf][PDF]]
-         - [[https://orgmode.org/org.html#Noweb-reference-syntax][Noweb reference syntax]]
-         - [[https://orgmode.org/org.html#Working-with-source-code][Working with source code]]
-       - [[https://orgmode.org/worg/org-papers.html][org-papers]]
-       - [[https://orgmode.org/worg/org-tutorials/][org-tutorials]]
-
-  ,** Project Files
-
-    - [[file:LICENSE][LICENSE]]
-
-  «common-export-settings»
-
-  ,* Footnotes
-
-  [fn:1] [[https://en.wikipedia.org/w/index.php?title=Literate_programming&oldid=866590640]]
-
-#+END_SRC
-
 ** [[file:.gitignore][.gitignore]]
 :PROPERTIES:
 :ID:       ECBD2FC2-E1F1-41C5-8D92-4F2F31EA56C0
@@ -774,6 +727,51 @@ Use this file to manage the files listed in the table below:
   <<license-file()>>
 #+END_SRC
 
+** [[file:README.org][README.org]]
+:PROPERTIES:
+:ID:       12162C15-FB1D-4748-B376-9433FFB50D79
+:END:
+
+#+NAME: readme-file
+#+BEGIN_SRC org :eval never :exports none  :tangle README.org :noweb yes 
+  ,#+TITLE: Literate Programming Tutorials
+
+  ,#+HTML: <img src="https://avatars3.githubusercontent.com/u/24377654?s=200&v=4#.jpg" height=50px>
+
+  ,** Description
+
+    Welcome to Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm[fn:1].
+
+  ,** Tutorials
+
+  ,*** Literate Programming using org-mode
+
+
+  ,** Useful Resources
+
+  ,*** noweb
+      - [[https://www.cs.tufts.edu/~nr/noweb/][Noweb — A Simple, Extensible Tool for Literate Programming]]
+
+  ,*** org-mode
+
+     - [[https://orgmode.org]]
+       - manual [[https://orgmode.org/manual/][HTML]] [[https://orgmode.org/org.pdf][PDF]]
+         - [[https://orgmode.org/org.html#Noweb-reference-syntax][Noweb reference syntax]]
+         - [[https://orgmode.org/org.html#Working-with-source-code][Working with source code]]
+       - [[https://orgmode.org/worg/org-papers.html][org-papers]]
+       - [[https://orgmode.org/worg/org-tutorials/][org-tutorials]]
+
+  ,** Project Files
+
+    - [[file:LICENSE][LICENSE]]
+
+  «common-export-settings»
+
+  ,* Footnotes
+
+  [fn:1] [[https://en.wikipedia.org/w/index.php?title=Literate_programming&oldid=866590640]]
+
+#+END_SRC
 
 ** Tutorial Template 
 
