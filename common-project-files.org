@@ -10,7 +10,7 @@ Use this file to manage the files listed in the table below:
 | LICENSE    |
 
 #+BEGIN_QUOTE
-  *Note:* After updating this file, use ~C-c~ ~C-v~ ~t~ or evaluate the ~org-babel-tangle~ function as this file to update the contents of all the files in the table above.
+  *Note:* After updating this file, use ~C-c~ ~C-v~ ~t~ or evaluate the ~org-babel-tangle~ function against this file to update the contents of all the files in the table above.
 #+END_QUOTE
 
 * Common Project Files 
