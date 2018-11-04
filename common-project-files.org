@@ -28,7 +28,12 @@ Use this file to manage the files listed in the table below:
 
   ,** Description
 
-    Welcome to Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm.
+    Welcome to Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm[fn:1].
+
+  ,** Tutorials
+
+  ,*** Literate Programming using org-mode
+
 
   ,** Useful Resources
 
@@ -49,6 +54,10 @@ Use this file to manage the files listed in the table below:
     - [[file:LICENSE][LICENSE]]
 
   «common-export-settings»
+
+  ,* Footnotes
+
+  [fn:1] [[https://en.wikipedia.org/w/index.php?title=Literate_programming&oldid=866590640]]
 
 #+END_SRC
 

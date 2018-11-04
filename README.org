@@ -4,7 +4,12 @@
 
 ** Description
 
-  Welcome to the Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm.
+  Welcome to Literate Programming Tutorials! The goal of this repository is to provide a curated list of open source tutorials and resources related to the Literate Programming Paradigm[fn:1].
+
+** Tutorials
+
+*** Literate Programming using org-mode
+
 
 ** Useful Resources
 
@@ -37,3 +42,8 @@
 
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
+
+
+* Footnotes
+
+[fn:1] [[https://en.wikipedia.org/w/index.php?title=Literate_programming&oldid=866590640]]
