@@ -1,0 +1,24 @@
+
+#+TITLE: 
+#+HTML: <img src="https://avatars3.githubusercontent.com/u/24377654?s=200&v=4#.jpg" height=50px>
+
+* Summary
+* Concepts
+* Examples
+* Further Study
+* Common Export Settings                                           :noexport:
+
+  
+  #+OPTIONS: ':nil *:t -:t ::t <:t H:7 \n:nil ^:{} arch:headline
+  #+OPTIONS: author:t broken-links:nil c:nil creator:nil
+  #+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
+  #+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+  #+OPTIONS: timestamp:t title:t toc:nil todo:t |:t
+  #+SELECT_TAGS: export
+  #+EXCLUDE_TAGS: noexport
+  
+  # For Display when file is exported with org-ruby 
+  
+  #+EXPORT_SELECT_TAGS: export
+  #+EXPORT_EXCLUDE_TAGS: noexport
+  
