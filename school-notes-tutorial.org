@@ -79,9 +79,17 @@ This link abbreviation will open the text in a buffer at the specific line liste
 
 ** TODO Org Files
 ** TODO HTML and Webpages
+
 ** TODO Custom Link eLisp
 * TODO Examples
-To demonstrate the custom links, we will be using the 
+** PDFs
+
+#+link: pg-pdf docview:books/11-pdf.pdf::%s
+
+[[pg-pdf::35][Chapter VIII]]
+** Text
+#+link: pg-text file:books/11-0.txt::%s
+[[pg-text::1572][Chapter VII]]
 * Further Study
 ** [[https://orgmode.org/org.html#External-links][Orgmode Manual External Links]]
 ** [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Document-View.html][Emacs Docview]]
