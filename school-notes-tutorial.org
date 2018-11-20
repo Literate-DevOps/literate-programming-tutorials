@@ -69,7 +69,14 @@ Emacs is incapible of rendering these documents out of the box, but there are so
 *** TODO Ereader
 Ereader is a package used to read epub documents in emacs, that includes orgmode support. 
 Of note is the ebook link type.[fn:2] 
-** TODO Text Files
+** DONE Text Files
+Text files are the simplest way to store books that I've seen so far. 
+And as a result are wonderfully easy to link to.
+#+BEGIN_SRC org
+  ,#+link: book file:pathtotext::%s
+#+END_SRC
+This link abbreviation will open the text in a buffer at the specific line listed.
+
 ** TODO Org Files
 ** TODO HTML and Webpages
 ** TODO Custom Link eLisp
