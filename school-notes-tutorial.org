@@ -6,58 +6,76 @@
 #+HTML: <img src="https://avatars3.githubusercontent.com/u/24377654?s=200&v=4#.jpg" height=50px>
 
 * Summary
-Orgmode is a powerful note taking tool. And while the documentation on the package is very dense, there are some topics that the manual does not go over
-in great detail. One of these topics is the link function, and specifically the ability to define custom links using the
+
+Orgmode is a powerful note taking tool. And while the documentation on the package is very dense, there are some topics that the manual does not go over in great detail. One of these topics is the link function, and specifically the ability to define custom links using the command. 
+
 #+BEGIN_EXAMPLE
-#+link:
+  ,#+link:
 #+END_EXAMPLE
-command. In this tutorial, I will show you how to set up orgmode, so that you can refer to specific pages of pdf, and how to use that to take notes.
-The real world exampes are from Project Gutenberg, specifically the alice of wonderland transcription produced by Arthur DiBianca and David Widger.[fn:1]
+
+In this tutorial, I will show you how to set up orgmode, so that you can refer to specific pages of pdf, and how to use that to take notes.
+
+The real world examples are from Project Gutenberg, specifically the alice of wonderland transcription produced by Arthur DiBianca and David Widger.[fn:1]
+
 * Concepts
+
 ** DONE Links
-Orgmode features the ability to create links to both internal and external sources in the form of hyperlinks. These links can be used to jump between points in a
-file, or jump to point within an external file. Orgmode links consist of two major parts, the link and description. 
+
+Orgmode features the ability to create links to both internal and external sources in the form of hyperlinks. These links can be used to jump between points in a file, or jump to point within an external file. Orgmode links consist of two major parts, the link and description. 
+
 #+name: link-example
 #+BEGIN_SRC org
   [[protocal:path::arguments][Descriptions]]
 #+END_SRC
 
 ** DONE Link Abbreviations
+
 Some hyperlinks are quite long and difficult to type many times over, this is where the ability to define link abbreviations comes in handy.
+
 #+name: link-abbreviation-example
 #+BEGIN_SRC org
   ,#+link: name protocal:path::%s
 #+END_SRC
-This allows for you to create new links using ~C-c C-l~ or entering a new link that looks like
+
+This allows for you to create new links using ~C-c C-l~ or entering a new link that looks like when the link is either clicked on, or you press ~C-c C-o~ you will be taken to the path using the protocal outlined above.
+
 #+BEGIN_SRC org
   [[name::searching][Description]]
 #+END_SRC
-when the link is either clicked on, or you press ~C-c C-o~ you will be taken to the path using the protocal outlined above.
+
 If the specific link cannot be understood, orgmode will offer to create a new headline with the name of the link.
 
 ** DONE Inserting Links and Opening Links
+
 Links can be inserted with the keybind ~C-c C-l~, ~M-x org-insert-link~, or by manually entering the link with the following syntax:
-<<link-example>>. 
+=<<link-example>>=.
+ 
 ** DONE PDFs
+
 PDFs are a common form of storing written text in a fixed format. This has the added benifit that a pdf will look the same on any device that can render in.
 However a consequence of this is that these documents can be difficultly to parse position with the link syntax.
 This is where emacs's docview comes in handy.
+
 #+name: pdf-link-to-page
 #+BEGIN_SRC org
   ,#+Link: book docview:pathtofile::%s
 #+END_SRC
-By creating a link abreviation like the one above, you just need to create a link
+
+By creating a link abreviation like the one above, you just need to create a link that will open a buffer at pagenum in the the pdf listed. 
+
+e.g. 
+
 #+BEGIN_SRC org
   [[book::pagenum][Description]]
 #+END_SRC
-that will open a buffer at pagenum in the the pdf listed. 
-Whats neat is that as long as the buffer that the book was loaded in remains open. Clicking on other links to the same files will
-just change your position in that buffer.
+
+Whats neat is that as long as the buffer that the book was loaded in remains open. Clicking on other links to the same files will just change your position in that buffer.
+
 There are limitations however. If you create a link abbreviation as shown, there will not be any auto complete when using org-insert-link. 
 This can be implimented with a more [[Custom Link eLisp][Advance]] link function.
 
-
 ** TODO Epubs
+
 Epubs are powerful way of storing and rendering books. Rather than prerendering all of the text and images like a pdf. Epubs are instead a collection
 of html pages, and a manifest xml document that have been zipped into a single file.
 While the exact page layout is no longer the same across devices, epubs will render to the demensions of the device they are on, and feature the ability
@@ -69,32 +87,45 @@ Emacs is incapible of rendering these documents out of the box, but there are so
 *** TODO Ereader
 Ereader is a package used to read epub documents in emacs, that includes orgmode support. 
 Of note is the ebook link type.[fn:2] 
+
 ** DONE Text Files
+
 Text files are the simplest way to store books that I've seen so far. 
 And as a result are wonderfully easy to link to.
+
 #+BEGIN_SRC org
   ,#+link: book file:pathtotext::%s
 #+END_SRC
+
 This link abbreviation will open the text in a buffer at the specific line listed.
 
 ** TODO Org Files
+
 ** TODO HTML and Webpages
 
 ** TODO Custom Link eLisp
+
 * TODO Examples
+
 ** PDFs
 
 #+link: pg-pdf docview:books/11-pdf.pdf::%s
 
 [[pg-pdf::35][Chapter VIII]]
-** Text
-#+link: pg-text file:books/11-0.txt::%s
-[[pg-text::1572][Chapter VII]]
-* Further Study
-** [[https://orgmode.org/org.html#External-links][Orgmode Manual External Links]]
-** [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Document-View.html][Emacs Docview]]
-* Common Export Settings                                           :noexport:
 
+** Text
+
+#+link: pg-text file:books/11-0.txt::%s
+
+[[pg-text::1572][Chapter VII]]
+
+* Further Study
+
+** [[https://orgmode.org/org.html#External-links][Orgmode Manual External Links]]
+
+** [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Document-View.html][Emacs Docview]]
+
+* Common Export Settings                                           :noexport:
   
   #+OPTIONS: ':nil *:t -:t ::t <:t H:7 \n:nil ^:{} arch:headline
   #+OPTIONS: author:t broken-links:nil c:nil creator:nil
