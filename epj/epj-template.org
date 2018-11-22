@@ -172,7 +172,7 @@
 
 #+END_SRC
 
-* Latex Output
+** Latex Output
 
 #+BEGIN_SRC latex :noweb yes :eval never :tangle yes 
   «european-physical-journal-latex-template»
