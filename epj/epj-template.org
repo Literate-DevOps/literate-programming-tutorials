@@ -10,8 +10,8 @@
 #+NAME: pacs-codes-table
 | PACS-KEY   | PACS-KEY-Description-Text  |
 |------------+----------------------------|
-| PACS-key01 | text discribing PACS-key01 |
-| PACS-key02 | text discribing PACS-key02 |
+| PACS-key01 | Text Describing PACS-key01 |
+| PACS-key02 | Text Describing PACS-key02 |
 
 * Introduction
 * Latex Template                                                   :noexport:
