@@ -2,6 +2,8 @@
 
 #+TITLE: Title Goes Here
 
+#+SUBTITLE: Subtitle Goes Here
+
 * Authors
 * Institutions
 * Abstract
@@ -58,7 +60,7 @@
   \begin{document}
   %
   \title{«get-title-text()»}
-  \subtitle{Do you have a subtitle?\\ If so, write it here}
+  \subtitle{«get-subtitle-text()»}
   \author{First author\inst{1} \and Second author\inst{2}% etc
   % \thanks is optional - remove next line if not needed
   \thanks{\emph{Present address:} Insert the address here if needed}%
@@ -176,6 +178,22 @@
 
 #+RESULTS: get-title-text
 : Title Goes Here
+
+*** get-subtitle-text
+
+#+NAME: get-subtitle-text
+#+BEGIN_SRC elisp  :results replace :var keyword="subtitle" :var delimiter=" "
+ (mapconcat 'car (org-element-map
+      (org-element-parse-buffer)
+      '(keyword)
+    (lambda (x) (if (string= (upcase keyword) (org-element-property :key x))
+                 (list (org-element-property :value x)) )
+      )
+    ) delimiter)
+#+END_SRC
+
+#+RESULTS: get-subtitle-text
+: Subtitle Goes Here
 
 *** epj-pacs-codes-latex 
 
