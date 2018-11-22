@@ -13,19 +13,6 @@
 | PACS-key01 | text discribing PACS-key01 |
 | PACS-key02 | text discribing PACS-key02 |
 
-** Generate PACS Latex Code
-
-#+NAME: epj-pacs-codes-latex
-#+BEGIN_SRC elisp  :var pacs_codes=pacs-codes-table :results latex replace :var join_delim="   \\and\n"
-  (string-join (mapcar (lambda (x) (format "      {%s}{%s}" (car x) (nth 1 x))) pacs_codes) join_delim)
-#+END_SRC
-
-#+RESULTS: epj-pacs-codes-latex
-#+BEGIN_EXPORT latex
-      {PACS-key01}{text discribing PACS-key01}   \and
-      {PACS-key02}{text discribing PACS-key02}
-#+END_EXPORT
-
 * Introduction
 * Latex Template                                                   :noexport:
 
@@ -179,6 +166,19 @@
 #+END_SRC
 
 ** Template Utility Code
+
+*** epj-pacs-codes-latex 
+
+#+NAME: epj-pacs-codes-latex
+#+BEGIN_SRC elisp  :var pacs_codes=pacs-codes-table :results latex replace :var join_delim="   \\and\n"
+  (string-join (mapcar (lambda (x) (format "      {%s}{%s}" (car x) (nth 1 x))) pacs_codes) join_delim)
+#+END_SRC
+
+#+RESULTS: epj-pacs-codes-latex
+#+BEGIN_EXPORT latex
+      {PACS-key01}{text discribing PACS-key01}   \and
+      {PACS-key02}{text discribing PACS-key02}
+#+END_EXPORT
 
 * Common Export Settings                                      :noexport:
 
