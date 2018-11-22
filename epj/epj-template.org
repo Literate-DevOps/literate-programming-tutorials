@@ -27,7 +27,7 @@
 #+END_EXPORT
 
 * Introduction
-* Latex Template
+* Latex Template                                                   :noexport:
 
 #+NAME: european-physical-journal-latex-template
 #+BEGIN_SRC latex :eval never :noweb yes 
