@@ -178,6 +178,8 @@
   «european-physical-journal-latex-template»
 #+END_SRC
 
+** Template Utility Code
+
 * Common Export Settings                                      :noexport:
 
 #+OPTIONS: ':nil *:t -:t ::t <:t H:7 \n:nil ^:{} arch:headline
