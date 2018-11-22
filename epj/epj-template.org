@@ -30,7 +30,7 @@
 * Latex Template
 
 #+NAME: european-physical-journal-latex-template
-#+BEGIN_SRC latex :eval never 
+#+BEGIN_SRC latex :eval never :noweb yes 
   %%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
   %
   % This is a template file for The European Physical Journal
