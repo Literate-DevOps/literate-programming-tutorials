@@ -1,6 +1,6 @@
 # -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
 
-#+TITLE: Title-Goes-Here
+#+TITLE: Title Goes Here
 
 * Authors
 * Institutions
@@ -57,7 +57,7 @@
   %
   \begin{document}
   %
-  \title{Insert your title here}
+  \title{«get-title-text()»}
   \subtitle{Do you have a subtitle?\\ If so, write it here}
   \author{First author\inst{1} \and Second author\inst{2}% etc
   % \thanks is optional - remove next line if not needed
@@ -166,6 +166,16 @@
 #+END_SRC
 
 ** Template Utility Code
+
+*** get-title-text
+
+#+NAME: get-title-text
+#+BEGIN_SRC elisp 
+  (format "%s" (car (plist-get (org-export-get-environment) ':title)))
+#+END_SRC
+
+#+RESULTS: get-title-text
+: Title Goes Here
 
 *** epj-pacs-codes-latex 
 
