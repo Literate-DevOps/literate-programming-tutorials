@@ -13,6 +13,7 @@ in great detail. One of these topics is the link function, and specifically the 
 #+END_EXAMPLE
 command. In this tutorial, I will show you how to set up orgmode, so that you can refer to specific pages of pdf, and how to use that to take notes.
 The real world exampes are from Project Gutenberg, specifically the alice of wonderland transcription produced by Arthur DiBianca and David Widger.[fn:1]
+The external link syntax is extremely powerful, especially when 
 * Concepts
 ** DONE Links
 Orgmode features the ability to create links to both internal and external sources in the form of hyperlinks. These links can be used to jump between points in a
@@ -77,10 +78,25 @@ And as a result are wonderfully easy to link to.
 #+END_SRC
 This link abbreviation will open the text in a buffer at the specific line listed.
 
-** TODO Org Files
+** DONE Org Files
+External Org files can be linked to in a few ways with the specific behavior depending
+on your org settings but by default you can link to headlines, or a line number.
+When linking to headlines you can either link to the exact headline[fn:3] or search for
+a head line[fn:4]. 
+#+BEGIN_SRC org
+  ,#+link: book file:pathtoorg::%s
+#+END_SRC
+
+#+BEGIN_SRC org
+  [[book::linenum][Org file at linenum]]
+  [[book::*Exact Headline][Org file at exact headline]]
+  [[book::text search][Org file that text searches]]
+#+END_SRC
+
 ** TODO HTML and Webpages
 
 ** TODO Custom Link eLisp
+
 * TODO Examples
 ** PDFs
 
@@ -90,6 +106,11 @@ This link abbreviation will open the text in a buffer at the specific line liste
 ** Text
 #+link: pg-text file:books/11-0.txt::%s
 [[pg-text::1572][Chapter VII]]
+** Org 
+#+link: pg-org file:books/11-org.org::%s
+[[pg-org::*CHAPTER%20IV.%20The%20Rabbit%20Sends%20in%20a%20Little%20Bill][Chapter IV as headdline]]
+[[pg-org::708][Chapter IV as line number]]
+[[pg-org::CHAPTER IV. The Rabbit Sends in a Little Bill][Chapter IV as search]]
 * Further Study
 ** [[https://orgmode.org/org.html#External-links][Orgmode Manual External Links]]
 ** [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Document-View.html][Emacs Docview]]
@@ -110,6 +131,10 @@ This link abbreviation will open the text in a buffer at the specific line liste
   #+EXPORT_EXCLUDE_TAGS: noexport
 
 * Footnotes
+
+[fn:4] As defined by these variables https://orgmode.org/org.html#FOOT32
+
+[fn:3] As defined by these variables https://orgmode.org/org.html#FOOT31
 
 [fn:2] Ereader's link parser https://github.com/bddean/emacs-ereader/blob/master/org-ebook.el
 
