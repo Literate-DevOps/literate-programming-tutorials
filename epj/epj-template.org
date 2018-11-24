@@ -93,7 +93,7 @@
   %
   \section{Introduction}
   \label{intro}
-  Your text comes here. Separate text sections with
+  «get-introduction-text()»
   \section{Section title}
   \label{sec:1}
   and \cite{RefJ}
@@ -202,6 +202,28 @@
 
 #+RESULTS: get-subtitle-text
 : Subtitle Goes Here
+
+*** get-introduction-text
+
+#+NAME: get-introduction-text
+#+BEGIN_SRC elisp :results latex replace :var keyword="introduction" :var deliminator="\\par\n"
+  (mapconcat 'identity(org-element-map (org-element-map
+                       (org-element-parse-buffer)
+                       '(headline)
+                     (lambda (hl) (if (string= (upcase keyword) (upcase (org-element-property :raw-value hl)))
+                                     hl)
+                       ) 
+                     nil t)
+      '(paragraph)
+    (lambda (p) 
+      (format "%s" (replace-regexp-in-string (rx (or (: bos (* (any " \t\n")))
+                                                     (: (* (any " \t\n")) eos)))
+                                             ""
+                                (buffer-substring-no-properties (org-element-property :contents-begin p) (org-element-property :contents-end p))))
+      )
+    nil nil)
+deliminator)
+#+END_SRC
 
 *** get-abstract-text
 
