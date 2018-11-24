@@ -14,6 +14,13 @@
 | E. Tal          |                      |              2 |
 
 * Institutions
+
+#+NAME: institutions-table
+| Institution-ID | Institution                                                                                                      |
+|----------------+------------------------------------------------------------------------------------------------------------------|
+|              1 | New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort, Some-Sort, Some-Sort-of-Country |
+|              2 | Golden Opportunities Lab, Department of Obscure Studies, Ancient College, Olde-Locale, Stodgy-Land               |
+
 * Abstract
 * PACS
 
@@ -76,7 +83,7 @@
   %
   \offprints{}          % Insert a name or remove this line
   %
-  \institute{Insert the first address here \and the second here}
+  \institute{«epj-institutions-latex()»}
   %
   \date{Received: date / Revised version: date}
   % The correct dates will be entered by Springer
@@ -269,6 +276,18 @@ deliminator)
 #+RESULTS: epj-authors-latex
 #+BEGIN_EXPORT latex
 Mai Deah\inst{1} \and Arthur Secondus\inst{1} \and E. Tal\inst{2}
+#+END_EXPORT
+
+*** epj-institutions-latex 
+
+#+NAME: epj-institutions-latex
+#+BEGIN_SRC elisp  :var institutions=institutions-table :results latex replace :var join_delim=" \\and "
+  (string-join (mapcar (lambda (x) (format "%s" (nth 1 x))) institutions) join_delim)
+#+END_SRC
+
+#+RESULTS: epj-institutions-latex
+#+BEGIN_EXPORT latex
+New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort, Some-Sort, Some-Sort-of-Country \and Golden Opportunities Lab, Department of Obscure Studies, Ancient College, Olde-Locale, Stodgy-Land
 #+END_EXPORT
 
 * Common Export Settings                                      :noexport:
