@@ -74,7 +74,7 @@
   % The correct dates will be entered by Springer
   %
   \abstract{
-  Insert your abstract here.
+  «get-abstract-text()»
   %
   \PACS{
   «epj-pacs-codes-latex()»
@@ -194,6 +194,27 @@
 
 #+RESULTS: get-subtitle-text
 : Subtitle Goes Here
+
+*** get-abstract-text
+
+#+NAME: get-abstract-text
+#+BEGIN_SRC elisp :results replace :var keyword="abstract"
+  (org-element-map (org-element-map
+                       (org-element-parse-buffer)
+                       '(headline)
+                     (lambda (hl) (if (string= (upcase keyword) (upcase (org-element-property :raw-value hl)))
+                                     hl)
+                       ) 
+                     nil t)
+      '(paragraph)
+    (lambda (p) 
+      (format "%s" (replace-regexp-in-string (rx (or (: bos (* (any " \t\n")))
+                                                     (: (* (any " \t\n")) eos)))
+                                             ""
+                                (buffer-substring-no-properties (org-element-property :contents-begin p) (org-element-property :contents-end p))))
+      )
+    nil t)
+#+END_SRC
 
 *** epj-pacs-codes-latex 
 
