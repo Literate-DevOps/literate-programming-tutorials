@@ -5,6 +5,14 @@
 #+SUBTITLE: Subtitle Goes Here
 
 * Authors
+
+#+NAME: authors-table
+| Author          | Email                | Institution-ID |
+|-----------------+----------------------+----------------|
+| Mai Deah        | mai.deah@example.edu |              1 |
+| Arthur Secondus |                      |              1 |
+| E. Tal          |                      |              2 |
+
 * Institutions
 * Abstract
 * PACS
@@ -61,7 +69,7 @@
   %
   \title{«get-title-text()»}
   \subtitle{«get-subtitle-text()»}
-  \author{First author\inst{1} \and Second author\inst{2}% etc
+  \author{«epj-authors-latex()»% etc
   % \thanks is optional - remove next line if not needed
   \thanks{\emph{Present address:} Insert the address here if needed}%
   }                     % Do not remove
@@ -227,6 +235,18 @@
 #+BEGIN_EXPORT latex
       {PACS-key01}{text discribing PACS-key01}   \and
       {PACS-key02}{text discribing PACS-key02}
+#+END_EXPORT
+
+*** epj-authors-latex 
+
+#+NAME: epj-authors-latex
+#+BEGIN_SRC elisp  :var authors=authors-table :results latex replace :var join_delim=" \\and "
+  (string-join (mapcar (lambda (x) (format "%s\\inst{%s}" (car x) (nth 2 x))) authors) join_delim)
+#+END_SRC
+
+#+RESULTS: epj-authors-latex
+#+BEGIN_EXPORT latex
+Mai Deah\inst{1} \and Arthur Secondus\inst{1} \and E. Tal\inst{2}
 #+END_EXPORT
 
 * Common Export Settings                                      :noexport:
