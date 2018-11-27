@@ -74,7 +74,7 @@ Whats neat is that as long as the buffer that the book was loaded in remains ope
 There are limitations however. If you create a link abbreviation as shown, there will not be any auto complete when using org-insert-link. 
 This can be implimented with a more [[Custom Link eLisp][Advance]] link function.
 
-** TODO Epubs
+** DONE Epubs
 
 Epubs are powerful way of storing and rendering books. Rather than prerendering all of the text and images like a pdf. Epubs are instead a collection
 of html pages, and a manifest xml document that have been zipped into a single file.
@@ -82,7 +82,8 @@ While the exact page layout is no longer the same across devices, epubs will ren
 Emacs is incapible of rendering these documents out of the box, but there are some well known packages that add in this functionality.
 
 *** TODO Nov.el
-
+While nov.el is my favorite package for reading epubs in emacs, it unfortunately falls short on the ability to link to specific sections of the book.
+This could be fixed by creating an [[elisp links][elisp function]].
 *** TODO Ereader
 Ereader is a package used to read epub documents in emacs, that includes orgmode support. 
 Of note is the ebook link type.[fn:2] 
@@ -103,7 +104,7 @@ This link abbreviation will open the text in a buffer at the specific line liste
 External Org files can be linked to in a few ways with the specific behavior depending
 on your org settings but by default you can link to headlines, or a line number.
 When linking to headlines you can either link to the exact headline[fn:3] or search for
-a head line[fn:4]. 
+a head line[fn:4].
 #+BEGIN_SRC org
   ,#+link: book file:pathtoorg::%s
 #+END_SRC
@@ -113,12 +114,24 @@ a head line[fn:4].
   [[book::*Exact Headline][Org file at exact headline]]
   [[book::text search][Org file that text searches]]
 #+END_SRC
-** TODO Org Files
->>>>>>> origin/1-school-notes-tutorial
 
-** TODO HTML and Webpages
+** TODO Webpages
+Orgmode can link to webpages using a few different methods.
+The first method uses the http/https protocal to access the webpage using your default browser.
+#+BEGIN_SRC org
+[[https://en.wikipedia.org/wiki/Literate_programming][Open from browser]]
+#+END_SRC
+This sends a signal to your browser to open the requestsed page. 
 
 ** TODO Custom Link eLisp
+Finally you can create more complicated link functions using elisp.
+The [[https://orgmode.org/manual/Adding-hyperlink-types.html#Adding-hyperlink-types][hacking]] page in the org manual demonstrates ho the man links were created.
+In essence, what you are doing is creating a lisp program and binding it to one of the link abbreviations.
+By writing a function like this, you can make the link as interactive as you want, or overide behavior that is un-wanted.
+See the [[elisp links][Examples]] section for more examples on using this feature.
+
+** TODO make a demonstration of a link plug in                     :noexport:
+
 
 * TODO Examples
 
@@ -149,11 +162,13 @@ a head line[fn:4].
 
 #+END_SRC
 
+** elisp links
+[[https://github.com/bddean/emacs-ereader/blob/f3bbd3f13195f8fba3e3c880aab0e4c60430dcf3/org-ebook.el][Ereader Example]]
+[[https://emacs.stackexchange.com/a/30345/11045][PDF Example]]
+[[https://orgmode.org/manual/Adding-hyperlink-types.html#Adding-hyperlink-types][Man Example]]
 * Further Study
-
-** [[https://orgmode.org/org.html#External-links][Orgmode Manual External Links]]
-
-** [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Document-View.html][Emacs Docview]]
+** [[https://orgmode.org/manual/Hyperlinks.html#Hyperlinks][Orgmode Hyperlinks]]
+ 
 * Common Export Settings                                           :noexport:
   
   #+OPTIONS: ':nil *:t -:t ::t <:t H:7 \n:nil ^:{} arch:headline
