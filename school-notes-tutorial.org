@@ -12,17 +12,11 @@ Orgmode is a powerful note taking tool. And while the documentation on the packa
 #+BEGIN_EXAMPLE
   ,#+link:
 #+END_EXAMPLE
-<<<<<<< HEAD
+
 command. In this tutorial, I will show you how to set up orgmode, so that you can refer to specific pages of pdf, and how to use that to take notes.
 The real world exampes are from Project Gutenberg, specifically the alice of wonderland transcription produced by Arthur DiBianca and David Widger.[fn:1]
 The external link syntax is extremely powerful, especially when 
-=======
 
-In this tutorial, I will show you how to set up orgmode, so that you can refer to specific pages of pdf, and how to use that to take notes.
-
-The real world examples are from Project Gutenberg, specifically the alice of wonderland transcription produced by Arthur DiBianca and David Widger.[fn:1]
-
->>>>>>> origin/1-school-notes-tutorial
 * Concepts
 
 ** DONE Links
@@ -84,8 +78,7 @@ This can be implimented with a more [[Custom Link eLisp][Advance]] link function
 
 Epubs are powerful way of storing and rendering books. Rather than prerendering all of the text and images like a pdf. Epubs are instead a collection
 of html pages, and a manifest xml document that have been zipped into a single file.
-While the exact page layout is no longer the same across devices, epubs will render to the demensions of the device they are on, and feature the ability
-to change font size and style on the fly. 
+While the exact page layout is no longer the same across devices, epubs will render to the demensions of the device they are on, and feature the ability to change font size and style on the fly. 
 Emacs is incapible of rendering these documents out of the box, but there are some well known packages that add in this functionality.
 
 *** TODO Nov.el
@@ -120,7 +113,6 @@ a head line[fn:4].
   [[book::*Exact Headline][Org file at exact headline]]
   [[book::text search][Org file that text searches]]
 #+END_SRC
-=======
 ** TODO Org Files
 >>>>>>> origin/1-school-notes-tutorial
 
@@ -131,31 +123,37 @@ a head line[fn:4].
 * TODO Examples
 
 ** PDFs
-
+#+BEGIN_SRC org
 #+link: pg-pdf docview:books/11-pdf.pdf::%s
 
 [[pg-pdf::35][Chapter VIII]]
 
+#+END_SRC
+
+
 ** Text
 
-#+link: pg-text file:books/11-0.txt::%s
+#+BEGIN_SRC org
+  ,#+link: pg-text file:books/11-0.txt::%s
 
-[[pg-text::1572][Chapter VII]]
-<<<<<<< HEAD
+  [[pg-text::1572][Chapter VII]]
+#+END_SRC
+
 ** Org 
-#+link: pg-org file:books/11-org.org::%s
-[[pg-org::*CHAPTER%20IV.%20The%20Rabbit%20Sends%20in%20a%20Little%20Bill][Chapter IV as headdline]]
-[[pg-org::708][Chapter IV as line number]]
-[[pg-org::CHAPTER IV. The Rabbit Sends in a Little Bill][Chapter IV as search]]
-=======
+#+BEGIN_SRC org
+  ,#+link: pg-org file:books/11-org.org::%s
+  [[pg-org::*CHAPTER%20IV.%20The%20Rabbit%20Sends%20in%20a%20Little%20Bill][Chapter IV as headdline]]
+  [[pg-org::708][Chapter IV as line number]]
+  [[pg-org::CHAPTER IV. The Rabbit Sends in a Little Bill][Chapter IV as search]]
 
->>>>>>> origin/1-school-notes-tutorial
+
+#+END_SRC
+
 * Further Study
 
 ** [[https://orgmode.org/org.html#External-links][Orgmode Manual External Links]]
 
 ** [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Document-View.html][Emacs Docview]]
-
 * Common Export Settings                                           :noexport:
   
   #+OPTIONS: ':nil *:t -:t ::t <:t H:7 \n:nil ^:{} arch:headline
