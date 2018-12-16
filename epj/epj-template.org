@@ -257,20 +257,20 @@ deliminator)
 
 #+NAME: epj-pacs-codes-latex
 #+BEGIN_SRC elisp  :var pacs_codes=pacs-codes-table :results latex replace :var join_delim="   \\and\n"
-  (string-join (mapcar (lambda (x) (format "      {%s}{%s}" (car x) (nth 1 x))) pacs_codes) join_delim)
+  (mapconcat 'identity (mapcar (lambda (x) (format "      {%s}{%s}" (car x) (nth 1 x))) pacs_codes) join_delim)
 #+END_SRC
 
 #+RESULTS: epj-pacs-codes-latex
 #+BEGIN_EXPORT latex
-      {PACS-key01}{text discribing PACS-key01}   \and
-      {PACS-key02}{text discribing PACS-key02}
+      {PACS-key01}{Text Describing PACS-key01}   \and
+      {PACS-key02}{Text Describing PACS-key02}
 #+END_EXPORT
 
 *** epj-authors-latex 
 
 #+NAME: epj-authors-latex
 #+BEGIN_SRC elisp  :var authors=authors-table :results latex replace :var join_delim=" \\and "
-  (string-join (mapcar (lambda (x) (format "%s\\inst{%s}" (car x) (nth 2 x))) authors) join_delim)
+  (mapconcat 'identity (mapcar (lambda (x) (format "%s\\inst{%s}" (car x) (nth 2 x))) authors) join_delim)
 #+END_SRC
 
 #+RESULTS: epj-authors-latex
@@ -282,7 +282,7 @@ Mai Deah\inst{1} \and Arthur Secondus\inst{1} \and E. Tal\inst{2}
 
 #+NAME: epj-institutions-latex
 #+BEGIN_SRC elisp  :var institutions=institutions-table :results latex replace :var join_delim=" \\and "
-  (string-join (mapcar (lambda (x) (format "%s" (nth 1 x))) institutions) join_delim)
+  (mapconcat 'identity (mapcar (lambda (x) (format "%s" (nth 1 x))) institutions) join_delim)
 #+END_SRC
 
 #+RESULTS: epj-institutions-latex
