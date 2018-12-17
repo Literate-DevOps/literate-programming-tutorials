@@ -5,32 +5,7 @@
 
 #+SUBTITLE: Subtitle Goes Here
 
-#+BEGIN_SRC latex :noweb yes
-  %
-  \title{«get-title-text()»}
-  \subtitle{«get-subtitle-text()»}
-  \author{«epj-authors-latex()»% etc
-  % \thanks is optional - remove next line if not needed
-  \thanks{\emph{Present address:} Insert the address here if needed}%
-  }                     % Do not remove
-  %
-  \offprints{}          % Insert a name or remove this line
-  %
-  \institute{«epj-institutions-latex()»}
-  %
-  \date{Received: date / Revised version: date}
-  % The correct dates will be entered by Springer
-  %
-  \abstract{
-  «get-abstract-text()»
-  %
-  \PACS{
-  «epj-pacs-codes-latex()»
-       } % end of PACS codes
-  } %end of abstract
-  %
-  \maketitle
-#+END_SRC
+#+CALL: export-epj-latex-block()
 
 * Authors                                                          :noexport:
 
@@ -167,7 +142,37 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                )
 #+END_SRC
 
-** get-title-text
+** export-epj-latex-block
+
+#+NAME: export-epj-latex-block
+#+BEGIN_SRC latex :noweb yes
+  %
+  \title{«get-title-text()»}
+  \subtitle{«get-subtitle-text()»}
+  \author{«epj-authors-latex()»% etc
+  % \thanks is optional - remove next line if not needed
+  \thanks{\emph{Present address:} Insert the address here if needed}%
+  }                     % Do not remove
+  %
+  \offprints{}          % Insert a name or remove this line
+  %
+  \institute{«epj-institutions-latex()»}
+  %
+  \date{Received: date / Revised version: date}
+  % The correct dates will be entered by Springer
+  %
+  \abstract{
+  «get-abstract-text()»
+  %
+  \PACS{
+  «epj-pacs-codes-latex()»
+       } % end of PACS codes
+  } %end of abstract
+  %
+  \maketitle
+#+END_SRC
+
+*** get-title-text
 
 #+NAME: get-title-text
 #+BEGIN_SRC elisp 
@@ -177,7 +182,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 #+RESULTS: get-title-text
 : Title Goes Here
 
-** get-subtitle-text
+*** get-subtitle-text
 
 #+NAME: get-subtitle-text
 #+BEGIN_SRC elisp  :results replace :var keyword="subtitle" :var delimiter=" "
@@ -193,7 +198,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 #+RESULTS: get-subtitle-text
 : Subtitle Goes Here
 
-** get-abstract-text
+*** get-abstract-text
 
 #+NAME: get-abstract-text
 #+BEGIN_SRC elisp :results replace :var keyword="abstract"
@@ -217,7 +222,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 #+RESULTS: get-abstract-text
 : The abstract goes here.
 
-** epj-pacs-codes-latex 
+*** epj-pacs-codes-latex 
 
 #+NAME: epj-pacs-codes-latex
 #+BEGIN_SRC elisp  :var pacs_codes=pacs-codes-table :results latex replace :var join_delim="   \\and\n"
@@ -230,7 +235,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       {PACS-key02}{Text Describing PACS-key02}
 #+END_EXPORT
 
-** epj-authors-latex 
+*** epj-authors-latex 
 
 #+NAME: epj-authors-latex
 #+BEGIN_SRC elisp  :var authors=authors-table :results latex replace :var join_delim=" \\and "
@@ -242,7 +247,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 Mai Deah\inst{1} \and Arthur Secondus\inst{1} \and E. Tal\inst{2}
 #+END_EXPORT
 
-** epj-institutions-latex 
+*** epj-institutions-latex 
 
 #+NAME: epj-institutions-latex
 #+BEGIN_SRC elisp  :var institutions=institutions-table :results latex replace :var join_delim=" \\and "
