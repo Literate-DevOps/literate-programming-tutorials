@@ -82,7 +82,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 # References
 
-#+BEGIN_SRC latex 
+#+BEGIN_SRC latex :exports results 
   %
   % BibTeX users please use
   % \bibliographystyle{}
