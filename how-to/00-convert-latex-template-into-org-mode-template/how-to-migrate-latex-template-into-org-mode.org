@@ -45,10 +45,10 @@ To complete this tutorial successfully, please follow all steps in each of the s
    
    #+BEGIN_QUOTE
    *TIP:* To export an =org-mode= document to =PDF=:  
-   1. Open the =org-mode= file in =emacs=.  
-   2. Position the cursor in the buffer of the =org-mode= document in =emacs=.  
-   3. Press the following key chords and keys, ~C-c~ ~C-e~ ~l~ ~p~ to initiate the export process.
-   4. Open the exported =PDF= file to validate the export process succeeded.
+      1. Open the =org-mode= file in =emacs=.  
+      2. Position the cursor in the buffer of the =org-mode= document in =emacs=.  
+      3. Press the following key chords and keys, ~C-c~ ~C-e~ ~l~ ~p~ to initiate the export process.
+      4. Open the exported =PDF= file to validate the export process succeeded.
    #+END_QUOTE
 
    If exporting an =org-mode= file to =PDF= succeeded then continue following the steps in this =How-To= tutorial. Otherwise troubleshoot each step in the requirements section and repeat until exporting an =org-mode= document to =PDF= is successful.
