@@ -53,6 +53,53 @@ To complete this tutorial successfully, please follow all steps in each of the s
 
    If exporting an =org-mode= file to =PDF= succeeded then continue following the steps in this =How-To= tutorial. Otherwise troubleshoot each step in the requirements section and repeat until exporting an =org-mode= document to =PDF= is successful.
 
+* Create New org-mode File
+
+1. Create a new =org-mode= file using =emacs=.
+
+   For this tutorial, the filename will be =journal-template.org=
+
+   - To create the file in emacs do the following: 
+     1. Press the key chords ~C-x~ ~C-f~
+     2. Type =journal-template.org=
+     3. Press ~Return~ or ~Enter~ key
+
+2. Add ~mode~ line to top of the file.
+   
+   #+NAME: mode-line
+   #+BEGIN_SRC org
+     # -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
+   #+END_SRC
+
+   #+BEGIN_QUOTE 
+     *TIP:* To insert =«= press key chord ~C-x~ ~8~ ~<~ and to insert =»= press key chord ~C-x~ ~8~ ~>~ 
+   #+END_QUOTE
+
+3. Add /Common Export Settings/ Section to end of the file.
+
+   #+NAME: common-export-settings
+   #+BEGIN_SRC org
+     ,* Common Export Settings                                           :noexport:
+
+     ,#+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
+     ,#+OPTIONS: author:nil broken-links:nil c:nil creator:nil
+     ,#+OPTIONS: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+     ,#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
+     ,#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
+     ,#+SELECT_TAGS: export
+     ,#+EXCLUDE_TAGS: noexport nolatex
+
+     # For Display when file is exported with org-ruby 
+
+     ,#+EXPORT_SELECT_TAGS: export
+     ,#+EXPORT_EXCLUDE_TAGS: noexport
+   #+END_SRC
+
+4. Save the file in =emacs=.
+
+   - To save the file in emacs do the following: 
+     1. Press the key chords ~C-x~ ~C-s~
+
 * Common Export Settings                                           :noexport:
 
 #+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
