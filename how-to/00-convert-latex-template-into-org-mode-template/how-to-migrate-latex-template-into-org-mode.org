@@ -1,0 +1,70 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
+
+#+TITLE: How to Migrate LaTeX Template into org-mode
+
+
+* Summary                                                          
+
+This =How-To= tutorial provides a step by step guide on how to migrate the LaTeX template provided by an academic journal into =org-mode= syntax. 
+
+** Instructions
+
+To complete this tutorial successfully, please follow all steps in each of the sections listed below in the order presented.
+- Requirements
+- Create New =org-mode= File
+- Download LaTeX Template
+- Migrate LaTeX Template Code into =local variables=
+- Migrate LaTeX Template Code into =SRC= blocks
+- Customize a =SRC= block using Literate Programming
+- Add Content to =org-mode= File
+- Export completed org-mode= file as =PDF=
+
+* Requirements
+
+#+BEGIN_QUOTE
+  *Note:* All the requirements /must/ be completed successfully before continuing with the steps in this =How-To= tutorial.
+#+END_QUOTE
+
+1. Download, Install, and Configure LaTeX Software
+
+   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
+
+2. Download, Install, and Configure =emacs= Software
+
+   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
+
+3. Download, Install, and Configure =org-mode= Software
+
+   #+BEGIN_QUOTE
+     *Note:* The =org-mode= application is already installed if you are using a recent version of =emacs=, i.e. versions 25 or greater.
+   #+END_QUOTE
+
+   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
+
+4. Export an =org-mode= file as =PDF= via built-in LaTeX exporter.
+   
+   #+BEGIN_QUOTE
+   *TIP:* To export an =org-mode= document to =PDF=:  
+   1. Open the =org-mode= file in =emacs=.  
+   2. Position the cursor in the buffer of the =org-mode= document in =emacs=.  
+   3. Press the following key chords and keys, ~C-c~ ~C-e~ ~l~ ~p~ to initiate the export process.
+   4. Open the exported =PDF= file to validate the export process succeeded.
+   #+END_QUOTE
+
+   If exporting an =org-mode= file to =PDF= succeeded then continue following the steps in this =How-To= tutorial. Otherwise troubleshoot each step in the requirements section and repeat until exporting an =org-mode= document to =PDF= is successful.
+
+* Common Export Settings                                           :noexport:
+
+#+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
+#+OPTIONS: author:nil broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
+#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport nolatex
+
+# For Display when file is exported with org-ruby 
+
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
