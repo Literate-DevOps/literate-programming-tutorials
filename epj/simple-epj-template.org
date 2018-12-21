@@ -261,11 +261,11 @@ New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort,
 
 * Common Export Settings                                           :noexport:
 
-#+OPTIONS: ':nil *:t -:t ::t <:t H:7 \n:nil ^:{} arch:headline
+#+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
 #+OPTIONS: author:nil broken-links:nil c:nil creator:nil
 #+OPTIONS: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
-#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
-#+OPTIONS: timestamp:t title:nil toc:nil todo:t |:t
+#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
+#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport nolatex
 
