@@ -150,9 +150,9 @@ The first method uses the http/https protocal to access the webpage using your d
 #+END_SRC
 This sends a signal to your browser to open the requested page. 
 
-** TODO Custom Link eLisp
+** DONE Custom Link eLisp
 Finally you can create more complicated link functions using elisp.
-The [[https://orgmode.org/manual/Adding-hyperlink-types.html#Adding-hyperlink-types][hacking]] page in the org manual demonstrates ho the man links were created.
+The [[https://orgmode.org/manual/Adding-hyperlink-types.html#Adding-hyperlink-types][hacking]] page in the org manual demonstrates how the man links were created.
 In essence, what you are doing is creating a lisp program and binding it to one of the link abbreviations.
 By writing a function like this, you can make the link as interactive as you want, or overide behavior that is un-wanted.
 See the [[elisp links][Examples]] section for more examples on using this feature.
@@ -160,11 +160,11 @@ See the [[elisp links][Examples]] section for more examples on using this featur
 ** TODO make a demonstration of a link plug in                     :noexport:
 
 
-* TODO Examples
+* DONE Examples
 
 ** PDFs
 #+BEGIN_SRC org
-#+link: pg-pdf docview:books/11-pdf.pdf::%s
+,#+link: pg-pdf docview:books/11-pdf.pdf::%s
 
 [[pg-pdf::35][Chapter VIII]]
 
@@ -195,7 +195,6 @@ See the [[elisp links][Examples]] section for more examples on using this featur
 [[https://orgmode.org/manual/Adding-hyperlink-types.html#Adding-hyperlink-types][Man Example]]
 * Further Study
 ** [[https://orgmode.org/manual/Hyperlinks.html#Hyperlinks][Orgmode Hyperlinks]]
-** [[https://raw.githubusercontent.com/bddean/emacs-ereader/f3bbd3f13195f8fba3e3c880aab0e4c60430dcf3/org-ebook.el][org-ebook-source]]
 * Common Export Settings                                           :noexport:
   
   #+OPTIONS: ':nil *:t -:t ::t <:t H:7 \n:nil ^:{} arch:headline
