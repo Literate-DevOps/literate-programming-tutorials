@@ -17,7 +17,7 @@ To complete this tutorial successfully, please follow all steps in each of the s
 - Migrate LaTeX Template Code into =SRC= blocks
 - Customize a =SRC= block using Literate Programming
 - Add Content to =org-mode= File
-- Export completed org-mode= file as =PDF=
+- Export completed =org-mode= file as =PDF=
 
 * Requirements
 
