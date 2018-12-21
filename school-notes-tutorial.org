@@ -91,7 +91,29 @@ While nov.el is my favorite package for reading epubs in emacs, it unfortunately
 This could be fixed by creating an [[elisp links][elisp function]].
 *** TODO Ereader
 Ereader is a package used to read epub documents in emacs, that includes orgmode support. 
-Of note is the ebook link type.[fn:2] 
+Of note is the ebook link type.[fn:2] However to use the ebook link you will need to enable it in your init file by adding.
+#+BEGIN_SRC elisp
+(require 'org-ebook)
+#+END_SRC
+The ebook can link to the book in two ways. By chapter and by string.
+With the provided books chapter selection seems to be broken. However string selection still works.
+To search by chapter add 
+#+BEGIN_SRC org
+::@YYY
+#+END_SRC
+where YYY is the start of a chapter. It also limits further string searches to that chapter.
+String searches are done by adding
+#+BEGIN_SRC org
+::$ZZZ
+#+END_SRC
+to a string where ZZZ is any combination of characters and white space.
+A full ebook link looks like this.
+#+BEGIN_SRC org
+
+[[ebook:books/pg11-images.epub::@CHAPTER III. A Caucus-Race and a Long Tale::$They were indeed]]
+#+END_SRC
+
+
 
 ** DONE Text Files
 
@@ -126,7 +148,7 @@ The first method uses the http/https protocal to access the webpage using your d
 #+BEGIN_SRC org
 [[https://en.wikipedia.org/wiki/Literate_programming][Open from browser]]
 #+END_SRC
-This sends a signal to your browser to open the requestsed page. 
+This sends a signal to your browser to open the requested page. 
 
 ** TODO Custom Link eLisp
 Finally you can create more complicated link functions using elisp.
@@ -173,7 +195,7 @@ See the [[elisp links][Examples]] section for more examples on using this featur
 [[https://orgmode.org/manual/Adding-hyperlink-types.html#Adding-hyperlink-types][Man Example]]
 * Further Study
 ** [[https://orgmode.org/manual/Hyperlinks.html#Hyperlinks][Orgmode Hyperlinks]]
- 
+** [[https://raw.githubusercontent.com/bddean/emacs-ereader/f3bbd3f13195f8fba3e3c880aab0e4c60430dcf3/org-ebook.el][org-ebook-source]]
 * Common Export Settings                                           :noexport:
   
   #+OPTIONS: ':nil *:t -:t ::t <:t H:7 \n:nil ^:{} arch:headline
