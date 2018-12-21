@@ -7,7 +7,7 @@
 
 #+CALL: export-epj-latex-block()
 
-* Authors                                                          :noexport:
+* Authors                                                          :nolatex:
 
 #+NAME: authors-table
 | Author          | Email                | Institution-ID |
@@ -16,7 +16,7 @@
 | Arthur Secondus |                      |              1 |
 | E. Tal          |                      |              2 |
 
-* Institutions                                                     :noexport:
+* Institutions                                                     :nolatex:
 
 #+NAME: institutions-table
 | Institution-ID | Institution                                                                                                      |
@@ -24,7 +24,7 @@
 |              1 | New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort, Some-Sort, Some-Sort-of-Country |
 |              2 | Golden Opportunities Lab, Department of Obscure Studies, Ancient College, Olde-Locale, Stodgy-Land               |
 
-* PACS                                                             :noexport:
+* PACS                                                             :nolatex:
 
 #+NAME: pacs-codes-table
 | PACS-KEY   | PACS-KEY-Description-Text  |
@@ -32,7 +32,7 @@
 | PACS-key01 | Text Describing PACS-key01 |
 | PACS-key02 | Text Describing PACS-key02 |
 
-* Abstract                                                         :noexport:
+* Abstract                                                         :nolatex:
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
@@ -267,7 +267,7 @@ New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort,
 #+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+OPTIONS: timestamp:t title:nil toc:nil todo:t |:t
 #+SELECT_TAGS: export
-#+EXCLUDE_TAGS: noexport
+#+EXCLUDE_TAGS: noexport nolatex
 
 # For Display when file is exported with org-ruby 
 
