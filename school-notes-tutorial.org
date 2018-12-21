@@ -74,6 +74,11 @@ Whats neat is that as long as the buffer that the book was loaded in remains ope
 There are limitations however. If you create a link abbreviation as shown, there will not be any auto complete when using org-insert-link. 
 This can be implimented with a more [[Custom Link eLisp][Advance]] link function.
 
+***  PDF-Tools
+If you use the PDF-Tools package, the docview links break. If you need to use pdf-tools get the package ~org-pdfview~.
+Org-pdfview when enabled in your init file creates a pdf-view link which supports page completion. To continue using book links,
+simply change the protocol from docview, to pdfview. 
+
 ** DONE Epubs
 
 Epubs are powerful way of storing and rendering books. Rather than prerendering all of the text and images like a pdf. Epubs are instead a collection
