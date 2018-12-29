@@ -25,6 +25,8 @@ To complete this tutorial successfully, please follow all steps in the order pre
   *Note:* All the requirements /must/ be completed successfully before continuing with the steps in this =How-To= tutorial.
 #+END_QUOTE
 
+** Instructions
+
 1. Download, Install, and Configure LaTeX Software
 
    Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
@@ -54,6 +56,8 @@ To complete this tutorial successfully, please follow all steps in the order pre
    If exporting an =org-mode= file to =PDF= succeeded then continue following the steps in this =How-To= tutorial. Otherwise troubleshoot each step in the requirements section and repeat until exporting an =org-mode= document to =PDF= is successful.
 
 * Create New org-mode File
+
+** Instructions
 
 1. Create a new =org-mode= file using =emacs=.
 
