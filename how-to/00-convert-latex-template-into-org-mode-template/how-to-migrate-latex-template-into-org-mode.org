@@ -100,6 +100,8 @@ To complete this tutorial successfully, please follow all steps in the order pre
    - To save the file in emacs do the following: 
      1. Press the key chords ~C-x~ ~C-s~
 
+* Download LaTeX Template
+
 * Common Export Settings                                           :noexport:
 
 #+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
