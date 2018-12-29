@@ -9,7 +9,7 @@ This =How-To= tutorial provides a step by step guide on how to migrate the LaTeX
 
 ** Instructions
 
-To complete this tutorial successfully, please follow all steps in each of the sections listed below in the order presented.
+To complete this tutorial successfully, please follow all steps in the order presented of each section listed below:
 - Requirements
 - Create New =org-mode= File
 - Download LaTeX Template
