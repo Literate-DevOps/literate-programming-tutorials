@@ -1,0 +1,307 @@
+% SVJour DOCUMENT CLASS OPTION EPJ -- The European Physical Journal
+%
+% This is an enhancement for the
+% LaTeX document class for Springer journals (two column version)
+%
+%%
+%%
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+\ProvidesFile{svepj.clo}
+              [2002/03/11 v1.2
+      style option for The European Physical Journal]
+\typeout{SVJour Class option: svepj.clo for The European Physical Journal}
+\DeclareOption{leqno}{\input{leqno.clo}}
+\let\if@nopacs\iffalse
+\DeclareOption{nopacs}{\let\if@nopacs\iftrue}
+\ExecuteOptions{final,twocolumn,10pt}
+\newif\if@normhead \@normheadtrue
+\def\hugehead{\@normheadfalse
+\let\ProcessRunnHead=\relax
+\onecolumn
+\let\thanks=\footnote
+\long\def\@makefntext##1{\parindent\bibindent
+     \columnwidth\textwidth
+     \advance\columnwidth -\columnsep
+     \divide\columnwidth\tw@
+     \hsize\columnwidth
+     \linewidth\columnwidth
+     \noindent\hbox to\parindent{\hss\@makefnmark\enspace}##1}%
+}
+\let\if@mathematic\iffalse
+% No size changing allowed, hence a copy of size10.clo is included
+\renewcommand\normalsize{%
+   \@setfontsize\normalsize\@xpt{10.5dd}%
+   \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
+   \abovedisplayshortskip \z@ \@plus3\p@
+   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+   \belowdisplayskip \abovedisplayskip
+   \let\@listi\@listI}
+\normalsize
+\newcommand\small{%
+   \@setfontsize\small\@ixpt{10dd}%
+   \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@
+   \abovedisplayshortskip \z@ \@plus2\p@
+   \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
+   \def\@listi{\leftmargin\leftmargini
+               \parsep 0\p@ \@plus1\p@ \@minus\p@
+               \topsep 8\p@ \@plus2\p@ \@minus4\p@
+               \itemsep0\p@}%
+   \belowdisplayskip \abovedisplayskip
+}
+\let\footnotesize\small
+\newcommand\scriptsize{\@setfontsize\scriptsize\@viipt\@viiipt}
+\newcommand\tiny{\@setfontsize\tiny\@vpt\@vipt}
+\newcommand\large{\@setfontsize\large\@xiipt{13dd}}
+\newcommand\Large{\@setfontsize\Large\@xivpt{15dd}}
+\newcommand\LARGE{\@setfontsize\LARGE\@xviipt{17dd}}
+\newcommand\huge{\@setfontsize\huge\@xxpt{25}}
+\newcommand\Huge{\@setfontsize\Huge\@xxvpt{30}}
+%
+\setlength{\textwidth}{180mm}
+\setlength{\textheight}{56pc}
+%
+\def\epj@maketitle{\par
+\ch@ckobl{journalname}{Noname}
+\ch@ckobl{date}{the date of receipt and acceptance should be inserted
+later}
+\ch@ckobl{title}{A title should be given}
+\ch@ckobl{author}{Name(s) and initial(s) of author(s) should be given}
+\ch@ckobl{institute}{Address(es) of author(s) should be given}
+\ch@ckobl{abstract}{Abstract is missing.}
+\begingroup
+%
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{$^{\@thefnmark}$}%
+    \def\switch@fnmark{\def\thefootnote{\mathrm{\alph{footnote}}}}
+%
+ \def\lastand{\ifnum\value{inst}=2\relax
+                 \unskip{} \andname\
+              \else
+                 \unskip, \andname\
+              \fi}%
+ \def\and{\stepcounter{auth}\relax
+          \if@smartand
+             \ifnum\value{auth}=\value{inst}%
+                \lastand
+             \else
+                \unskip,
+             \fi
+          \else
+             \unskip,
+          \fi}%
+ \thispagestyle{empty}
+ \ifnum \col@number=\@ne
+   \@maketitle
+ \else
+   \twocolumn[\@maketitle]%
+ \fi
+ \global\@topnum\z@
+ \if@normhead
+    \@thanks
+ \else
+    \twocolumn[\vspace{\@tempdima}]
+    \addtocounter{page}{-1}
+    \if!\the\authorrunning!
+       \authorrunning{ }%
+    \fi
+ \fi
+ \if!\@mail!\else
+    \footnotetext[0]{\kern-\bibindent\mailname\
+    \ignorespaces\@mail}%
+ \fi
+%
+ \if@runhead
+    \ProcessRunnHead
+ \fi
+%
+ \endgroup
+ \setcounter{footnote}{0}
+ \global\let\thanks\relax
+ \global\let\maketitle\relax
+ \global\let\@maketitle\relax
+ \global\let\@thanks\@empty
+ \global\let\@author\@empty
+ \global\let\@date\@empty
+ \global\let\@title\@empty
+ \global\let\@subtitle\@empty
+ \global\let\title\relax
+ \global\let\author\relax
+ \global\let\date\relax
+ \global\let\and\relax}
+%
+\def\epj@@maketitle{\newpage
+ \normalfont
+ \vbox to0pt{\vskip-40pt
+ \nointerlineskip
+ \makeheadbox\vss}\nointerlineskip
+ \if@normhead
+    \setbox\authrun=\vbox\bgroup
+ \fi
+ {\LARGE \sffamily\bfseries
+  \hrule\@height\logodepth\@width\z@
+  \pretolerance=10000
+  \rightskip=0pt plus 4cm
+ \if!\@headnote!\else
+   \noindent
+   {\LARGE\normalfont\itshape\ignorespaces\@headnote\par}\vskip 3.5mm
+ \fi
+  \noindent\ignorespaces
+  \@title \par}\vskip 11.24pt\relax
+ \authorfont
+ \if!\@subtitle!\else
+   {\large\sffamily\bfseries
+   \pretolerance=10000
+   \rightskip=0pt plus 3cm
+   \noindent\ignorespaces\@subtitle \par}\vskip 11.24pt
+ \fi
+ \lineskip .5em
+ \switch@fnmark
+ \def\@makefnmark{$^{\mathrm\@thefnmark}$}%
+ \protected@xdef\@thanks{\@thanks\protect\switch@fnmark}%
+ \setbox0=\vbox{\setcounter{auth}{1}\def\and{\stepcounter{auth} }%
+                \hfuzz=2\textwidth\def\thanks##1{}\@author}%
+ \setcounter{footnote}{0}%
+ \value{inst}=\value{auth}%
+ \setcounter{auth}{1}%
+ \rightskip=0pt plus 2cm
+ \noindent\ignorespaces\@author\vskip7.23pt
+ \rightskip=0pt\relax
+ \small\rm
+ \institutename
+ \vskip 12.85pt
+ \leftskip=1.5cm\rightskip=\leftskip
+ \noindent\@date
+ \if!\@dedic!\else
+    \par
+    \normalsize\it
+    \addvspace\baselineskip
+    \noindent\@dedic
+ \fi
+ \vskip 12.85pt
+ {\topsep=0pt\partopsep=0pt\parsep=0pt\itemsep=0pt\relax
+  \def\pacsstart##1##2{##1\hskip5pt plus2ptminus2pt##2}%
+  \def\and##1##2{\unskip\ -- ##1\hskip5pt plus2ptminus2pt##2}%
+  \trivlist\item[\hskip\labelsep
+  {\sffamily\bfseries\abstractname}]%
+  \leftskip=1.5cm\rightskip=\leftskip
+  \@abstract
+  \if@nopacs\else
+     \ch@ckobl{PACS}{{XX.XX.XX}{No PACS code given}}%
+     \@@PACS
+  \fi
+  \endtrivlist}%
+ \if@normhead
+    \egroup % end of header box
+    \@tempdima=\headerboxheight
+    \advance\@tempdima by-\ht\authrun
+    \ifdim\@tempdima>0pt
+       \vrule width0pt height\@tempdima
+    \fi
+    \unvbox\authrun
+    \global\@minipagetrue
+    \global\everypar{\global\@minipagefalse\global\everypar{}}
+ \else
+    \typeout{\the\c@auth\space author names and}
+    \typeout{\the\c@inst\space institutes processed}
+    \global\@tempdima=\pagetotal
+    \global\advance\@tempdima by22.47pt
+ \fi
+ \vskip22.47pt
+}
+%
+\def\PACS#1{\gdef\@PACS{#1}}
+\def\@@PACS{\par\addvspace\baselineskip\noindent{\sffamily\bfseries
+PACS.\enspace}\ignorespaces\expandafter\pacsstart\@PACS\par}
+%
+\def\epjabstract#1{\gdef\@abstract{#1}}
+%
+\def\epjrunnhead{%
+    \def\\{\unskip\ \ignorespaces}\def\inst##1{\unskip{}}%
+    \def\thanks##1{\unskip{}}\def\fnmsep{\unskip}%
+    \instindent=\textwidth
+    \advance\instindent by-\headlineindent
+    \if!\the\titlerunning!\else
+      \edef\@title{\the\titlerunning}%
+    \fi
+    \global\setbox\titrun=\hbox{\small\rm\ignorespaces\@title}%
+    \ifdim\wd\titrun>\instindent
+       \typeout{^^JSVJour Warning: Title too long for running head.}%
+       \typeout{Please supply a shorter form with \string\titlerunning
+                \space prior to \string\maketitle}%
+       \global\setbox\titrun=\hbox{\small\rm
+       Title Suppressed Due to Excessive Length}%
+    \fi
+    \xdef\@title{\copy\titrun}%
+%
+    \if!\the\authorrunning!
+    \else
+      \setcounter{auth}{1}%
+      \edef\@author{\the\authorrunning}%
+    \fi
+    \ifnum\value{auth}>2
+       \def\stripauthor##1\and##2\endauthor{%
+       \protected@xdef\@author{##1\unskip\unskip\if!##2!\else\ et al.\fi}}%
+       \expandafter\stripauthor\@author\and\endauthor
+    \else
+       \gdef\and{\unskip, \ignorespaces}%
+       {\def\and{\noexpand\protect\noexpand\and}%
+       \protected@xdef\@author{\@author}}
+    \fi
+    \global\setbox\authrun=\hbox{\small\ignorespaces
+                                 \@author\unskip: \unhbox\titrun}%
+    \ifdim\wd\authrun>\instindent
+    \typeout{^^JSVJour Warning: The running head built automatically from
+             \string\author\space and \string\title
+             ^^Jexceeds the pagewidth, please supply a shorter form
+             ^^Jwith \string\authorrunning\space and
+             \string\titlerunning\space prior to \string\maketitle}%
+    \global\setbox\authrun=\hbox{\small\rm Please give a shorter version
+          with: {\tt\string\authorrunning\space and
+             \string\titlerunning\space prior to \string\maketitle}}%
+    \fi
+    \xdef\@author{\copy\authrun}%
+    \markboth{\@author}{\@author}%
+}
+%
+\AtEndOfClass{\let\ackname\@empty
+\let\if@runhead\iftrue
+\let\if@smartand\iftrue
+\let\@maketitle=\epj@@maketitle
+\let\maketitle=\epj@maketitle
+\let\ProcessRunnHead=\epjrunnhead
+\let\abstract=\epjabstract
+\def\@evenhead{\small\rlap{\thepage}\hfil\leftmark\hfil}%
+\def\@oddhead{\small\hfil\rightmark\hfil\llap{\thepage}}%
+\def\sectcounterend{}
+\setlength\columnsep{4mm}
+\def\section{\@startsection{section}{1}{\z@}%
+    {-21dd plus-4pt minus-4pt}{10.5dd plus 4pt
+     minus4pt}{\large\sffamily\bfseries}}
+\def\subsection{\@startsection{subsection}{2}{\z@}%
+    {-21dd plus-4pt minus-4pt}{10.5dd plus 4pt
+     minus4pt}{\normalsize\sffamily\bfseries}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-21dd plus-4pt minus-4pt}{10.5dd plus 4pt
+     minus4pt}{\normalsize\sffamily}}
+\def\paragraph{\@startsection{subsubsection}{4}{\z@}%
+    {-21dd plus-4pt minus-4pt}{-1pt}{\normalsize\sffamily\bfseries}}
+\def\authorfont{\rmfamily}
+\def\leftlegendglue{\hfil}
+\journalname{EPJ}}
+%%
+%% End of copy of file `svepj.clo'.
+\endinput
