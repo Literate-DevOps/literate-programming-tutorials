@@ -2036,7 +2036,6 @@ After completing the instructions in this section, the contents of journal-templ
   «file-variables()»
 #+END_SRC
 
-
 * Common Export Settings                                           :noexport:
 
 #+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
