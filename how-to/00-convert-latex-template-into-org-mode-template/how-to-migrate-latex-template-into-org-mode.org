@@ -79,7 +79,15 @@ To complete this tutorial successfully, please follow all steps in the order pre
      *TIP:* To insert =«= press key chord ~C-x~ ~8~ ~<~ and to insert =»= press key chord ~C-x~ ~8~ ~>~ 
    #+END_QUOTE
 
-3. Add /Common Export Settings/ Section to end of the file.
+3. Add /Template Utility Code/ Section to end of file.
+   
+   #+NAME: template-utility-code
+   #+BEGIN_SRC org
+     ,* Template Utility Code                                            :noexport:
+
+   #+END_SRC
+
+4. Add /Common Export Settings/ Section to end of the file.
 
    #+NAME: common-export-settings
    #+BEGIN_SRC org
@@ -99,7 +107,7 @@ To complete this tutorial successfully, please follow all steps in the order pre
      ,#+EXPORT_EXCLUDE_TAGS: noexport
    #+END_SRC
 
-4. Save the file in =emacs=.
+5. Save the file in =emacs=.
 
    - To save the file in emacs do the following: 
      1. Press the key chords ~C-x~ ~C-s~
@@ -111,6 +119,7 @@ After completing the instructions in this section, the contents of journal-templ
 #+BEGIN_SRC org :tangle self-check-example-01.org :noweb yes :exports none 
   «mode-line»
 
+  «template-utility-code»
   «common-export-settings»
 #+END_SRC
 

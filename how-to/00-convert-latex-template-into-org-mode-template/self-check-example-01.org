@@ -1,5 +1,7 @@
 # -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
 
+* Template Utility Code                                            :noexport:
+
 * Common Export Settings                                           :noexport:
 
 #+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
