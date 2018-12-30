@@ -1912,6 +1912,41 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
 
    #+END_SRC
 
+* Migrate LaTeX Template Code into =file variables=
+
+In this section, the objective is migrate LaTeX code from LaTeX template into [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html][file varibles]] syntax at the bottom of the =org-mode= file. The file varibles will be used when exporting from =org-mode= back to LaTeX.
+
+Near the top of [[file:template.tex][template.tex]] file you will find the following the lines of LaTeX code:
+
+#+BEGIN_SRC css :noweb yes :wrap "SRC latex :eval never :exports code" :exports results 
+  «epj-template-begin-latex-code»
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC latex :eval never :exports code
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{filecontents}{leer.eps}
+%!PS-Adobe-2.0 EPSF-2.0
+%%CreationDate: Mon Jul 13 16:51:17 1992
+%%DocumentFonts: (atend)
+%%Pages: 0 1
+%%BoundingBox: 72 31 601 342
+%%EndComments
+
+gsave
+72 31 moveto
+72 342 lineto
+601 342 lineto
+601 31 lineto
+72 31 lineto
+showpage
+grestore
+%%Trailer
+%%DocumentFonts: Helvetica
+\end{filecontents}
+#+END_SRC
+
 * Common Export Settings                                           :noexport:
 
 #+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
