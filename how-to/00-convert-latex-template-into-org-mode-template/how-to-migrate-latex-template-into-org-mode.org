@@ -2014,13 +2014,22 @@ s.gsub(/([\\])/, '\1\1').strip
    # End:
    #+END_SRC
 
+2. Add the following line under the mode line near the top of the journal-template.org file.
+
+   #+NAME: latex-class-epj-svjour
+   #+BEGIN_SRC org :exports code 
+
+     ,#+LATEX_CLASS: epj-svjour
+
+   #+END_SRC
+
 ** Self Check - Example 2
 
 After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-02.org][self-check-example-02.org]].
 
 #+BEGIN_SRC org :tangle self-check-example-02.org :noweb yes :exports none 
   «mode-line»
-
+  «latex-class-epj-svjour»
   «template-utility-code»
   «common-export-settings»
 

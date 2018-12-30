@@ -1,5 +1,7 @@
 # -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
 
+#+LATEX_CLASS: epj-svjour
+
 * Template Utility Code                                            :noexport:
 
 * Common Export Settings                                           :noexport:
