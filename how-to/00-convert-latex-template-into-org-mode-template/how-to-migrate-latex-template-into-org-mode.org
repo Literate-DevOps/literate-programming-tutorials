@@ -155,11 +155,11 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
      % Copy it to a new file with a new name and use it as the basis
      % for your article
      %
+     %%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
    #+END_SRC
 
    #+NAME: epj-template-begin-latex-code     
    #+BEGIN_SRC latex :exports none :eval never
-     %%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
      %
      \begin{filecontents}{leer.eps}
      %!PS-Adobe-2.0 EPSF-2.0
@@ -180,6 +180,8 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
      %%Trailer
      %%DocumentFonts: Helvetica
      \end{filecontents}
+     %
+     \documentclass[epj]{svjour}
    #+END_SRC
 
    #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
@@ -187,8 +189,6 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
    #+END_SRC  
 
    #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never 
-     %
-     \documentclass[epj]{svjour}
      % Remove option referee for final version
      %
      % Remove any % below to load the required packages
@@ -1916,15 +1916,14 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
 
 In this section, the objective is migrate LaTeX code from LaTeX template into [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html][file varibles]] syntax at the bottom of the =org-mode= file. The file varibles will be used when exporting from =org-mode= back to LaTeX.
 
-Near the top of [[file:template.tex][template.tex]] file you will find the following the lines of LaTeX code:
+The LaTeX code that will be migrated into file variables syntax is located near the top of [[file:template.tex][template.tex]] file:
 
-#+BEGIN_SRC css :noweb yes :wrap "SRC latex :eval never :exports code" :exports results 
+#+BEGIN_SRC org :noweb yes :wrap "SRC latex :eval never :exports code" :exports results  :results replace 
   «epj-template-begin-latex-code»
 #+END_SRC
 
 #+RESULTS:
 #+BEGIN_SRC latex :eval never :exports code
-%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \begin{filecontents}{leer.eps}
 %!PS-Adobe-2.0 EPSF-2.0
@@ -1945,7 +1944,89 @@ grestore
 %%Trailer
 %%DocumentFonts: Helvetica
 \end{filecontents}
+%
+\documentclass[epj]{svjour}
 #+END_SRC
+
+#+NAME: escape-epj-template-begin-latex-code
+#+BEGIN_SRC ruby :noweb yes :exports none 
+s = %q<
+«epj-template-begin-latex-code»
+>
+s.gsub(/([\\])/, '\1\1').strip
+#+END_SRC
+
+** Instructions
+
+1. Add the following lines of file variables syntax to the end of the journal-template.org file.
+
+   #+NAME: file-variables
+   #+BEGIN_SRC org  :noweb yes :wrap "SRC org :eval never :exports code" :exports results :results replace 
+
+     # Local Variables:
+     # eval: (require (quote cl-lib))
+     # eval: (require (quote ox))
+     # eval: (require (quote ox-publish))
+     # org-latex-with-hyperref: nil
+     # eval: (add-to-list (quote org-latex-classes) (quote ("epj-svjour" "%%%%%%%%%%%%%%%%%%%%%%%% epj-svjour %%%%%%%%%%%%%%%%%%%%%%%%%%
+     # «escape-epj-template-begin-latex-code()»
+     #  [NO-DEFAULT-PACKAGES]
+     #  [PACKAGES]
+     #  [EXTRA]" ("\\section{%s}" . "\\section*{%s}") ("\\subsection{%s}" . "\\subsection*{%s}") ("\\subsubsection{%s}" . "\\subsubsection*{%s}") ("\\paragraph{%s}" . "\\paragraph*{%s}") ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+     # End:
+
+   #+END_SRC
+
+   #+RESULTS: file-variables
+   #+BEGIN_SRC org :eval never :exports code
+
+   # Local Variables:
+   # eval: (require (quote cl-lib))
+   # eval: (require (quote ox))
+   # eval: (require (quote ox-publish))
+   # org-latex-with-hyperref: nil
+   # eval: (add-to-list (quote org-latex-classes) (quote ("epj-svjour" "%%%%%%%%%%%%%%%%%%%%%%%% epj-svjour %%%%%%%%%%%%%%%%%%%%%%%%%%
+   # %
+   # \\begin{filecontents}{leer.eps}
+   # %!PS-Adobe-2.0 EPSF-2.0
+   # %%CreationDate: Mon Jul 13 16:51:17 1992
+   # %%DocumentFonts: (atend)
+   # %%Pages: 0 1
+   # %%BoundingBox: 72 31 601 342
+   # %%EndComments
+   # 
+   # gsave
+   # 72 31 moveto
+   # 72 342 lineto
+   # 601 342 lineto
+   # 601 31 lineto
+   # 72 31 lineto
+   # showpage
+   # grestore
+   # %%Trailer
+   # %%DocumentFonts: Helvetica
+   # \\end{filecontents}
+   # %
+   # \\documentclass[epj]{svjour}
+   #  [NO-DEFAULT-PACKAGES]
+   #  [PACKAGES]
+   #  [EXTRA]" ("\\section{%s}" . "\\section*{%s}") ("\\subsection{%s}" . "\\subsection*{%s}") ("\\subsubsection{%s}" . "\\subsubsection*{%s}") ("\\paragraph{%s}" . "\\paragraph*{%s}") ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+   # End:
+   #+END_SRC
+
+** Self Check - Example 2
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-02.org][self-check-example-02.org]].
+
+#+BEGIN_SRC org :tangle self-check-example-02.org :noweb yes :exports none 
+  «mode-line»
+
+  «template-utility-code»
+  «common-export-settings»
+
+  «file-variables()»
+#+END_SRC
+
 
 * Common Export Settings                                           :noexport:
 
