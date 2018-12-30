@@ -13,7 +13,7 @@ To complete this tutorial successfully, please follow all steps in the order pre
 - Requirements
 - Create New =org-mode= File
 - Download LaTeX Template
-- Migrate LaTeX Template Code into =local variables=
+- Migrate LaTeX Template Code into =file variables=
 - Migrate LaTeX Template Code into =SRC= blocks
 - Customize a =SRC= block using Literate Programming
 - Add Content to =org-mode= File
