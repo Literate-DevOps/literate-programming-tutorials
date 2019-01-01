@@ -1948,6 +1948,10 @@ grestore
 \documentclass[epj]{svjour}
 #+END_SRC
 
+#+BEGIN_QUOTE
+  *TIP:* When migrating the LaTeX code into =file variables=, you will need to double the backslashes ~\~, e.g. ~\end~ will become ~\\end~.
+#+END_QUOTE
+
 #+NAME: escape-epj-template-begin-latex-code
 #+BEGIN_SRC ruby :noweb yes :exports none 
 s = %q<
