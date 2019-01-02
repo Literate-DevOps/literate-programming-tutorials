@@ -246,12 +246,16 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
    #+END_SRC
    
    #+NAME: epj-template-abstract-pacs-latex-code
-   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never 
+   #+BEGIN_SRC latex :exports none :eval never 
      \PACS{
            {PACS-key}{discribing text of that key}   \and
            {PACS-key}{discribing text of that key}
           } % end of PACS codes
    #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-abstract-pacs-latex-code»
+   #+END_SRC  
    
    #+NAME: epj-template-abstract-end-latex-code
    #+BEGIN_SRC latex :exports none :eval never 
