@@ -201,9 +201,13 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
    #+END_SRC
    
    #+NAME: epj-template-title-latex-code
-   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never 
+   #+BEGIN_SRC latex :exports none :eval never 
      \title{Insert your title here}
    #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-title-latex-code»
+   #+END_SRC  
      
    #+NAME: epj-template-subtitle-latex-code
    #+BEGIN_SRC latex :exports none :eval never 
