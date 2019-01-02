@@ -746,6 +746,21 @@ Use this file to manage the files listed in the table below:
 
   ,*** Literate Programming using org-mode
 
+  ,**** How-To
+
+       The =How-To= tutorials provide enough details to complete a small project.
+
+       ,#+BEGIN_SRC bash :exports results :results drawer replace 
+         ROOT_DIR='how-to'
+         for dir in `ls -1 ${ROOT_DIR}`; do
+             echo "- [[file:${ROOT_DIR}/${dir}][${dir}]]"
+         done
+       ,#+END_SRC
+
+       ,#+RESULTS:
+       :RESULTS:
+       - [[file:how-to/00-convert-latex-template-into-org-mode-template][00-convert-latex-template-into-org-mode-template]]
+       :END:
 
   ,** Useful Resources
 
