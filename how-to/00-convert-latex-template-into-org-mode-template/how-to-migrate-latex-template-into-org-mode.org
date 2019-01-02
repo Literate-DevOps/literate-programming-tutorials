@@ -230,13 +230,17 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
      \institute{Insert the first address here \and the second here}
    #+END_SRC
 
-   #+NAME: epj-template-date-latex-code     
-   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never 
+   #+NAME: epj-template-date-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
      %
      \date{Received: date / Revised version: date}
      % The correct dates will be entered by Springer
      %
    #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-date-latex-code»
+   #+END_SRC  
    
    #+NAME: epj-template-abstract-begin-latex-code
    #+BEGIN_SRC latex :exports none :eval never 
