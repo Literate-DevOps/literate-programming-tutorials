@@ -1,0 +1,2427 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
+
+#+TITLE: How to Migrate LaTeX Template into org-mode
+
+
+* Summary                                                          
+
+This =How-To= tutorial provides a step by step guide on how to migrate the LaTeX template provided by an academic journal into =org-mode= syntax. 
+
+** Instructions
+
+To complete this tutorial successfully, please follow all steps in the order presented of each section listed below:
+- Requirements
+- Create New =org-mode= File
+- Download LaTeX Template
+- Migrate LaTeX Template Code into =file variables=
+- Migrate LaTeX Template Code into =SRC= blocks
+- Customize a =SRC= block using Literate Programming
+- Add Content to =org-mode= File
+- Export completed =org-mode= file as =PDF=
+
+* Requirements
+
+#+BEGIN_QUOTE
+  *Note:* All the requirements /must/ be completed successfully before continuing with the steps in this =How-To= tutorial.
+#+END_QUOTE
+
+** Instructions
+
+1. Download, Install, and Configure LaTeX Software
+
+   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
+
+2. Download, Install, and Configure =emacs= Software
+
+   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
+
+3. Download, Install, and Configure =org-mode= Software
+
+   #+BEGIN_QUOTE
+     *Note:* The =org-mode= application is already installed if you are using a recent version of =emacs=, i.e. versions 25 or greater.
+   #+END_QUOTE
+
+   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
+
+4. Export an =org-mode= file as =PDF= via built-in LaTeX exporter.
+   
+   #+BEGIN_QUOTE
+   *TIP:* To export an =org-mode= document to =PDF=:  
+      1. Open the =org-mode= file in =emacs=.  
+      2. Position the cursor in the buffer of the =org-mode= document in =emacs=.  
+      3. Press the following key chords and keys, ~C-c~ ~C-e~ ~l~ ~p~ to initiate the export process.
+      4. Open the exported =PDF= file to validate the export process succeeded.
+   #+END_QUOTE
+
+   If exporting an =org-mode= file to =PDF= succeeded then continue following the steps in this =How-To= tutorial. Otherwise troubleshoot each step in the requirements section and repeat until exporting an =org-mode= document to =PDF= is successful.
+
+* Create New org-mode File
+
+** Instructions
+
+1. Create a new =org-mode= file using =emacs=.
+
+   For this tutorial, the filename will be =journal-template.org=
+
+   - To create the file in emacs do the following: 
+     1. Press the key chords ~C-x~ ~C-f~
+     2. Type =journal-template.org=
+     3. Press ~Return~ or ~Enter~ key
+
+2. Add ~mode~ line to top of the file.
+   
+   #+NAME: mode-line
+   #+BEGIN_SRC org
+     # -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
+   #+END_SRC
+
+   #+BEGIN_QUOTE 
+     *TIP:* To insert =«= press key chord ~C-x~ ~8~ ~<~ and to insert =»= press key chord ~C-x~ ~8~ ~>~ 
+   #+END_QUOTE
+
+3. Add /Template Utility Code/ Section to end of file.
+   
+   #+NAME: template-utility-code
+   #+BEGIN_SRC org
+     ,* Template Utility Code                                            :noexport:
+
+   #+END_SRC
+
+4. Add /Common Export Settings/ Section to end of the file.
+
+   #+NAME: common-export-settings
+   #+BEGIN_SRC org
+     ,* Common Export Settings                                           :noexport:
+
+     ,#+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
+     ,#+OPTIONS: author:nil broken-links:nil c:nil creator:nil
+     ,#+OPTIONS: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+     ,#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
+     ,#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
+     ,#+SELECT_TAGS: export
+     ,#+EXCLUDE_TAGS: noexport nolatex
+
+     # For Display when file is exported with org-ruby 
+
+     ,#+EXPORT_SELECT_TAGS: export
+     ,#+EXPORT_EXCLUDE_TAGS: noexport
+   #+END_SRC
+
+5. Save the file in =emacs=.
+
+   - To save the file in emacs do the following: 
+     1. Press the key chords ~C-x~ ~C-s~
+
+** Self Check - Example 1
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-01.org][self-check-example-01.org]].
+
+#+BEGIN_SRC org :tangle self-check-example-01.org :noweb yes :exports none 
+  «mode-line»
+
+  «template-utility-code»
+  «common-export-settings»
+#+END_SRC
+
+* Download LaTeX Template
+
+For this =How-To= tutorial, the LaTeX template[fn:1] provided by the European Physical Journal A (EPJ A)[fn:2] will be used.
+
+The following 3 files provided by the EPJ A will be needed in this tutorial:
+
+ - *template.tex*
+
+   The =template.tex= file is provided as "[a] fill-in-form for a standard article with usage comments"[fn:3].
+
+   The objective of this =How-To= tutorial is migrate LaTeX code from =template.tex= into the new =org-mode= file.
+
+ - *svepj.clo*
+
+   The =svepj.clo= is the LaTeX "[c]lass option file for The European Physical Journal"[fn:4].
+
+ - *svjour.cls*
+
+   The =svjour.cls= is the LaTeX "[c]ore document class file for Springer journals"[fn:5].
+
+** Instructions
+
+1. Download [[file:template.tex][template.tex]] file into same directory as =journal-template.org=.
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never 
+     %%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+     %
+     % This is a template file for The European Physical Journal
+     %
+     % Copy it to a new file with a new name and use it as the basis
+     % for your article
+     %
+     %%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+   #+END_SRC
+
+   #+NAME: epj-template-begin-latex-code     
+   #+BEGIN_SRC latex :exports none :eval never
+     %
+     \begin{filecontents}{leer.eps}
+     %!PS-Adobe-2.0 EPSF-2.0
+     %%CreationDate: Mon Jul 13 16:51:17 1992
+     %%DocumentFonts: (atend)
+     %%Pages: 0 1
+     %%BoundingBox: 72 31 601 342
+     %%EndComments
+
+     gsave
+     72 31 moveto
+     72 342 lineto
+     601 342 lineto
+     601 31 lineto
+     72 31 lineto
+     showpage
+     grestore
+     %%Trailer
+     %%DocumentFonts: Helvetica
+     \end{filecontents}
+     %
+     \documentclass[epj]{svjour}
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-begin-latex-code»
+   #+END_SRC  
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never 
+     % Remove option referee for final version
+     %
+     % Remove any % below to load the required packages
+     %\usepackage{latexsym}
+     \usepackage{graphics}
+     % etc
+     %
+     \begin{document}
+     %
+   #+END_SRC
+   
+   #+NAME: epj-template-title-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     \title{Insert your title here}
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-title-latex-code»
+   #+END_SRC  
+     
+   #+NAME: epj-template-subtitle-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     \subtitle{Do you have a subtitle?\\ If so, write it here}
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-subtitle-latex-code»
+   #+END_SRC  
+   
+   #+NAME: epj-template-author-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     \author{First author\inst{1} \and Second author\inst{2}% etc
+     % \thanks is optional - remove next line if not needed
+     \thanks{\emph{Present address:} Insert the address here if needed}%
+     }                     % Do not remove
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-author-latex-code»
+   #+END_SRC  
+   
+   #+NAME: epj-template-offprints-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     %
+     \offprints{}          % Insert a name or remove this line
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-offprints-latex-code»
+   #+END_SRC  
+   
+   #+NAME: epj-template-institution-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     %
+     \institute{Insert the first address here \and the second here}
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-institution-latex-code»
+   #+END_SRC  
+
+   #+NAME: epj-template-date-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     %
+     \date{Received: date / Revised version: date}
+     % The correct dates will be entered by Springer
+     %
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-date-latex-code»
+   #+END_SRC  
+   
+   #+NAME: epj-template-abstract-begin-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     \abstract{
+     Insert your abstract here.
+     %
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-abstract-begin-latex-code»
+   #+END_SRC  
+   
+   #+NAME: epj-template-abstract-pacs-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     \PACS{
+           {PACS-key}{discribing text of that key}   \and
+           {PACS-key}{discribing text of that key}
+          } % end of PACS codes
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-abstract-pacs-latex-code»
+   #+END_SRC  
+   
+   #+NAME: epj-template-abstract-end-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     } %end of abstract
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-abstract-end-latex-code»
+   #+END_SRC  
+   
+   #+NAME: epj-template-maketitle-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     %
+     \maketitle
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-maketitle-latex-code»
+   #+END_SRC  
+     
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never 
+     %
+     \section{Introduction}
+     \label{intro}
+     Your text comes here. Separate text sections with
+     \section{Section title}
+     \label{sec:1}
+     and \cite{RefJ}
+     \subsection{Subsection title}
+     \label{sec:2}
+     as required. Don't forget to give each section
+     and subsection a unique label (see Sect.~\ref{sec:1}).
+     %
+     % For one-column wide figures use
+     \begin{figure}
+     % Use the relevant command for your figure-insertion program
+     % to insert the figure file.
+     % For example, with the option graphics use
+     \resizebox{0.75\textwidth}{!}{%
+       \includegraphics{leer.eps}
+     }
+     % If not, use
+     %\vspace{5cm}       % Give the correct figure height in cm
+     \caption{Please write your figure caption here}
+     \label{fig:1}       % Give a unique label
+     \end{figure}
+     %
+     % For two-column wide figures use
+     \begin{figure*}
+     % Use the relevant command for your figure-insertion program
+     % to insert the figure file. See example above.
+     % If not, use
+     \vspace*{5cm}       % Give the correct figure height in cm
+     \caption{Please write your figure caption here}
+     \label{fig:2}       % Give a unique label
+     \end{figure*}
+     %
+     % For tables use
+     \begin{table}
+     \caption{Please write your table caption here}
+     \label{tab:1}       % Give a unique label
+     % For LaTeX tables use
+     \begin{tabular}{lll}
+     \hline\noalign{\smallskip}
+     first & second & third  \\
+     \noalign{\smallskip}\hline\noalign{\smallskip}
+     number & number & number \\
+     number & number & number \\
+     \noalign{\smallskip}\hline
+     \end{tabular}
+     % Or use
+     \vspace*{5cm}  % with the correct table height
+     \end{table}
+   #+END_SRC
+   
+   #+NAME: epj-template-bibliography-latex-code
+   #+BEGIN_SRC latex :exports none :eval never 
+     %
+     % BibTeX users please use
+     % \bibliographystyle{}
+     % \bibliography{}
+     %
+     % Non-BibTeX users please use
+     \begin{thebibliography}{}
+     %
+     % and use \bibitem to create references.
+     %
+     \bibitem{RefJ}
+     % Format for Journal Reference
+     Author, Journal \textbf{Volume}, (year) page numbers.
+     % Format for books
+     \bibitem{RefB}
+     Author, \textit{Book title} (Publisher, place year) page numbers
+     % etc
+     \end{thebibliography}
+   #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-bibliography-latex-code»
+   #+END_SRC  
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never 
+
+     \end{document}
+
+     % end of file template.tex
+   #+END_SRC
+
+   #+BEGIN_SRC latex :tangle template.tex :noweb yes :exports none :eval never 
+     «template-tex-file»
+   #+END_SRC
+
+2. Download [[file:svepj.clo][svepj.clo]] file into same directory as =journal-template.org=.
+
+   #+BEGIN_SRC latex :tangle svepj.clo :exports none 
+     % SVJour DOCUMENT CLASS OPTION EPJ -- The European Physical Journal
+     %
+     % This is an enhancement for the
+     % LaTeX document class for Springer journals (two column version)
+     %
+     %%
+     %%
+     %% \CharacterTable
+     %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+     %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+     %%   Digits        \0\1\2\3\4\5\6\7\8\9
+     %%   Exclamation   \!     Double quote  \"     Hash (number) \#
+     %%   Dollar        \$     Percent       \%     Ampersand     \&
+     %%   Acute accent  \'     Left paren    \(     Right paren   \)
+     %%   Asterisk      \*     Plus          \+     Comma         \,
+     %%   Minus         \-     Point         \.     Solidus       \/
+     %%   Colon         \:     Semicolon     \;     Less than     \<
+     %%   Equals        \=     Greater than  \>     Question mark \?
+     %%   Commercial at \@     Left bracket  \[     Backslash     \\
+     %%   Right bracket \]     Circumflex    \^     Underscore    \_
+     %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+     %%   Right brace   \}     Tilde         \~}
+     \ProvidesFile{svepj.clo}
+                   [2002/03/11 v1.2
+           style option for The European Physical Journal]
+     \typeout{SVJour Class option: svepj.clo for The European Physical Journal}
+     \DeclareOption{leqno}{\input{leqno.clo}}
+     \let\if@nopacs\iffalse
+     \DeclareOption{nopacs}{\let\if@nopacs\iftrue}
+     \ExecuteOptions{final,twocolumn,10pt}
+     \newif\if@normhead \@normheadtrue
+     \def\hugehead{\@normheadfalse
+     \let\ProcessRunnHead=\relax
+     \onecolumn
+     \let\thanks=\footnote
+     \long\def\@makefntext##1{\parindent\bibindent
+          \columnwidth\textwidth
+          \advance\columnwidth -\columnsep
+          \divide\columnwidth\tw@
+          \hsize\columnwidth
+          \linewidth\columnwidth
+          \noindent\hbox to\parindent{\hss\@makefnmark\enspace}##1}%
+     }
+     \let\if@mathematic\iffalse
+     % No size changing allowed, hence a copy of size10.clo is included
+     \renewcommand\normalsize{%
+        \@setfontsize\normalsize\@xpt{10.5dd}%
+        \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
+        \abovedisplayshortskip \z@ \@plus3\p@
+        \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+        \belowdisplayskip \abovedisplayskip
+        \let\@listi\@listI}
+     \normalsize
+     \newcommand\small{%
+        \@setfontsize\small\@ixpt{10dd}%
+        \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@
+        \abovedisplayshortskip \z@ \@plus2\p@
+        \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
+        \def\@listi{\leftmargin\leftmargini
+                    \parsep 0\p@ \@plus1\p@ \@minus\p@
+                    \topsep 8\p@ \@plus2\p@ \@minus4\p@
+                    \itemsep0\p@}%
+        \belowdisplayskip \abovedisplayskip
+     }
+     \let\footnotesize\small
+     \newcommand\scriptsize{\@setfontsize\scriptsize\@viipt\@viiipt}
+     \newcommand\tiny{\@setfontsize\tiny\@vpt\@vipt}
+     \newcommand\large{\@setfontsize\large\@xiipt{13dd}}
+     \newcommand\Large{\@setfontsize\Large\@xivpt{15dd}}
+     \newcommand\LARGE{\@setfontsize\LARGE\@xviipt{17dd}}
+     \newcommand\huge{\@setfontsize\huge\@xxpt{25}}
+     \newcommand\Huge{\@setfontsize\Huge\@xxvpt{30}}
+     %
+     \setlength{\textwidth}{180mm}
+     \setlength{\textheight}{56pc}
+     %
+     \def\epj@maketitle{\par
+     \ch@ckobl{journalname}{Noname}
+     \ch@ckobl{date}{the date of receipt and acceptance should be inserted
+     later}
+     \ch@ckobl{title}{A title should be given}
+     \ch@ckobl{author}{Name(s) and initial(s) of author(s) should be given}
+     \ch@ckobl{institute}{Address(es) of author(s) should be given}
+     \ch@ckobl{abstract}{Abstract is missing.}
+     \begingroup
+     %
+         \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+         \def\@makefnmark{$^{\@thefnmark}$}%
+         \def\switch@fnmark{\def\thefootnote{\mathrm{\alph{footnote}}}}
+     %
+      \def\lastand{\ifnum\value{inst}=2\relax
+                      \unskip{} \andname\
+                   \else
+                      \unskip, \andname\
+                   \fi}%
+      \def\and{\stepcounter{auth}\relax
+               \if@smartand
+                  \ifnum\value{auth}=\value{inst}%
+                     \lastand
+                  \else
+                     \unskip,
+                  \fi
+               \else
+                  \unskip,
+               \fi}%
+      \thispagestyle{empty}
+      \ifnum \col@number=\@ne
+        \@maketitle
+      \else
+        \twocolumn[\@maketitle]%
+      \fi
+      \global\@topnum\z@
+      \if@normhead
+         \@thanks
+      \else
+         \twocolumn[\vspace{\@tempdima}]
+         \addtocounter{page}{-1}
+         \if!\the\authorrunning!
+            \authorrunning{ }%
+         \fi
+      \fi
+      \if!\@mail!\else
+         \footnotetext[0]{\kern-\bibindent\mailname\
+         \ignorespaces\@mail}%
+      \fi
+     %
+      \if@runhead
+         \ProcessRunnHead
+      \fi
+     %
+      \endgroup
+      \setcounter{footnote}{0}
+      \global\let\thanks\relax
+      \global\let\maketitle\relax
+      \global\let\@maketitle\relax
+      \global\let\@thanks\@empty
+      \global\let\@author\@empty
+      \global\let\@date\@empty
+      \global\let\@title\@empty
+      \global\let\@subtitle\@empty
+      \global\let\title\relax
+      \global\let\author\relax
+      \global\let\date\relax
+      \global\let\and\relax}
+     %
+     \def\epj@@maketitle{\newpage
+      \normalfont
+      \vbox to0pt{\vskip-40pt
+      \nointerlineskip
+      \makeheadbox\vss}\nointerlineskip
+      \if@normhead
+         \setbox\authrun=\vbox\bgroup
+      \fi
+      {\LARGE \sffamily\bfseries
+       \hrule\@height\logodepth\@width\z@
+       \pretolerance=10000
+       \rightskip=0pt plus 4cm
+      \if!\@headnote!\else
+        \noindent
+        {\LARGE\normalfont\itshape\ignorespaces\@headnote\par}\vskip 3.5mm
+      \fi
+       \noindent\ignorespaces
+       \@title \par}\vskip 11.24pt\relax
+      \authorfont
+      \if!\@subtitle!\else
+        {\large\sffamily\bfseries
+        \pretolerance=10000
+        \rightskip=0pt plus 3cm
+        \noindent\ignorespaces\@subtitle \par}\vskip 11.24pt
+      \fi
+      \lineskip .5em
+      \switch@fnmark
+      \def\@makefnmark{$^{\mathrm\@thefnmark}$}%
+      \protected@xdef\@thanks{\@thanks\protect\switch@fnmark}%
+      \setbox0=\vbox{\setcounter{auth}{1}\def\and{\stepcounter{auth} }%
+                     \hfuzz=2\textwidth\def\thanks##1{}\@author}%
+      \setcounter{footnote}{0}%
+      \value{inst}=\value{auth}%
+      \setcounter{auth}{1}%
+      \rightskip=0pt plus 2cm
+      \noindent\ignorespaces\@author\vskip7.23pt
+      \rightskip=0pt\relax
+      \small\rm
+      \institutename
+      \vskip 12.85pt
+      \leftskip=1.5cm\rightskip=\leftskip
+      \noindent\@date
+      \if!\@dedic!\else
+         \par
+         \normalsize\it
+         \addvspace\baselineskip
+         \noindent\@dedic
+      \fi
+      \vskip 12.85pt
+      {\topsep=0pt\partopsep=0pt\parsep=0pt\itemsep=0pt\relax
+       \def\pacsstart##1##2{##1\hskip5pt plus2ptminus2pt##2}%
+       \def\and##1##2{\unskip\ -- ##1\hskip5pt plus2ptminus2pt##2}%
+       \trivlist\item[\hskip\labelsep
+       {\sffamily\bfseries\abstractname}]%
+       \leftskip=1.5cm\rightskip=\leftskip
+       \@abstract
+       \if@nopacs\else
+          \ch@ckobl{PACS}{{XX.XX.XX}{No PACS code given}}%
+          \@@PACS
+       \fi
+       \endtrivlist}%
+      \if@normhead
+         \egroup % end of header box
+         \@tempdima=\headerboxheight
+         \advance\@tempdima by-\ht\authrun
+         \ifdim\@tempdima>0pt
+            \vrule width0pt height\@tempdima
+         \fi
+         \unvbox\authrun
+         \global\@minipagetrue
+         \global\everypar{\global\@minipagefalse\global\everypar{}}
+      \else
+         \typeout{\the\c@auth\space author names and}
+         \typeout{\the\c@inst\space institutes processed}
+         \global\@tempdima=\pagetotal
+         \global\advance\@tempdima by22.47pt
+      \fi
+      \vskip22.47pt
+     }
+     %
+     \def\PACS#1{\gdef\@PACS{#1}}
+     \def\@@PACS{\par\addvspace\baselineskip\noindent{\sffamily\bfseries
+     PACS.\enspace}\ignorespaces\expandafter\pacsstart\@PACS\par}
+     %
+     \def\epjabstract#1{\gdef\@abstract{#1}}
+     %
+     \def\epjrunnhead{%
+         \def\\{\unskip\ \ignorespaces}\def\inst##1{\unskip{}}%
+         \def\thanks##1{\unskip{}}\def\fnmsep{\unskip}%
+         \instindent=\textwidth
+         \advance\instindent by-\headlineindent
+         \if!\the\titlerunning!\else
+           \edef\@title{\the\titlerunning}%
+         \fi
+         \global\setbox\titrun=\hbox{\small\rm\ignorespaces\@title}%
+         \ifdim\wd\titrun>\instindent
+            \typeout{^^JSVJour Warning: Title too long for running head.}%
+            \typeout{Please supply a shorter form with \string\titlerunning
+                     \space prior to \string\maketitle}%
+            \global\setbox\titrun=\hbox{\small\rm
+            Title Suppressed Due to Excessive Length}%
+         \fi
+         \xdef\@title{\copy\titrun}%
+     %
+         \if!\the\authorrunning!
+         \else
+           \setcounter{auth}{1}%
+           \edef\@author{\the\authorrunning}%
+         \fi
+         \ifnum\value{auth}>2
+            \def\stripauthor##1\and##2\endauthor{%
+            \protected@xdef\@author{##1\unskip\unskip\if!##2!\else\ et al.\fi}}%
+            \expandafter\stripauthor\@author\and\endauthor
+         \else
+            \gdef\and{\unskip, \ignorespaces}%
+            {\def\and{\noexpand\protect\noexpand\and}%
+            \protected@xdef\@author{\@author}}
+         \fi
+         \global\setbox\authrun=\hbox{\small\ignorespaces
+                                      \@author\unskip: \unhbox\titrun}%
+         \ifdim\wd\authrun>\instindent
+         \typeout{^^JSVJour Warning: The running head built automatically from
+                  \string\author\space and \string\title
+                  ^^Jexceeds the pagewidth, please supply a shorter form
+                  ^^Jwith \string\authorrunning\space and
+                  \string\titlerunning\space prior to \string\maketitle}%
+         \global\setbox\authrun=\hbox{\small\rm Please give a shorter version
+               with: {\tt\string\authorrunning\space and
+                  \string\titlerunning\space prior to \string\maketitle}}%
+         \fi
+         \xdef\@author{\copy\authrun}%
+         \markboth{\@author}{\@author}%
+     }
+     %
+     \AtEndOfClass{\let\ackname\@empty
+     \let\if@runhead\iftrue
+     \let\if@smartand\iftrue
+     \let\@maketitle=\epj@@maketitle
+     \let\maketitle=\epj@maketitle
+     \let\ProcessRunnHead=\epjrunnhead
+     \let\abstract=\epjabstract
+     \def\@evenhead{\small\rlap{\thepage}\hfil\leftmark\hfil}%
+     \def\@oddhead{\small\hfil\rightmark\hfil\llap{\thepage}}%
+     \def\sectcounterend{}
+     \setlength\columnsep{4mm}
+     \def\section{\@startsection{section}{1}{\z@}%
+         {-21dd plus-4pt minus-4pt}{10.5dd plus 4pt
+          minus4pt}{\large\sffamily\bfseries}}
+     \def\subsection{\@startsection{subsection}{2}{\z@}%
+         {-21dd plus-4pt minus-4pt}{10.5dd plus 4pt
+          minus4pt}{\normalsize\sffamily\bfseries}}
+     \def\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+         {-21dd plus-4pt minus-4pt}{10.5dd plus 4pt
+          minus4pt}{\normalsize\sffamily}}
+     \def\paragraph{\@startsection{subsubsection}{4}{\z@}%
+         {-21dd plus-4pt minus-4pt}{-1pt}{\normalsize\sffamily\bfseries}}
+     \def\authorfont{\rmfamily}
+     \def\leftlegendglue{\hfil}
+     \journalname{EPJ}}
+     %%
+     %% End of copy of file `svepj.clo'.
+     \endinput
+
+   #+END_SRC
+
+3. Download [[file:svjour.cls][svjour.cls]] file into same directory as =journal-template.org=.
+
+   #+BEGIN_SRC latex :tangle svjour.cls :exports none 
+     % SVJour DOCUMENT CLASS -- version 1.11 for LaTeX2e
+     %
+     % LaTeX document class for Springer journals
+     %
+     %%
+     %%
+     %% \CharacterTable
+     %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+     %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+     %%   Digits        \0\1\2\3\4\5\6\7\8\9
+     %%   Exclamation   \!     Double quote  \"     Hash (number) \#
+     %%   Dollar        \$     Percent       \%     Ampersand     \&
+     %%   Acute accent  \'     Left paren    \(     Right paren   \)
+     %%   Asterisk      \*     Plus          \+     Comma         \,
+     %%   Minus         \-     Point         \.     Solidus       \/
+     %%   Colon         \:     Semicolon     \;     Less than     \<
+     %%   Equals        \=     Greater than  \>     Question mark \?
+     %%   Commercial at \@     Left bracket  \[     Backslash     \\
+     %%   Right bracket \]     Circumflex    \^     Underscore    \_
+     %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+     %%   Right brace   \}     Tilde         \~}
+     \NeedsTeXFormat{LaTeX2e}[1995/12/01]
+     \ProvidesClass{svjour}[2003/04/15
+     ^^JLaTeX document class for Springer journals - version 1.11]
+     \newcommand\@ptsize{}
+     \newif\if@restonecol
+     \newif\if@titlepage
+     \@titlepagefalse
+     \DeclareOption{a4paper}
+        {\setlength\paperheight {297mm}%
+         \setlength\paperwidth  {210mm}}
+     \DeclareOption{10pt}{\renewcommand\@ptsize{0}}
+     \DeclareOption{twoside}{\@twosidetrue  \@mparswitchtrue}
+     \DeclareOption{draft}{\setlength\overfullrule{5pt}}
+     \DeclareOption{final}{\setlength\overfullrule{0pt}}
+     \DeclareOption{twocolumn}{\@twocolumntrue}
+     \DeclareOption{fleqn}{\input{fleqn.clo}\AtEndOfClass{\mathindent\z@}}
+     \let\if@mathematic\iftrue
+     \let\if@numbook\iffalse
+     \DeclareOption{numbook}{\let\if@envcntsect\iftrue
+       \AtEndOfPackage{%
+        \renewcommand\thefigure{\thesection.\@arabic\c@figure}%
+        \renewcommand\thetable{\thesection.\@arabic\c@table}%
+        \renewcommand\theequation{\thesection.\@arabic\c@equation}%
+        \@addtoreset{figure}{section}%
+        \@addtoreset{table}{section}%
+        \@addtoreset{equation}{section}%
+       }%
+     }
+     \DeclareOption{openbib}{%
+       \AtEndOfPackage{%
+        \renewcommand\@openbib@code{%
+           \advance\leftmargin\bibindent
+           \itemindent -\bibindent
+           \listparindent \itemindent
+           \parsep \z@
+           }%
+        \renewcommand\newblock{\par}}%
+     }
+     %
+     \let\if@runhead\iffalse
+     \DeclareOption{runningheads}{\let\if@runhead\iftrue}
+     \let\if@smartrunh\iffalse
+     \DeclareOption{smartrunhead}{\let\if@smartrunh\iftrue}
+     \DeclareOption{nosmartrunhead}{\let\if@smartrunh\iffalse}
+     \let\if@envcntreset\iffalse
+     \DeclareOption{envcountreset}{\let\if@envcntreset\iftrue}
+     \let\if@envcntsame\iffalse
+     \DeclareOption{envcountsame}{\let\if@envcntsame\iftrue}
+     \let\if@envcntsect\iffalse
+     \DeclareOption{envcountsect}{\let\if@envcntsect\iftrue}
+     \let\if@referee\iffalse
+     \DeclareOption{referee}{\let\if@referee\iftrue}
+     \def\makereferee{\def\baselinestretch{2}}
+     \let\if@instindent\iffalse
+     \DeclareOption{instindent}{\let\if@instindent\iftrue}
+     \let\if@smartand\iffalse
+     \DeclareOption{smartand}{\let\if@smartand\iftrue}
+     \let\if@spthms\iftrue
+     \DeclareOption{nospthms}{\let\if@spthms\iffalse}
+     \let\switch@texts\relax
+     \DeclareOption{deutsch}{\def\switch@texts{\ds@deutsch}}
+     \DeclareOption{francais}{\def\switch@texts{\ds@francais}}
+     %
+     \let\journalopt\@empty
+     \DeclareOption*{\InputIfFileExists{sv\CurrentOption.clo}{%
+     \let\journalopt\CurrentOption}{%
+     \ClassWarning{Springer-SVJour}{Specified option or subpackage
+     "\CurrentOption" not found -}\OptionNotUsed}}
+     \ExecuteOptions{a4paper,twoside,10pt,instindent}
+     \ProcessOptions
+     \ifx\journalopt\@empty
+     \ClassError{Springer-SVJour}{No valid journal specified in option list}{}
+     \expandafter\stop
+     \fi
+     %
+     \if@smartrunh\AtEndDocument{\islastpageeven\getlastpagenumber}\fi
+     %
+     \DeclareMathSymbol{\Gamma}{\mathalpha}{letters}{"00}
+     \DeclareMathSymbol{\Delta}{\mathalpha}{letters}{"01}
+     \DeclareMathSymbol{\Theta}{\mathalpha}{letters}{"02}
+     \DeclareMathSymbol{\Lambda}{\mathalpha}{letters}{"03}
+     \DeclareMathSymbol{\Xi}{\mathalpha}{letters}{"04}
+     \DeclareMathSymbol{\Pi}{\mathalpha}{letters}{"05}
+     \DeclareMathSymbol{\Sigma}{\mathalpha}{letters}{"06}
+     \DeclareMathSymbol{\Upsilon}{\mathalpha}{letters}{"07}
+     \DeclareMathSymbol{\Phi}{\mathalpha}{letters}{"08}
+     \DeclareMathSymbol{\Psi}{\mathalpha}{letters}{"09}
+     \DeclareMathSymbol{\Omega}{\mathalpha}{letters}{"0A}
+     %
+     \setlength\parindent{15\p@}
+     \setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
+     \setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
+     \setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
+     \setlength\headheight{12\p@}
+     \setlength\headsep   {16.74dd}
+     \setlength\topskip   {10\p@}
+     \setlength\footskip{30\p@}
+     \setlength\maxdepth{.5\topskip}
+     %
+     \@settopoint\textwidth
+     \setlength\marginparsep {10\p@}
+     \setlength\marginparpush{5\p@}
+     \setlength\topmargin{-10pt}
+     \if@twocolumn
+        \setlength\oddsidemargin {-30\p@}
+        \setlength\evensidemargin{-30\p@}
+     \else
+        \setlength\oddsidemargin {\z@}
+        \setlength\evensidemargin{\z@}
+     \fi
+     \setlength\marginparwidth  {48\p@}
+     \setlength\footnotesep{8\p@}
+     \setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
+     \setlength\floatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
+     \setlength\textfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
+     \setlength\intextsep   {20\p@ \@plus 2\p@ \@minus 2\p@}
+     \setlength\dblfloatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
+     \setlength\dbltextfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
+     \setlength\@fptop{0\p@}
+     \setlength\@fpsep{12\p@ \@plus 2\p@ \@minus 2\p@}
+     \setlength\@fpbot{0\p@ \@plus 1fil}
+     \setlength\@dblfptop{0\p@}
+     \setlength\@dblfpsep{12\p@ \@plus 2\p@ \@minus 2\p@}
+     \setlength\@dblfpbot{0\p@ \@plus 1fil}
+     \setlength\partopsep{2\p@ \@plus 1\p@ \@minus 1\p@}
+     \def\@listi{\leftmargin\leftmargini
+                 \parsep \z@
+                 \topsep 6\p@ \@plus2\p@ \@minus4\p@
+                 \itemsep\parsep}
+     \let\@listI\@listi
+     \@listi
+     \def\@listii {\leftmargin\leftmarginii
+                   \labelwidth\leftmarginii
+                   \advance\labelwidth-\labelsep
+                   \topsep    \z@
+                   \parsep    \topsep
+                   \itemsep   \parsep}
+     \def\@listiii{\leftmargin\leftmarginiii
+                   \labelwidth\leftmarginiii
+                   \advance\labelwidth-\labelsep
+                   \topsep    \z@
+                   \parsep    \topsep
+                   \itemsep   \parsep}
+     \def\@listiv {\leftmargin\leftmarginiv
+                   \labelwidth\leftmarginiv
+                   \advance\labelwidth-\labelsep}
+     \def\@listv  {\leftmargin\leftmarginv
+                   \labelwidth\leftmarginv
+                   \advance\labelwidth-\labelsep}
+     \def\@listvi {\leftmargin\leftmarginvi
+                   \labelwidth\leftmarginvi
+                   \advance\labelwidth-\labelsep}
+     %
+     \setlength\lineskip{1\p@}
+     \setlength\normallineskip{1\p@}
+     \renewcommand\baselinestretch{}
+     \setlength\parskip{0\p@ \@plus \p@}
+     \@lowpenalty   51
+     \@medpenalty  151
+     \@highpenalty 301
+     \setcounter{topnumber}{4}
+     \renewcommand\topfraction{.9}
+     \setcounter{bottomnumber}{2}
+     \renewcommand\bottomfraction{.7}
+     \setcounter{totalnumber}{6}
+     \renewcommand\textfraction{.1}
+     \renewcommand\floatpagefraction{.85}
+     \setcounter{dbltopnumber}{3}
+     \renewcommand\dbltopfraction{.85}
+     \renewcommand\dblfloatpagefraction{.85}
+     \def\ps@headings{%
+         \let\@oddfoot\@empty\let\@evenfoot\@empty
+         \def\@evenhead{\small\rlap{\thepage}\hfil\leftmark\unskip}%
+         \def\@oddhead{\small\rightmark\hfil\llap{\thepage}}%
+         \let\@mkboth\@gobbletwo
+         \let\sectionmark\@gobble
+         \let\subsectionmark\@gobble
+         }
+     % make indentations changeable
+     \def\setitemindent#1{\settowidth{\labelwidth}{#1}%
+             \leftmargini\labelwidth
+             \advance\leftmargini\labelsep
+        \def\@listi{\leftmargin\leftmargini
+             \labelwidth\leftmargini\advance\labelwidth by -\labelsep
+             \parsep=\parskip
+             \topsep=\medskipamount
+             \itemsep=\parskip \advance\itemsep by -\parsep}}
+     \def\setitemitemindent#1{\settowidth{\labelwidth}{#1}%
+             \leftmarginii\labelwidth
+             \advance\leftmarginii\labelsep
+     \def\@listii{\leftmargin\leftmarginii
+             \labelwidth\leftmarginii\advance\labelwidth by -\labelsep
+             \parsep=\parskip
+             \topsep=\z@
+             \itemsep=\parskip \advance\itemsep by -\parsep}}
+     % labels of description
+     \def\descriptionlabel#1{\hspace\labelsep #1\hfil}
+     % adjusted environment "description"
+     % if an optional parameter (at the first two levels of lists)
+     % is present, its width is considered to be the widest mark
+     % throughout the current list.
+     \def\description{\@ifnextchar[{\@describe}{\list{}{\labelwidth\z@
+               \itemindent-\leftmargin \let\makelabel\descriptionlabel}}}
+     \let\enddescription\endlist
+     %
+     \def\describelabel#1{#1\hfil}
+     \def\@describe[#1]{\relax\ifnum\@listdepth=0
+     \setitemindent{#1}\else\ifnum\@listdepth=1
+     \setitemitemindent{#1}\fi\fi
+     \list{--}{\let\makelabel\describelabel}}
+     %
+     \newdimen\logodepth
+     \logodepth=2.2cm
+     \newdimen\headerboxheight
+     \headerboxheight=180pt % 18 10.5dd-lines - 2\baselineskip
+     \newdimen\betweenumberspace          % dimension for space between
+     \betweenumberspace=3.33pt            % number and text of titles.
+     \newdimen\aftertext                  % dimension for space after
+     \aftertext=5pt                       % text of title.
+     \newdimen\headlineindent             % dimension for space between
+     \headlineindent=1.166cm              % number and text of headings.
+     \def\andname{and}
+     \if@mathematic
+        \def\runinend{\enspace}
+        \def\floatcounterend{\enspace}
+        \def\sectcounterend{}
+     \else
+        \def\runinend{.}
+        \def\floatcounterend{.\ }
+        \def\sectcounterend{.}
+     \fi
+     \def\keywordname{{\bfseries Key words\runinend}}
+     \def\lastandname{, and}
+     \def\mailname{{\itshape Correspondence to\/}:}
+     \def\email#1{{e-mail: \tt#1}}
+     \def\keywords#1{\par\addvspace\baselineskip\noindent\keywordname\enspace
+     \ignorespaces#1}
+     %
+     \newcounter{inst}
+     \newcounter{auth}
+     \def\authdepth{2}
+     \newdimen\instindent
+     \newbox\authrun
+     \newtoks\authorrunning
+     \newbox\titrun
+     \newtoks\titlerunning
+     \def\authorfont{\bfseries}
+
+     \def\combirunning#1{\gdef\@combi{#1}}
+     \def\@combi{}
+     \newbox\combirun
+     %
+     \def\ps@last{\def\@evenhead{\small\rlap{\thepage}\hfil
+     \lastevenhead}}
+     \newcounter{lastpage}
+     \def\islastpageeven{\@ifundefined{lastpagenumber}
+     {\setcounter{lastpage}{0}}{\setcounter{lastpage}{\lastpagenumber}}
+     \ifnum\value{lastpage}>0
+        \ifodd\value{lastpage}%
+        \else
+           \if@smartrunh
+              \thispagestyle{last}%
+           \fi
+        \fi
+     \fi}
+     \def\getlastpagenumber{\clearpage
+     \addtocounter{page}{-1}%
+        \immediate\write\@auxout{\string\gdef\string\lastpagenumber{\thepage}}%
+        \immediate\write\@auxout{\string\newlabel{LastPage}{{}{\thepage}}}%
+        \addtocounter{page}{1}}
+
+     \def\journalname#1{\gdef\@journalname{#1}}
+
+     \def\dedication#1{\gdef\@dedic{#1}}
+     \def\@dedic{}
+
+     \let\@date\undefined
+
+     \def\institute#1{\gdef\@institute{#1}}
+
+     \def\institutename{\par
+      \begingroup
+      \parindent=0pt
+      \parskip=0pt
+      \setcounter{inst}{1}%
+      \def\and{\par\stepcounter{inst}%
+      \if@instindent\hangindent\instindent\fi
+      \noindent
+      \hbox to\instindent{\hss\smash{$^{\theinst}$}\enspace}\ignorespaces}%
+      \setbox0=\vbox{\def\thanks##1{}\@institute}
+      \ifnum\value{inst}>9\relax\setbox0=\hbox{$^{88}$\enspace}%
+                      \else\setbox0=\hbox{$^{8}$\enspace}\fi
+      \instindent=\wd0\relax
+      \ifnum\value{inst}=1\relax
+      \else
+        \setcounter{inst}{1}%
+        \if@instindent\hangindent\instindent\fi
+        \noindent
+        \hbox to\instindent{\hss\smash{$^{\theinst}$}\enspace}\ignorespaces
+      \fi
+      \small
+      \ignorespaces
+      \@institute\par
+      \endgroup}
+
+     \def\offprints#1{\begingroup
+     \def\protect{\noexpand\protect\noexpand}\xdef\@thanks{\@thanks
+     \protect\footnotetext[0]{\unskip\hskip-15pt{\itshape Send offprint requests
+     to\/}: \ignorespaces#1}}\endgroup\ignorespaces}
+
+     \def\mail#1{\gdef\@mail{#1}}
+     \def\@mail{}
+
+     \def\@thanks{}
+
+     \def\@fnsymbol#1{\ifcase#1\or\star\or{\star\star}\or{\star\star\star}%
+        \or \dagger\or \ddagger\or
+        \mathchar "278\or \mathchar "27B\or \|\or **\or \dagger\dagger
+        \or \ddagger\ddagger \else\@ctrerr\fi\relax}
+
+     \def\inst#1{\unskip$^{#1}$}
+     \def\fnmsep{\unskip$^,$}
+
+     \def\subtitle#1{\gdef\@subtitle{#1}}
+     \def\@subtitle{}
+
+     \def\headnote#1{\gdef\@headnote{#1}}
+     \def\@headnote{}
+
+     \def\ch@ckobl#1#2{\@ifundefined{@#1}
+      {\typeout{SVJour warning: Missing
+     \expandafter\string\csname#1\endcsname}%
+       \csname #1\endcsname{#2}}
+      {}}
+     %
+     \def\ProcessRunnHead{%
+         \def\\{\unskip\ \ignorespaces}\def\inst##1{\unskip{}}%
+         \def\thanks##1{\unskip{}}\def\fnmsep{\unskip}%
+         \instindent=\textwidth
+         \advance\instindent by-\headlineindent
+         \if!\the\titlerunning!\else
+           \edef\@title{\the\titlerunning}%
+         \fi
+         \global\setbox\titrun=\hbox{\small\rmfamily\unboldmath\ignorespaces\@title
+                                     \unskip}%
+         \ifdim\wd\titrun>\instindent
+            \typeout{^^JSVJour Warning: Title too long for running head.}%
+            \typeout{Please supply a shorter form with \string\titlerunning
+                     \space prior to \string\maketitle}%
+            \global\setbox\titrun=\hbox{\small\rmfamily
+            Title Suppressed Due to Excessive Length}%
+         \fi
+         \xdef\@title{\copy\titrun}%
+     %
+         \if!\the\authorrunning!
+         \else
+           \setcounter{auth}{1}%
+           \edef\@author{\the\authorrunning}%
+         \fi
+         \ifnum\value{auth}>\authdepth
+            \def\stripauthor##1\and##2\endauthor{%
+            \protected@xdef\@author{##1\unskip\unskip\if!##2!\else\ et al.\fi}}%
+            \expandafter\stripauthor\@author\and\endauthor
+         \else
+            \gdef\and{\unskip, \ignorespaces}%
+            {\def\and{\noexpand\protect\noexpand\and}%
+            \protected@xdef\@author{\@author}}
+         \fi
+         \global\setbox\authrun=\hbox{\small\rmfamily\unboldmath\ignorespaces
+                                      \@author\unskip}%
+         \ifdim\wd\authrun>\instindent
+         \typeout{^^JSVJour Warning: Author name(s) too long for running head.
+                  ^^JPlease supply a shorter form with \string\authorrunning
+                  \space prior to \string\maketitle}%
+         \global\setbox\authrun=\hbox{\small\rmfamily Please give a shorter version
+               with: {\tt\string\authorrunning\space and
+                  \string\titlerunning\space prior to \string\maketitle}}%
+         \fi
+         \xdef\@author{\copy\authrun}%
+         \markboth{\@author}{\@title}%
+     }
+     %
+     \def\maketitle{\par
+     \ch@ckobl{journalname}{Noname}
+     \ch@ckobl{date}{The date of receipt and acceptance will be inserted by
+     the editor}
+     \ch@ckobl{title}{A title should be given}
+     \ch@ckobl{author}{Name(s) and initial(s) of author(s) should be given}
+     \ch@ckobl{institute}{Address(es) of author(s) should be given}
+     \begingroup
+     %
+         \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+         \def\@makefnmark{$^{\@thefnmark}$}%
+     %
+      \def\lastand{\ifnum\value{inst}=2\relax
+                      \unskip{} \andname\
+                   \else
+                      \unskip, \andname\
+                   \fi}%
+      \def\and{\stepcounter{auth}\relax
+               \if@smartand
+                  \ifnum\value{auth}=\value{inst}%
+                     \lastand
+                  \else
+                     \unskip,
+                  \fi
+               \else
+                  \unskip,
+               \fi}%
+      \ifnum \col@number=\@ne
+        \@maketitle
+      \else
+        \twocolumn[\@maketitle]%
+      \fi
+      \thispagestyle{empty}
+      \global\@topnum\z@
+      \@thanks
+      \if!\@mail!\else
+         \footnotetext[0]{\kern-\bibindent\mailname\
+         \ignorespaces\@mail}%
+      \fi
+     %
+      \if@runhead
+         \ProcessRunnHead
+         \if@smartrunh
+            \instindent=\textwidth
+            \advance\instindent by-\headlineindent
+            \if!\@combi!%
+               \global\setbox\combirun=\hbox{\small\rmfamily\unboldmath\ignorespaces
+                                             \@author\unskip: \@title\unskip}%
+               \def\@tempa{Automatically generated running head}%
+            \else
+               \global\setbox\combirun=\hbox{\small\rmfamily\unboldmath\ignorespaces
+                                             \@combi\unskip}%
+               \def\@tempa{With \string\combirunning\space supplied running head}%
+            \fi
+            \ifdim\wd\combirun>\instindent
+               \typeout{^^JSVJour Warning: \@tempa}%
+               \typeout{for a possible last even numbered page is too long.}%
+               \typeout{Please supply a shorter form with \string\combirunning
+                        \space prior to \string\maketitle.}%
+               \global\setbox\combirun=\hbox{\small\rmfamily
+               Title Suppressed Due to Excessive Length --
+               supply \ttfamily\char92combirunning}%
+            \fi
+            \xdef\lastevenhead{\copy\combirun}%
+         \fi
+      \fi
+     %
+      \endgroup
+      \setcounter{footnote}{0}
+      \global\let\thanks\relax
+      \global\let\maketitle\relax
+      \global\let\@maketitle\relax
+      \global\let\@thanks\@empty
+      \global\let\@author\@empty
+      \global\let\@date\@empty
+      \global\let\@title\@empty
+      \global\let\@subtitle\@empty
+      \global\let\title\relax
+      \global\let\author\relax
+      \global\let\date\relax
+      \global\let\and\relax}
+
+     \def\makeheadbox{{%
+     \hbox to0pt{\vbox{\baselineskip=10dd\hrule\hbox
+     to\hsize{\vrule\kern3pt\vbox{\kern3pt
+     \hbox{\bfseries\@journalname\ manuscript No.}
+     \hbox{(will be inserted by the editor)}
+     \kern3pt}\hfil\kern3pt\vrule}\hrule}%
+     \hss}}}
+
+     \def\@maketitle{\newpage
+      \normalfont
+      \vbox to0pt{\vskip-40pt
+      \nointerlineskip
+      \makeheadbox\vss}\nointerlineskip
+      \setbox\authrun=\vbox\bgroup
+      {\Large \bfseries\boldmath
+       \hrule\@height\logodepth\@width\z@
+       \pretolerance=10000
+       \rightskip=0pt plus 4cm
+      \if!\@headnote!\else
+        \noindent
+        {\normalfont\em\ignorespaces\@headnote\par}\vskip 3.5mm
+      \fi
+       \noindent\ignorespaces
+       \@title \par}\vskip 11.24pt\relax
+      \if!\@subtitle!\else
+        {\large\bfseries\boldmath
+        \pretolerance=10000
+        \rightskip=0pt plus 3cm
+        \noindent\ignorespaces\@subtitle \par}\vskip 11.24pt
+      \fi
+      \normalfont\authorfont
+      \lineskip .5em
+      \setbox0=\vbox{\setcounter{auth}{1}\def\and{\stepcounter{auth} }%
+                     \hfuzz=2\textwidth\def\thanks##1{}\@author}%
+      \value{inst}=\value{auth}%
+      \setcounter{auth}{1}%
+      \rightskip=0pt plus 2cm
+      \noindent\ignorespaces\@author\vskip7.23pt
+      \rightskip=0pt\relax
+      \normalfont\small\rmfamily
+      \institutename
+      \vskip 12.85pt \noindent\@date
+      \if!\@dedic!\else
+         \par
+         \small\itshape
+         \addvspace\baselineskip
+         \noindent\@dedic
+      \fi
+      \egroup % end of header box
+      \@tempdima=\headerboxheight
+      \advance\@tempdima by-\ht\authrun
+      \ifdim\@tempdima>0pt
+         \vrule width0pt height\@tempdima
+      \fi
+      \unvbox\authrun
+      \global\@minipagetrue
+      \global\everypar{\global\@minipagefalse\global\everypar{}}
+      \vskip22.47pt
+     }
+     %
+     \if@mathematic
+        \def\vec#1{\ensuremath{\mathchoice
+                          {\mbox{\boldmath$\displaystyle\mathbf{#1}$}}
+                          {\mbox{\boldmath$\textstyle\mathbf{#1}$}}
+                          {\mbox{\boldmath$\scriptstyle\mathbf{#1}$}}
+                          {\mbox{\boldmath$\scriptscriptstyle\mathbf{#1}$}}}}
+     \else
+        \def\vec#1{\ensuremath{\mathchoice
+                          {\mbox{\boldmath$\displaystyle#1$}}
+                          {\mbox{\boldmath$\textstyle#1$}}
+                          {\mbox{\boldmath$\scriptstyle#1$}}
+                          {\mbox{\boldmath$\scriptscriptstyle#1$}}}}
+     \fi
+     %
+     \def\tens#1{\ensuremath{\mathsf{#1}}}
+     %
+     \setcounter{secnumdepth}{3}
+     \newcounter {section}
+     \newcounter {subsection}[section]
+     \newcounter {subsubsection}[subsection]
+     \newcounter {paragraph}[subsubsection]
+     \newcounter {subparagraph}[paragraph]
+     \renewcommand\thesection      {\@arabic\c@section}
+     \renewcommand\thesubsection   {\thesection.\@arabic\c@subsection}
+     \renewcommand\thesubsubsection{\thesubsection.\@arabic\c@subsubsection}
+     \renewcommand\theparagraph    {\thesubsubsection.\@arabic\c@paragraph}
+     \renewcommand\thesubparagraph {\theparagraph.\@arabic\c@subparagraph}
+     %
+     \def\@hangfrom#1{\setbox\@tempboxa\hbox{#1}%
+           \hangindent \z@\noindent\box\@tempboxa}
+
+     \def\@seccntformat#1{\csname the#1\endcsname\sectcounterend
+     \hskip\betweenumberspace}
+
+     \def\@sect#1#2#3#4#5#6[#7]#8{%
+       \ifnum #2>\c@secnumdepth
+         \let\@svsec\@empty
+       \else
+         \refstepcounter{#1}%
+         \protected@edef\@svsec{\@seccntformat{#1}\relax}%
+       \fi
+       \@tempskipa #5\relax
+       \ifdim \@tempskipa>\z@
+         \begingroup
+           #6{%
+             \@hangfrom{\hskip #3\relax\@svsec}%
+               \raggedright
+               \hyphenpenalty \@M%
+               \interlinepenalty \@M #8\@@par}%
+         \endgroup
+         \csname #1mark\endcsname{#7}%
+         \addcontentsline{toc}{#1}{%
+           \ifnum #2>\c@secnumdepth \else
+             \protect\numberline{\csname the#1\endcsname\sectcounterend}%
+           \fi
+           #7}%
+       \else
+         \def\@svsechd{%
+           #6{\hskip #3\relax
+           \@svsec #8\hskip\aftertext}%
+           \csname #1mark\endcsname{#7}%
+           \addcontentsline{toc}{#1}{%
+             \ifnum #2>\c@secnumdepth \else
+               \protect\numberline{\csname the#1\endcsname}%
+             \fi
+             #7}}%
+       \fi
+       \@xsect{#5}}
+
+     %
+     % measures and setting of sections
+     %
+     \def\section{\@startsection{section}{1}{\z@}%
+         {-21dd plus-4pt minus-4pt}{10.5dd plus 4pt
+          minus4pt}{\normalsize\bfseries\boldmath}}
+     \def\subsection{\@startsection{subsection}{2}{\z@}%
+         {-21dd plus-4pt minus-4pt}{10.5dd plus 4pt
+          minus4pt}{\normalsize\itshape}}
+     \def\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+         {-13dd plus-4pt minus-4pt}{-5.5pt}{\normalsize\itshape}}
+     \def\paragraph{\@startsection{paragraph}{4}{\z@}%
+         {-13pt plus-4pt minus-4pt}{-5.5pt}{\normalsize\itshape}}
+
+     \setlength\leftmargini  {\parindent}
+     \leftmargin  \leftmargini
+     \setlength\leftmarginii {\parindent}
+     \setlength\leftmarginiii {1.87em}
+     \setlength\leftmarginiv  {1.7em}
+     \setlength\leftmarginv  {.5em}
+     \setlength\leftmarginvi {.5em}
+     \setlength  \labelsep  {.5em}
+     \setlength  \labelwidth{\leftmargini}
+     \addtolength\labelwidth{-\labelsep}
+     \@beginparpenalty -\@lowpenalty
+     \@endparpenalty   -\@lowpenalty
+     \@itempenalty     -\@lowpenalty
+     \renewcommand\theenumi{\@arabic\c@enumi}
+     \renewcommand\theenumii{\@alph\c@enumii}
+     \renewcommand\theenumiii{\@roman\c@enumiii}
+     \renewcommand\theenumiv{\@Alph\c@enumiv}
+     \newcommand\labelenumi{\theenumi.}
+     \newcommand\labelenumii{(\theenumii)}
+     \newcommand\labelenumiii{\theenumiii.}
+     \newcommand\labelenumiv{\theenumiv.}
+     \renewcommand\p@enumii{\theenumi}
+     \renewcommand\p@enumiii{\theenumi(\theenumii)}
+     \renewcommand\p@enumiv{\p@enumiii\theenumiii}
+     \newcommand\labelitemi{\normalfont\bfseries --}
+     \newcommand\labelitemii{\normalfont\bfseries --}
+     \newcommand\labelitemiii{$\m@th\bullet$}
+     \newcommand\labelitemiv{$\m@th\cdot$}
+
+     \if@spthms
+     % definition of the "\spnewtheorem" command.
+     %
+     % Usage:
+     %
+     %     \spnewtheorem{env_nam}{caption}[within]{cap_font}{body_font}
+     % or  \spnewtheorem{env_nam}[numbered_like]{caption}{cap_font}{body_font}
+     % or  \spnewtheorem*{env_nam}{caption}{cap_font}{body_font}
+     %
+     % New is "cap_font" and "body_font". It stands for
+     % fontdefinition of the caption and the text itself.
+     %
+     % "\spnewtheorem*" gives a theorem without number.
+     %
+     % A defined spnewthoerem environment is used as described
+     % by Lamport.
+     %
+     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+     \def\@thmcountersep{}
+     \def\@thmcounterend{}
+     \newdimen\spthmsep \spthmsep=3pt
+
+     \def\spnewtheorem{\@ifstar{\@sthm}{\@Sthm}}
+
+     % definition of \spnewtheorem with number
+
+     \def\@spnthm#1#2{%
+       \@ifnextchar[{\@spxnthm{#1}{#2}}{\@spynthm{#1}{#2}}}
+     \def\@Sthm#1{\@ifnextchar[{\@spothm{#1}}{\@spnthm{#1}}}
+
+     \def\@spxnthm#1#2[#3]#4#5{\expandafter\@ifdefinable\csname #1\endcsname
+        {\@definecounter{#1}\@addtoreset{#1}{#3}%
+        \expandafter\xdef\csname the#1\endcsname{\expandafter\noexpand
+          \csname the#3\endcsname \noexpand\@thmcountersep \@thmcounter{#1}}%
+        \expandafter\xdef\csname #1name\endcsname{#2}%
+        \global\@namedef{#1}{\@spthm{#1}{\csname #1name\endcsname}{#4}{#5}}%
+                                   \global\@namedef{end#1}{\@endtheorem}}}
+
+     \def\@spynthm#1#2#3#4{\expandafter\@ifdefinable\csname #1\endcsname
+        {\@definecounter{#1}%
+        \expandafter\xdef\csname the#1\endcsname{\@thmcounter{#1}}%
+        \expandafter\xdef\csname #1name\endcsname{#2}%
+        \global\@namedef{#1}{\@spthm{#1}{\csname #1name\endcsname}{#3}{#4}}%
+                                    \global\@namedef{end#1}{\@endtheorem}}}
+
+     \def\@spothm#1[#2]#3#4#5{%
+       \@ifundefined{c@#2}{\@latexerr{No theorem environment `#2' defined}\@eha}%
+       {\expandafter\@ifdefinable\csname #1\endcsname
+       {\global\@namedef{the#1}{\@nameuse{the#2}}%
+       \expandafter\xdef\csname #1name\endcsname{#3}%
+       \global\@namedef{#1}{\@spthm{#2}{\csname #1name\endcsname}{#4}{#5}}%
+       \global\@namedef{end#1}{\@endtheorem}}}}
+
+     \def\@spthm#1#2#3#4{\topsep 7\p@ \@plus2\p@ \@minus4\p@
+     \labelsep=\spthmsep\refstepcounter{#1}%
+     \@ifnextchar[{\@spythm{#1}{#2}{#3}{#4}}{\@spxthm{#1}{#2}{#3}{#4}}}
+
+     \def\@spxthm#1#2#3#4{\@spbegintheorem{#2}{\csname the#1\endcsname}{#3}{#4}%
+                         \ignorespaces}
+
+     \def\@spythm#1#2#3#4[#5]{\@spopargbegintheorem{#2}{\csname
+            the#1\endcsname}{#5}{#3}{#4}\ignorespaces}
+
+     \def\normalthmheadings{\def\@spbegintheorem##1##2##3##4{\trivlist
+                      \item[\hskip\labelsep{##3##1\ ##2\@thmcounterend}]##4}
+     \def\@spopargbegintheorem##1##2##3##4##5{\trivlist
+           \item[\hskip\labelsep{##4##1\ ##2}]{##4(##3)\@thmcounterend\ }##5}}
+     \normalthmheadings
+
+     \def\reversethmheadings{\def\@spbegintheorem##1##2##3##4{\trivlist
+                      \item[\hskip\labelsep{##3##2\ ##1\@thmcounterend}]##4}
+     \def\@spopargbegintheorem##1##2##3##4##5{\trivlist
+           \item[\hskip\labelsep{##4##2\ ##1}]{##4(##3)\@thmcounterend\ }##5}}
+
+     % definition of \spnewtheorem* without number
+
+     \def\@sthm#1#2{\@Ynthm{#1}{#2}}
+
+     \def\@Ynthm#1#2#3#4{\expandafter\@ifdefinable\csname #1\endcsname
+        {\global\@namedef{#1}{\@Thm{\csname #1name\endcsname}{#3}{#4}}%
+         \expandafter\xdef\csname #1name\endcsname{#2}%
+         \global\@namedef{end#1}{\@endtheorem}}}
+
+     \def\@Thm#1#2#3{\topsep 7\p@ \@plus2\p@ \@minus4\p@
+     \@ifnextchar[{\@Ythm{#1}{#2}{#3}}{\@Xthm{#1}{#2}{#3}}}
+
+     \def\@Xthm#1#2#3{\@Begintheorem{#1}{#2}{#3}\ignorespaces}
+
+     \def\@Ythm#1#2#3[#4]{\@Opargbegintheorem{#1}
+            {#4}{#2}{#3}\ignorespaces}
+
+     \def\@Begintheorem#1#2#3{#3\trivlist
+                                \item[\hskip\labelsep{#2#1\@thmcounterend}]}
+
+     \def\@Opargbegintheorem#1#2#3#4{#4\trivlist
+           \item[\hskip\labelsep{#3#1}]{#3(#2)\@thmcounterend\ }}
+
+     \if@envcntsect
+        \def\@thmcountersep{.}
+        \spnewtheorem{theorem}{Theorem}[section]{\bfseries}{\itshape}
+     \else
+        \spnewtheorem{theorem}{Theorem}{\bfseries}{\itshape}
+        \if@envcntreset
+           \@addtoreset{theorem}{section}
+        \else
+           \@addtoreset{theorem}{chapter}
+        \fi
+     \fi
+
+     %definition of divers theorem environments
+     \spnewtheorem*{claim}{Claim}{\itshape}{\rmfamily}
+     \spnewtheorem*{proof}{Proof}{\itshape}{\rmfamily}
+     \if@envcntsame % alle Umgebungen wie Theorem.
+        \def\spn@wtheorem#1#2#3#4{\@spothm{#1}[theorem]{#2}{#3}{#4}}
+     \else % alle Umgebungen mit eigenem Zaehler
+        \if@envcntsect % mit section numeriert
+           \def\spn@wtheorem#1#2#3#4{\@spxnthm{#1}{#2}[section]{#3}{#4}}
+        \else % nicht mit section numeriert
+           \if@envcntreset
+              \def\spn@wtheorem#1#2#3#4{\@spynthm{#1}{#2}{#3}{#4}
+                                        \@addtoreset{#1}{section}}
+           \else
+              \let\spn@wtheorem=\@spynthm
+           \fi
+        \fi
+     \fi
+     \spn@wtheorem{case}{Case}{\itshape}{\rmfamily}
+     \spn@wtheorem{conjecture}{Conjecture}{\itshape}{\rmfamily}
+     \spn@wtheorem{corollary}{Corollary}{\bfseries}{\itshape}
+     \spn@wtheorem{definition}{Definition}{\bfseries}{\itshape}
+     \spn@wtheorem{example}{Example}{\itshape}{\rmfamily}
+     \spn@wtheorem{exercise}{Exercise}{\bfseries}{\rmfamily}
+     \spn@wtheorem{lemma}{Lemma}{\bfseries}{\itshape}
+     \spn@wtheorem{note}{Note}{\itshape}{\rmfamily}
+     \spn@wtheorem{problem}{Problem}{\bfseries}{\rmfamily}
+     \spn@wtheorem{property}{Property}{\itshape}{\rmfamily}
+     \spn@wtheorem{proposition}{Proposition}{\bfseries}{\itshape}
+     \spn@wtheorem{question}{Question}{\itshape}{\rmfamily}
+     \spn@wtheorem{solution}{Solution}{\bfseries}{\rmfamily}
+     \spn@wtheorem{remark}{Remark}{\itshape}{\rmfamily}
+     %
+     \newenvironment{theopargself}
+         {\def\@spopargbegintheorem##1##2##3##4##5{\trivlist
+              \item[\hskip\labelsep{##4##1\ ##2}]{##4##3\@thmcounterend\ }##5}
+          \def\@Opargbegintheorem##1##2##3##4{##4\trivlist
+              \item[\hskip\labelsep{##3##1}]{##3##2\@thmcounterend\ }}}{}
+     \newenvironment{theopargself*}
+         {\def\@spopargbegintheorem##1##2##3##4##5{\trivlist
+              \item[\hskip\labelsep{##4##1\ ##2}]{\hspace*{-\labelsep}##4##3\@thmcounterend}##5}
+          \def\@Opargbegintheorem##1##2##3##4{##4\trivlist
+              \item[\hskip\labelsep{##3##1}]{\hspace*{-\labelsep}##3##2\@thmcounterend}}}{}
+     \fi
+
+     \def\@takefromreset#1#2{%
+         \def\@tempa{#1}%
+         \let\@tempd\@elt
+         \def\@elt##1{%
+             \def\@tempb{##1}%
+             \ifx\@tempa\@tempb\else
+                 \@addtoreset{##1}{#2}%
+             \fi}%
+         \expandafter\expandafter\let\expandafter\@tempc\csname cl@#2\endcsname
+         \expandafter\def\csname cl@#2\endcsname{}%
+         \@tempc
+         \let\@elt\@tempd}
+
+     \def\squareforqed{\hbox{\rlap{$\sqcap$}$\sqcup$}}
+     \def\qed{\ifmmode\else\unskip\quad\fi\squareforqed}
+     \def\smartqed{\def\qed{\ifmmode\squareforqed\else{\unskip\nobreak\hfil
+     \penalty50\hskip1em\null\nobreak\hfil\squareforqed
+     \parfillskip=0pt\finalhyphendemerits=0\endgraf}\fi}}
+
+     % Define `abstract' environment
+     \def\abstract{\topsep=0pt\partopsep=0pt\parsep=0pt\itemsep=0pt\relax
+     \trivlist\item[\hskip\labelsep
+     {\bfseries\abstractname}]\if!\abstractname!\hskip-\labelsep\fi}
+     \if@twocolumn
+        \def\endabstract{\endtrivlist\addvspace{5mm}\strich}
+        \def\strich{\hrule\vskip3ptplus12pt\null}
+     \else
+        \def\endabstract{\endtrivlist\addvspace{3mm}}
+     \fi
+     %
+     \newenvironment{verse}
+                    {\let\\\@centercr
+                     \list{}{\itemsep      \z@
+                             \itemindent   -1.5em%
+                             \listparindent\itemindent
+                             \rightmargin  \leftmargin
+                             \advance\leftmargin 1.5em}%
+                     \item\relax}
+                    {\endlist}
+     \newenvironment{quotation}
+                    {\list{}{\listparindent 1.5em%
+                             \itemindent    \listparindent
+                             \rightmargin   \leftmargin
+                             \parsep        \z@ \@plus\p@}%
+                     \item\relax}
+                    {\endlist}
+     \newenvironment{quote}
+                    {\list{}{\rightmargin\leftmargin}%
+                     \item\relax}
+                    {\endlist}
+     \newcommand\appendix{\par
+       \setcounter{section}{0}%
+       \setcounter{subsection}{0}%
+       \renewcommand\thesection{\@Alph\c@section}}
+     \setlength\arraycolsep{1.5\p@}
+     \setlength\tabcolsep{6\p@}
+     \setlength\arrayrulewidth{.4\p@}
+     \setlength\doublerulesep{2\p@}
+     \setlength\tabbingsep{\labelsep}
+     \skip\@mpfootins = \skip\footins
+     \setlength\fboxsep{3\p@}
+     \setlength\fboxrule{.4\p@}
+     \renewcommand\theequation{\@arabic\c@equation}
+     \newcounter{figure}
+     \renewcommand\thefigure{\@arabic\c@figure}
+     \def\fps@figure{tbp}
+     \def\ftype@figure{1}
+     \def\ext@figure{lof}
+     \def\fnum@figure{\figurename~\thefigure}
+     \newenvironment{figure}
+                    {\@float{figure}}
+                    {\end@float}
+     \newenvironment{figure*}
+                    {\@dblfloat{figure}}
+                    {\end@dblfloat}
+     \newcounter{table}
+     \renewcommand\thetable{\@arabic\c@table}
+     \def\fps@table{tbp}
+     \def\ftype@table{2}
+     \def\ext@table{lot}
+     \def\fnum@table{\tablename~\thetable}
+     \newenvironment{table}
+                    {\@float{table}}
+                    {\end@float}
+     \newenvironment{table*}
+                    {\@dblfloat{table}}
+                    {\end@dblfloat}
+
+     \def \@floatboxreset {%
+             \reset@font
+             \small
+             \@setnobreak
+             \@setminipage
+     }
+
+     \newlength\abovecaptionskip
+     \newlength\belowcaptionskip
+     \setlength\abovecaptionskip{10\p@}
+     \setlength\belowcaptionskip{0\p@}
+     \newcommand\leftlegendglue{}
+
+     \def\fig@type{figure}
+
+     \newdimen\figcapgap\figcapgap=3pt
+     \newdimen\tabcapgap\tabcapgap=5.5pt
+
+     \@ifundefined{floatlegendstyle}{\def\floatlegendstyle{\bfseries}}{}
+
+     \long\def\@caption#1[#2]#3{\par\addcontentsline{\csname
+       ext@#1\endcsname}{#1}{\protect\numberline{\csname
+       the#1\endcsname}{\ignorespaces #2}}\begingroup
+         \@parboxrestore
+         \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces #3}\par
+       \endgroup}
+
+     \def\capstrut{\vrule\@width\z@\@height\topskip}
+
+     \@ifundefined{captionstyle}{\def\captionstyle{\normalfont\small}}{}
+
+     \long\def\@makecaption#1#2{%
+      \captionstyle
+      \ifx\@captype\fig@type
+        \vskip\figcapgap
+      \fi
+      \setbox\@tempboxa\hbox{{\floatlegendstyle #1\floatcounterend}%
+      \capstrut #2}%
+      \ifdim \wd\@tempboxa >\hsize
+        {\floatlegendstyle #1\floatcounterend}\capstrut #2\par
+      \else
+        \hbox to\hsize{\leftlegendglue\unhbox\@tempboxa\hfil}%
+      \fi
+      \ifx\@captype\fig@type\else
+        \vskip\tabcapgap
+      \fi}
+
+     \newdimen\figgap\figgap=1cc
+     \long\def\@makesidecaption#1#2{%
+        \parbox[b]{\@tempdima}{\captionstyle{\floatlegendstyle
+                                              #1\floatcounterend}#2}}
+     \def\sidecaption#1\caption{%
+     \setbox\@tempboxa=\hbox{#1\unskip}%
+     \if@twocolumn
+      \ifdim\hsize<\textwidth\else
+        \ifdim\wd\@tempboxa<\columnwidth
+           \typeout{Double column float fits into single column -
+                 ^^Jyou'd better switch the environment. }%
+        \fi
+      \fi
+     \fi
+     \@tempdima=\hsize
+     \advance\@tempdima by-\figgap
+     \advance\@tempdima by-\wd\@tempboxa
+     \ifdim\@tempdima<3cm
+         \typeout{\string\sidecaption: No sufficient room for the legend;
+                  using normal \string\caption. }%
+        \unhbox\@tempboxa
+        \let\@capcommand=\@caption
+     \else
+        \let\@capcommand=\@sidecaption
+        \leavevmode
+        \unhbox\@tempboxa
+        \hfill
+     \fi
+     \refstepcounter\@captype
+     \@dblarg{\@capcommand\@captype}}
+
+     \long\def\@sidecaption#1[#2]#3{\addcontentsline{\csname
+       ext@#1\endcsname}{#1}{\protect\numberline{\csname
+       the#1\endcsname}{\ignorespaces #2}}\begingroup
+         \@parboxrestore
+         \@makesidecaption{\csname fnum@#1\endcsname}{\ignorespaces #3}\par
+       \endgroup}
+
+     % Define `acknowledgement' environment
+     \def\acknowledgement{\par\addvspace{17pt}\small\rmfamily
+     \trivlist\if!\ackname!\item[]\else
+     \item[\hskip\labelsep
+     {\it\ackname}]\fi}
+     \def\endacknowledgement{\endtrivlist\addvspace{6pt}}
+     % Define `noteadd' environment
+     \def\noteadd{\par\addvspace{17pt}\small\rmfamily
+     \trivlist\item[\hskip\labelsep
+     {\itshape\noteaddname}]}
+     \def\endnoteadd{\endtrivlist\addvspace{6pt}}
+
+     \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
+     \DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
+     \DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
+     \DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
+     \DeclareOldFontCommand{\it}{\normalfont\itshape}{\mathit}
+     \DeclareOldFontCommand{\sl}{\normalfont\slshape}{\@nomath\sl}
+     \DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
+     \DeclareRobustCommand*\cal{\@fontswitch\relax\mathcal}
+     \DeclareRobustCommand*\mit{\@fontswitch\relax\mathnormal}
+     \newcommand\@pnumwidth{1.55em}
+     \newcommand\@tocrmarg{2.55em}
+     \newcommand\@dotsep{4.5}
+     \setcounter{tocdepth}{1}
+     \newcommand\tableofcontents{%
+         \section*{\contentsname}%
+         \@starttoc{toc}%
+         \addtocontents{toc}{\begingroup\protect\small}%
+         \AtEndDocument{\addtocontents{toc}{\endgroup}}%
+         }
+     \newcommand*\l@part[2]{%
+       \ifnum \c@tocdepth >-2\relax
+         \addpenalty\@secpenalty
+         \addvspace{2.25em \@plus\p@}%
+         \begingroup
+           \setlength\@tempdima{3em}%
+           \parindent \z@ \rightskip \@pnumwidth
+           \parfillskip -\@pnumwidth
+           {\leavevmode
+            \large \bfseries #1\hfil \hb@xt@\@pnumwidth{\hss #2}}\par
+            \nobreak
+            \if@compatibility
+              \global\@nobreaktrue
+              \everypar{\global\@nobreakfalse\everypar{}}%
+           \fi
+         \endgroup
+       \fi}
+     \newcommand*\l@section{\@dottedtocline{1}{0pt}{1.5em}}
+     \newcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+     \newcommand*\l@subsubsection{\@dottedtocline{3}{3.8em}{3.2em}}
+     \newcommand*\l@paragraph{\@dottedtocline{4}{7.0em}{4.1em}}
+     \newcommand*\l@subparagraph{\@dottedtocline{5}{10em}{5em}}
+     \newcommand\listoffigures{%
+         \section*{\listfigurename
+           \@mkboth{\listfigurename}%
+                   {\listfigurename}}%
+         \@starttoc{lof}%
+         }
+     \newcommand*\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
+     \newcommand\listoftables{%
+         \section*{\listtablename
+           \@mkboth{\listtablename}{\listtablename}}%
+         \@starttoc{lot}%
+         }
+     \let\l@table\l@figure
+     \newdimen\bibindent
+     \setlength\bibindent{\parindent}
+     \def\@biblabel#1{#1.}
+     \def\@lbibitem[#1]#2{\item[{[#1]}\hfill]\if@filesw
+           {\let\protect\noexpand
+            \immediate
+            \write\@auxout{\string\bibcite{#2}{#1}}}\fi\ignorespaces}
+     \newenvironment{thebibliography}[1]
+          {\section*{\refname
+             \@mkboth{\refname}{\refname}}\small
+           \list{\@biblabel{\@arabic\c@enumiv}}%
+                {\settowidth\labelwidth{\@biblabel{#1}}%
+                 \leftmargin\labelwidth
+                 \advance\leftmargin\labelsep
+                 \@openbib@code
+                 \usecounter{enumiv}%
+                 \let\p@enumiv\@empty
+                 \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+           \sloppy\clubpenalty4000\widowpenalty4000%
+           \sfcode`\.\@m}
+          {\def\@noitemerr
+            {\@latex@warning{Empty `thebibliography' environment}}%
+           \endlist}
+     %
+     \newcount\@tempcntc
+     \def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+       \@tempcnta\z@\@tempcntb\m@ne\def\@citea{}\@cite{\@for\@citeb:=#2\do
+         {\@ifundefined
+            {b@\@citeb}{\@citeo\@tempcntb\m@ne\@citea\def\@citea{,}{\bfseries
+             ?}\@warning
+            {Citation `\@citeb' on page \thepage \space undefined}}%
+         {\setbox\z@\hbox{\global\@tempcntc0\csname b@\@citeb\endcsname\relax}%
+          \ifnum\@tempcntc=\z@ \@citeo\@tempcntb\m@ne
+            \@citea\def\@citea{,\hskip0.1em\ignorespaces}\hbox{\csname b@\@citeb\endcsname}%
+          \else
+           \advance\@tempcntb\@ne
+           \ifnum\@tempcntb=\@tempcntc
+           \else\advance\@tempcntb\m@ne\@citeo
+           \@tempcnta\@tempcntc\@tempcntb\@tempcntc\fi\fi}}\@citeo}{#1}}
+     \def\@citeo{\ifnum\@tempcnta>\@tempcntb\else
+                 \@citea\def\@citea{,\hskip0.1em\ignorespaces}%
+       \ifnum\@tempcnta=\@tempcntb\the\@tempcnta\else
+        {\advance\@tempcnta\@ne\ifnum\@tempcnta=\@tempcntb \else \def\@citea{--}\fi
+         \advance\@tempcnta\m@ne\the\@tempcnta\@citea\the\@tempcntb}\fi\fi}
+     %
+     \newcommand\newblock{\hskip .11em\@plus.33em\@minus.07em}
+     \let\@openbib@code\@empty
+     \newenvironment{theindex}
+                    {\if@twocolumn
+                       \@restonecolfalse
+                     \else
+                       \@restonecoltrue
+                     \fi
+                     \columnseprule \z@
+                     \columnsep 35\p@
+                     \twocolumn[\section*{\indexname}]%
+                     \@mkboth{\indexname}{\indexname}%
+                     \thispagestyle{plain}\parindent\z@
+                     \parskip\z@ \@plus .3\p@\relax
+                     \let\item\@idxitem}
+                    {\if@restonecol\onecolumn\else\clearpage\fi}
+     \newcommand\@idxitem{\par\hangindent 40\p@}
+     \newcommand\subitem{\@idxitem \hspace*{20\p@}}
+     \newcommand\subsubitem{\@idxitem \hspace*{30\p@}}
+     \newcommand\indexspace{\par \vskip 10\p@ \@plus5\p@ \@minus3\p@\relax}
+     \renewcommand\footnoterule{%
+       \kern-3\p@
+       \hrule\@width.4\columnwidth
+       \kern2.6\p@}
+     \newcommand\@makefntext[1]{%
+         \noindent
+         \hb@xt@\bibindent{\hss\@makefnmark\enspace}#1}
+     %
+     \newcommand\contentsname{Contents}
+     \newcommand\listfigurename{List of Figures}
+     \newcommand\listtablename{List of Tables}
+     \newcommand\refname{References}
+     \newcommand\indexname{Index}
+     \newcommand\figurename{Fig.}
+     \newcommand\tablename{Table}
+     \newcommand\partname{Part}
+     \newcommand\appendixname{Appendix}
+     \newcommand\abstractname{Abstract\runinend}
+     \newcommand\ackname{Acknowledgements\runinend}
+     \newcommand\noteaddname{Note added in proof}
+     % French section
+     \def\ds@francais{%
+      \typeout{On parle francais.}%
+      \def\abstractname{R\'esum\'e\runinend}%
+      \def\ackname{Remerciements\runinend}%
+      \def\andname{et}%
+      \def\lastandname{ et}%
+      \def\appendixname{Appendice}
+      \def\chaptername{Chapitre}%
+      \def\claimname{Pr\'etention}%
+      \def\conjecturename{Hypoth\`ese}%
+      \def\contentsname{Table des mati\`eres}%
+      \def\corollaryname{Corollaire}%
+      \def\definitionname{D\'efinition}%
+      \def\examplename{Exemple}%
+      \def\exercisename{Exercice}%
+      \def\figurename{Fig.}%
+      \def\keywordname{{\bfseries Mots-cl\'e\runinend}}
+      \def\indexname{Index}
+      \def\lemmaname{Lemme}%
+      \def\contriblistname{Liste des contributeurs}
+      \def\listfigurename{Liste des figures}%
+      \def\listtablename{Liste des tables}%
+      \def\mailname{{\itshape Correspondence to\/}:}
+      \def\noteaddname{Note ajout\'ee \`a l'\'epreuve}%
+      \def\notename{Remarque}%
+      \def\partname{Partie}%
+      \def\problemname{Probl\`eme}%
+      \def\proofname{Preuve}%
+      \def\propertyname{Caract\'eristique}%
+     %\def\propositionname{Proposition}%
+      \def\questionname{Question}%
+      \def\refname{Bibliographie}%
+      \def\remarkname{Remarque}%
+      \def\seename{voyez}
+      \def\solutionname{Solution}%
+     %\def\subclassname{{\it Subject Classifications\/}:}
+      \def\tablename{Tableau}%
+      \def\theoremname{Th\'eor\`eme}%
+     }
+     %
+     % German section
+     \def\ds@deutsch{\typeout{Man spricht deutsch.}%
+      \def\abstractname{Zusammenfassung\runinend}%
+      \def\ackname{Danksagung\runinend}%
+      \def\andname{und}%
+      \def\lastandname{ und}%
+      \def\appendixname{Anhang}%
+      \def\chaptername{Kapitel}%
+      \def\claimname{Behauptung}%
+      \def\conjecturename{Hypothese}%
+      \def\contentsname{Inhaltsverzeichnis}%
+      \def\corollaryname{Korollar}%
+     %\def\definitionname{Definition}%
+      \def\examplename{Beispiel}%
+      \def\exercisename{\"Ubung}%
+      \def\figurename{Abb.}%
+      \def\keywordname{{\bfseries Schl\"usselw\"orter\runinend}}
+      \def\indexname{Index}
+     %\def\lemmaname{Lemma}%
+      \def\contriblistname{Mitarbeiter}
+      \def\listfigurename{Abbildungsverzeichnis}%
+      \def\listtablename{Tabellenverzeichnis}%
+      \def\mailname{{\itshape Correspondence to\/}:}
+      \def\noteaddname{Nachtrag}%
+      \def\notename{Anmerkung}%
+      \def\partname{Teil}%
+     %\def\problemname{Problem}%
+      \def\proofname{Beweis}%
+      \def\propertyname{Eigenschaft}%
+     %\def\propositionname{Proposition}%
+      \def\questionname{Frage}%
+      \def\refname{Literatur}%
+      \def\remarkname{Anmerkung}%
+      \def\seename{siehe}
+      \def\solutionname{L\"osung}%
+     %\def\subclassname{{\it Subject Classifications\/}:}
+      \def\tablename{Tabelle}%
+     %\def\theoremname{Theorem}%
+     }
+     \AtBeginDocument{\switch@texts}
+     \newcommand\today{}
+     \edef\today{\ifcase\month\or
+       January\or February\or March\or April\or May\or June\or
+       July\or August\or September\or October\or November\or December\fi
+       \space\number\day, \number\year}
+     \setlength\columnsep{1.5cc}
+     \setlength\columnseprule{0\p@}
+     %
+     \frenchspacing
+     \clubpenalty=10000
+     \widowpenalty=10000
+     \def\thisbottomragged{\def\@textbottom{\vskip\z@ plus.0001fil
+     \global\let\@textbottom\relax}}
+     \pagestyle{headings}
+     \pagenumbering{arabic}
+     \if@twocolumn
+        \twocolumn
+     \fi
+     \if@referee
+        \makereferee
+     \fi
+     \flushbottom
+     \endinput
+     %%
+     %% End of file `svjour.cls'.
+
+   #+END_SRC
+
+* Migrate LaTeX Template Code into =file variables=
+
+In this section, the objective is migrate LaTeX code from LaTeX template into [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html][file varibles]] syntax at the bottom of the =org-mode= file. The file varibles will be used when exporting from =org-mode= back to LaTeX.
+
+The LaTeX code that will be migrated into file variables syntax is located near the top of [[file:template.tex][template.tex]] file:
+
+#+BEGIN_SRC org :noweb yes :wrap "SRC latex :eval never :exports code" :exports results  :results replace 
+  «epj-template-begin-latex-code»
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC latex :eval never :exports code
+%
+\begin{filecontents}{leer.eps}
+%!PS-Adobe-2.0 EPSF-2.0
+%%CreationDate: Mon Jul 13 16:51:17 1992
+%%DocumentFonts: (atend)
+%%Pages: 0 1
+%%BoundingBox: 72 31 601 342
+%%EndComments
+
+gsave
+72 31 moveto
+72 342 lineto
+601 342 lineto
+601 31 lineto
+72 31 lineto
+showpage
+grestore
+%%Trailer
+%%DocumentFonts: Helvetica
+\end{filecontents}
+%
+\documentclass[epj]{svjour}
+#+END_SRC
+
+#+BEGIN_QUOTE
+  *TIP:* When migrating the LaTeX code into =file variables=, you will need to double the backslashes ~\~, e.g. ~\end~ will become ~\\end~.
+#+END_QUOTE
+
+#+NAME: escape-epj-template-begin-latex-code
+#+BEGIN_SRC ruby :noweb yes :exports none 
+s = %q<
+«epj-template-begin-latex-code»
+>
+s.gsub(/([\\])/, '\1\1').strip
+#+END_SRC
+
+** Instructions
+
+1. Add the following lines of file variables syntax to the end of the journal-template.org file.
+
+   #+NAME: file-variables
+   #+BEGIN_SRC org  :noweb yes :wrap "SRC org :eval never :exports code" :exports results :results replace 
+
+     # Local Variables:
+     # eval: (require (quote cl-lib))
+     # eval: (require (quote ox))
+     # eval: (require (quote ox-publish))
+     # org-latex-with-hyperref: nil
+     # eval: (add-to-list (quote org-latex-classes) (quote ("epj-svjour" "%%%%%%%%%%%%%%%%%%%%%%%% epj-svjour %%%%%%%%%%%%%%%%%%%%%%%%%%
+     # «escape-epj-template-begin-latex-code()»
+     #  [NO-DEFAULT-PACKAGES]
+     #  [PACKAGES]
+     #  [EXTRA]" ("\\section{%s}" . "\\section*{%s}") ("\\subsection{%s}" . "\\subsection*{%s}") ("\\subsubsection{%s}" . "\\subsubsection*{%s}") ("\\paragraph{%s}" . "\\paragraph*{%s}") ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+     # End:
+
+   #+END_SRC
+
+   #+RESULTS: file-variables
+   #+BEGIN_SRC org :eval never :exports code
+
+   # Local Variables:
+   # eval: (require (quote cl-lib))
+   # eval: (require (quote ox))
+   # eval: (require (quote ox-publish))
+   # org-latex-with-hyperref: nil
+   # eval: (add-to-list (quote org-latex-classes) (quote ("epj-svjour" "%%%%%%%%%%%%%%%%%%%%%%%% epj-svjour %%%%%%%%%%%%%%%%%%%%%%%%%%
+   # %
+   # \\begin{filecontents}{leer.eps}
+   # %!PS-Adobe-2.0 EPSF-2.0
+   # %%CreationDate: Mon Jul 13 16:51:17 1992
+   # %%DocumentFonts: (atend)
+   # %%Pages: 0 1
+   # %%BoundingBox: 72 31 601 342
+   # %%EndComments
+   # 
+   # gsave
+   # 72 31 moveto
+   # 72 342 lineto
+   # 601 342 lineto
+   # 601 31 lineto
+   # 72 31 lineto
+   # showpage
+   # grestore
+   # %%Trailer
+   # %%DocumentFonts: Helvetica
+   # \\end{filecontents}
+   # %
+   # \\documentclass[epj]{svjour}
+   #  [NO-DEFAULT-PACKAGES]
+   #  [PACKAGES]
+   #  [EXTRA]" ("\\section{%s}" . "\\section*{%s}") ("\\subsection{%s}" . "\\subsection*{%s}") ("\\subsubsection{%s}" . "\\subsubsection*{%s}") ("\\paragraph{%s}" . "\\paragraph*{%s}") ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+   # End:
+   #+END_SRC
+
+2. Add the following line under the mode line near the top of the journal-template.org file.
+
+   #+NAME: latex-class-epj-svjour
+   #+BEGIN_SRC org :exports code 
+
+     ,#+LATEX_CLASS: epj-svjour
+
+   #+END_SRC
+
+** Self Check - Example 2
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-02.org][self-check-example-02.org]].
+
+#+BEGIN_SRC org :tangle self-check-example-02.org :noweb yes :exports none 
+  «mode-line»
+  «latex-class-epj-svjour»
+  «template-utility-code»
+  «common-export-settings»
+
+  «file-variables()»
+#+END_SRC
+
+* Migrate LaTeX Template Code into =SRC= blocks
+
+In this section, the object is to migrate specific snippets of LaTeX code from the LaTeX template into =SRC= block syntax provided by =org-mode=. Each =SRC= block will inject customized LaTeX into the final LaTeX document created by the built-in exporter. 
+
+These template specific =SRC= blocks will be kept under a dedicated section named =Template Utility Code= which will not be exported. 
+
+
+** Instructions
+
+1. Add the following lines *after* the =* Template Utitily Code= section in the journal-template.org document.
+
+   #+NAME: export-epj-latex-block-code
+   #+BEGIN_SRC org  :noweb no 
+     ,** export-epj-latex-block
+
+      ,#+NAME: export-epj-latex-block
+      ,#+BEGIN_SRC latex :noweb yes
+        %
+        \title{«get-title-text()»}
+        \subtitle{«get-subtitle-text()»}
+        \author{«epj-authors-latex()»% etc
+        % \thanks is optional - remove next line if not needed
+        \thanks{\emph{Present address:} Insert the address here if needed}%
+        }                     % Do not remove
+        %
+        \offprints{}          % Insert a name or remove this line
+        %
+        \institute{«epj-institutions-latex()»}
+        %
+        \date{Received: date / Revised version: date}
+        % The correct dates will be entered by Springer
+        %
+        \abstract{
+        «get-abstract-text()»
+        %
+        \PACS{
+        «epj-pacs-codes-latex()»
+             } % end of PACS codes
+        } %end of abstract
+        %
+        \maketitle
+      ,#+END_SRC
+
+     ,*** get-title-text
+
+      ,#+NAME: get-title-text
+      ,#+BEGIN_SRC elisp 
+        (format "%s" (car (plist-get (org-export-get-environment) ':title)))
+      ,#+END_SRC
+
+      ,#+RESULTS: get-title-text
+      : Title Goes Here
+
+     ,*** get-subtitle-text
+
+      ,#+NAME: get-subtitle-text
+      ,#+BEGIN_SRC elisp  :results replace :var keyword="subtitle" :var delimiter=" "
+       (mapconcat 'car (org-element-map
+            (org-element-parse-buffer)
+            '(keyword)
+          (lambda (x) (if (string= (upcase keyword) (org-element-property :key x))
+                       (list (org-element-property :value x)) )
+            )
+          ) delimiter)
+      ,#+END_SRC
+
+      ,#+RESULTS: get-subtitle-text
+      : Subtitle Goes Here
+
+     ,*** get-abstract-text
+
+      ,#+NAME: get-abstract-text
+      ,#+BEGIN_SRC elisp :results replace :var keyword="abstract"
+        (org-element-map (org-element-map
+                             (org-element-parse-buffer)
+                             '(headline)
+                           (lambda (hl) (if (string= (upcase keyword) (upcase (org-element-property :raw-value hl)))
+                                           hl)
+                             ) 
+                           nil t)
+            '(paragraph)
+          (lambda (p) 
+            (format "%s" (replace-regexp-in-string (rx (or (: bos (* (any " \t\n")))
+                                                           (: (* (any " \t\n")) eos)))
+                                                   ""
+                                      (buffer-substring-no-properties (org-element-property :contents-begin p) (org-element-property :contents-end p))))
+            )
+          nil t)
+      ,#+END_SRC
+
+      ,#+RESULTS: get-abstract-text
+      : The abstract goes here.
+
+     ,*** epj-pacs-codes-latex 
+
+      ,#+NAME: epj-pacs-codes-latex
+      ,#+BEGIN_SRC elisp  :var pacs_codes=pacs-codes-table :results latex replace :var join_delim="   \\and\n"
+        (mapconcat 'identity (mapcar (lambda (x) (format "      {%s}{%s}" (car x) (nth 1 x))) pacs_codes) join_delim)
+      ,#+END_SRC
+
+      ,#+RESULTS: epj-pacs-codes-latex
+      ,#+BEGIN_EXPORT latex
+            {PACS-key01}{Text Describing PACS-key01}   \and
+            {PACS-key02}{Text Describing PACS-key02}
+      ,#+END_EXPORT
+
+     ,*** epj-authors-latex 
+
+      ,#+NAME: epj-authors-latex
+      ,#+BEGIN_SRC elisp  :var authors=authors-table :results latex replace :var join_delim=" \\and "
+        (mapconcat 'identity (mapcar (lambda (x) (format "%s\\inst{%s}" (car x) (nth 2 x))) authors) join_delim)
+      ,#+END_SRC
+
+      ,#+RESULTS: epj-authors-latex
+      ,#+BEGIN_EXPORT latex
+      Mai Deah\inst{1} \and Arthur Secondus\inst{1} \and E. Tal\inst{2}
+      ,#+END_EXPORT
+
+     ,*** epj-institutions-latex 
+
+      ,#+NAME: epj-institutions-latex
+      ,#+BEGIN_SRC elisp  :var institutions=institutions-table :results latex replace :var join_delim=" \\and "
+        (mapconcat 'identity (mapcar (lambda (x) (format "%s" (nth 1 x))) institutions) join_delim)
+      ,#+END_SRC
+
+      ,#+RESULTS: epj-institutions-latex
+      ,#+BEGIN_EXPORT latex
+      New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort, Some-Sort, Some-Sort-of-Country \and Golden Opportunities Lab, Department of Obscure Studies, Ancient College, Olde-Locale, Stodgy-Land
+      ,#+END_EXPORT
+
+   #+END_SRC
+
+2.  Add the following lines *before* the =* Template Utitily Code= section in the journal-template.org document.
+
+   #+NAME: display-export-epj-latex-block
+   #+BEGIN_SRC org :noweb no 
+     ,#+TITLE: Title Goes Here
+
+     ,#+SUBTITLE: Subtitle Goes Here
+
+     ,#+CALL: export-epj-latex-block()
+
+     ,* Authors                                                          :nolatex:
+
+     ,#+NAME: authors-table
+     | Author          | Email                | Institution-ID |
+     |-----------------+----------------------+----------------|
+     | Mai Deah        | mai.deah@example.edu |              1 |
+     | Arthur Secondus |                      |              1 |
+     | E. Tal          |                      |              2 |
+
+     ,* Institutions                                                     :nolatex:
+
+     ,#+NAME: institutions-table
+     | Institution-ID | Institution                                                                                                      |
+     |----------------+------------------------------------------------------------------------------------------------------------------|
+     |              1 | New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort, Some-Sort, Some-Sort-of-Country |
+     |              2 | Golden Opportunities Lab, Department of Obscure Studies, Ancient College, Olde-Locale, Stodgy-Land               |
+
+     ,* PACS                                                             :nolatex:
+
+     ,#+NAME: pacs-codes-table
+     | PACS-KEY   | PACS-KEY-Description-Text  |
+     |------------+----------------------------|
+     | PACS-key01 | Text Describing PACS-key01 |
+     | PACS-key02 | Text Describing PACS-key02 |
+
+     ,* Abstract                                                         :nolatex:
+
+     # The abstract goes here.
+
+
+   #+END_SRC
+
+** Self Check - Example 3
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-03.org][self-check-example-03.org]].
+
+#+NAME: journal-template
+#+BEGIN_SRC org :tangle self-check-example-03.org :noweb yes :exports none 
+  «mode-line»
+  «latex-class-epj-svjour»
+  «display-export-epj-latex-block»
+  «template-utility-code»
+  «export-epj-latex-block-code»
+  «common-export-settings»
+
+  «file-variables()»
+#+END_SRC
+
+#+BEGIN_SRC org :tangle journal-template.org :noweb yes :exports none 
+  «journal-template»
+#+END_SRC
+
+
+* Add Content to =org-mode= File
+
+In this section, several new placeholder sections will added. The content of each section will be =Lorem Ipsum=   
+
+** Instructions
+
+1. Add content to journal-template.org.
+
+   #+BEGIN_QUOTE
+     The migration to journal-template.org is complete. Adding *real* content will be left as an exercise for the reader.
+   #+END_QUOTE
+
+** Self Check - Example 4 - Part I
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-04.org][self-check-example-04.org]].
+
+#+BEGIN_SRC org :tangle self-check-example-04.org :noweb yes :exports none 
+  «mode-line»
+  «latex-class-epj-svjour»
+  «display-export-epj-latex-block»
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  # The abstract goes here.
+
+  ,* Introduction
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  # The introduction goes here.
+
+  ,* Methods
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  # The methods go here.
+
+  ,* Results and Discussion
+
+  ,** Results
+
+  # The results and discussion goes here.
+
+  Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non-numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+
+  ,#+CAPTION: Please write your caption here
+  | first  | second | third  |
+  |--------+--------+--------|
+  | number | number | number |
+  | number | number | number |
+
+  ,** Discussion
+
+  At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non-provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non-recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+
+  ,* Conclusions
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  # The conclusions go here
+
+  # References
+
+  ,#+BEGIN_SRC latex :exports results 
+    %
+    % BibTeX users please use
+    % \bibliographystyle{}
+    % \bibliography{}
+    %
+    % Non-BibTeX users please use
+    \begin{thebibliography}{}
+    %
+    % and use \bibitem to create references.
+    %
+    \bibitem{RefJ}
+    % Format for Journal Reference
+    Author, Journal \textbf{Volume}, (year) page numbers.
+    % Format for books
+    \bibitem{RefB}
+    Author, \textit{Book title} (Publisher, place year) page numbers
+    % etc
+    \end{thebibliography}
+  ,#+END_SRC
+
+  «template-utility-code»
+  «export-epj-latex-block-code»
+  «common-export-settings»
+
+  «file-variables()»
+#+END_SRC
+
+* Export completed =org-mode= file as =PDF=
+
+In this section, the objective is to export the org-mode template to LaTeX and create a =PDF=.
+
+** Instructions
+
+1. Export an =org-mode= file as =PDF= via built-in LaTeX exporter.
+   
+   To export an =org-mode= document to =PDF=:  
+      1. Open the =org-mode= file in =emacs=.  
+      2. Position the cursor in the buffer of the =org-mode= document in =emacs=.  
+      3. Press the following key chords and keys, ~C-c~ ~C-e~ ~l~ ~p~ to initiate the export process.
+      4. Open the exported =PDF= file to validate the export process succeeded.
+
+** Self Check - Example 4 - Part II
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-04.pdf][self-check-example-04.pdf]].
+
+#+BEGIN_QUOTE
+*Note:* The LaTeX file created during the export should be similar to [[file:self-check-example-04.tex][self-check-example-04.tex]].
+#+END_QUOTE
+
+* Common Export Settings                                           :noexport:
+
+#+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
+#+OPTIONS: author:nil broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
+#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport nolatex
+
+# For Display when file is exported with org-ruby 
+
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+* Footnotes
+
+[fn:5] Description text for svjour.cls provided by EPJ A in =read.me= instructions.
+
+[fn:4] Description text for svepj.clo provided by EPJ A in =read.me= instructions.
+
+[fn:3] Description text for template.tex provided by EPJ A in =read.me= instructions.
+
+[fn:1] https://mc.manuscriptcentral.com/societyimages/epja/EPJA_templ.zip
+
+[fn:2] https://epja.epj.org/
+
