@@ -2084,6 +2084,195 @@ After completing the instructions in this section, the contents of journal-templ
   «file-variables()»
 #+END_SRC
 
+* Migrate LaTeX Template Code into =SRC= blocks
+
+In this section, the object is to migrate specific snippets of LaTeX code from the LaTeX template into =SRC= block syntax provided by =org-mode=. Each =SRC= block will inject customized LaTeX into the final LaTeX document created by the built-in exporter. 
+
+These template specific =SRC= blocks will be kept under a dedicated section named =Template Utility Code= which will not be exported. 
+
+
+** Instructions
+
+1. Add the following lines *after* the =* Template Utitily Code= section in the journal-template.org document.
+
+   #+NAME: export-epj-latex-block-code
+   #+BEGIN_SRC org  :noweb no 
+     ,** export-epj-latex-block
+
+      ,#+NAME: export-epj-latex-block
+      ,#+BEGIN_SRC latex :noweb yes
+        %
+        \title{«get-title-text()»}
+        \subtitle{«get-subtitle-text()»}
+        \author{«epj-authors-latex()»% etc
+        % \thanks is optional - remove next line if not needed
+        \thanks{\emph{Present address:} Insert the address here if needed}%
+        }                     % Do not remove
+        %
+        \offprints{}          % Insert a name or remove this line
+        %
+        \institute{«epj-institutions-latex()»}
+        %
+        \date{Received: date / Revised version: date}
+        % The correct dates will be entered by Springer
+        %
+        \abstract{
+        «get-abstract-text()»
+        %
+        \PACS{
+        «epj-pacs-codes-latex()»
+             } % end of PACS codes
+        } %end of abstract
+        %
+        \maketitle
+      ,#+END_SRC
+
+     ,*** get-title-text
+
+      ,#+NAME: get-title-text
+      ,#+BEGIN_SRC elisp 
+        (format "%s" (car (plist-get (org-export-get-environment) ':title)))
+      ,#+END_SRC
+
+      ,#+RESULTS: get-title-text
+      : Title Goes Here
+
+     ,*** get-subtitle-text
+
+      ,#+NAME: get-subtitle-text
+      ,#+BEGIN_SRC elisp  :results replace :var keyword="subtitle" :var delimiter=" "
+       (mapconcat 'car (org-element-map
+            (org-element-parse-buffer)
+            '(keyword)
+          (lambda (x) (if (string= (upcase keyword) (org-element-property :key x))
+                       (list (org-element-property :value x)) )
+            )
+          ) delimiter)
+      ,#+END_SRC
+
+      ,#+RESULTS: get-subtitle-text
+      : Subtitle Goes Here
+
+     ,*** get-abstract-text
+
+      ,#+NAME: get-abstract-text
+      ,#+BEGIN_SRC elisp :results replace :var keyword="abstract"
+        (org-element-map (org-element-map
+                             (org-element-parse-buffer)
+                             '(headline)
+                           (lambda (hl) (if (string= (upcase keyword) (upcase (org-element-property :raw-value hl)))
+                                           hl)
+                             ) 
+                           nil t)
+            '(paragraph)
+          (lambda (p) 
+            (format "%s" (replace-regexp-in-string (rx (or (: bos (* (any " \t\n")))
+                                                           (: (* (any " \t\n")) eos)))
+                                                   ""
+                                      (buffer-substring-no-properties (org-element-property :contents-begin p) (org-element-property :contents-end p))))
+            )
+          nil t)
+      ,#+END_SRC
+
+      ,#+RESULTS: get-abstract-text
+      : The abstract goes here.
+
+     ,*** epj-pacs-codes-latex 
+
+      ,#+NAME: epj-pacs-codes-latex
+      ,#+BEGIN_SRC elisp  :var pacs_codes=pacs-codes-table :results latex replace :var join_delim="   \\and\n"
+        (mapconcat 'identity (mapcar (lambda (x) (format "      {%s}{%s}" (car x) (nth 1 x))) pacs_codes) join_delim)
+      ,#+END_SRC
+
+      ,#+RESULTS: epj-pacs-codes-latex
+      ,#+BEGIN_EXPORT latex
+            {PACS-key01}{Text Describing PACS-key01}   \and
+            {PACS-key02}{Text Describing PACS-key02}
+      ,#+END_EXPORT
+
+     ,*** epj-authors-latex 
+
+      ,#+NAME: epj-authors-latex
+      ,#+BEGIN_SRC elisp  :var authors=authors-table :results latex replace :var join_delim=" \\and "
+        (mapconcat 'identity (mapcar (lambda (x) (format "%s\\inst{%s}" (car x) (nth 2 x))) authors) join_delim)
+      ,#+END_SRC
+
+      ,#+RESULTS: epj-authors-latex
+      ,#+BEGIN_EXPORT latex
+      Mai Deah\inst{1} \and Arthur Secondus\inst{1} \and E. Tal\inst{2}
+      ,#+END_EXPORT
+
+     ,*** epj-institutions-latex 
+
+      ,#+NAME: epj-institutions-latex
+      ,#+BEGIN_SRC elisp  :var institutions=institutions-table :results latex replace :var join_delim=" \\and "
+        (mapconcat 'identity (mapcar (lambda (x) (format "%s" (nth 1 x))) institutions) join_delim)
+      ,#+END_SRC
+
+      ,#+RESULTS: epj-institutions-latex
+      ,#+BEGIN_EXPORT latex
+      New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort, Some-Sort, Some-Sort-of-Country \and Golden Opportunities Lab, Department of Obscure Studies, Ancient College, Olde-Locale, Stodgy-Land
+      ,#+END_EXPORT
+
+   #+END_SRC
+
+2.  Add the following lines *before* the =* Template Utitily Code= section in the journal-template.org document.
+
+   #+NAME: display-export-epj-latex-block
+   #+BEGIN_SRC org :noweb no 
+     ,#+TITLE: Title Goes Here
+
+     ,#+SUBTITLE: Subtitle Goes Here
+
+     ,#+CALL: export-epj-latex-block()
+
+     ,* Authors                                                          :nolatex:
+
+     ,#+NAME: authors-table
+     | Author          | Email                | Institution-ID |
+     |-----------------+----------------------+----------------|
+     | Mai Deah        | mai.deah@example.edu |              1 |
+     | Arthur Secondus |                      |              1 |
+     | E. Tal          |                      |              2 |
+
+     ,* Institutions                                                     :nolatex:
+
+     ,#+NAME: institutions-table
+     | Institution-ID | Institution                                                                                                      |
+     |----------------+------------------------------------------------------------------------------------------------------------------|
+     |              1 | New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort, Some-Sort, Some-Sort-of-Country |
+     |              2 | Golden Opportunities Lab, Department of Obscure Studies, Ancient College, Olde-Locale, Stodgy-Land               |
+
+     ,* PACS                                                             :nolatex:
+
+     ,#+NAME: pacs-codes-table
+     | PACS-KEY   | PACS-KEY-Description-Text  |
+     |------------+----------------------------|
+     | PACS-key01 | Text Describing PACS-key01 |
+     | PACS-key02 | Text Describing PACS-key02 |
+
+     ,* Abstract                                                         :nolatex:
+
+     # The abstract goes here.
+
+
+   #+END_SRC
+
+** Self Check - Example 3
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-03.org][self-check-example-03.org]].
+
+#+BEGIN_SRC org :tangle self-check-example-03.org :noweb yes :exports none 
+  «mode-line»
+  «latex-class-epj-svjour»
+  «display-export-epj-latex-block»
+  «template-utility-code»
+  «export-epj-latex-block-code»
+  «common-export-settings»
+
+  «file-variables()»
+#+END_SRC
+
 * Common Export Settings                                           :noexport:
 
 #+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
