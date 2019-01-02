@@ -210,13 +210,17 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
      \subtitle{Do you have a subtitle?\\ If so, write it here}
    #+END_SRC
    
-   #+NAME: epj-template-author-latex-code  
-   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none 
+   #+NAME: epj-template-author-latex-code
+   #+BEGIN_SRC latex :exports none 
      \author{First author\inst{1} \and Second author\inst{2}% etc
      % \thanks is optional - remove next line if not needed
      \thanks{\emph{Present address:} Insert the address here if needed}%
      }                     % Do not remove
    #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-author-latex-code»
+   #+END_SRC  
    
    #+NAME: epj-template-offprints-latex-code
    #+BEGIN_SRC latex :exports none :eval never 
