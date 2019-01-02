@@ -2273,6 +2273,125 @@ After completing the instructions in this section, the contents of journal-templ
   «file-variables()»
 #+END_SRC
 
+* Add Content to =org-mode= File
+
+In this section, several new placeholder sections will added. The content of each section will be =Lorem Ipsum=   
+
+** Instructions
+
+1. Add content to journal-template.org.
+
+   #+BEGIN_QUOTE
+     The migration to journal-template.org is complete. Adding *real* content will be left as an exercise for the reader.
+   #+END_QUOTE
+
+** Self Check - Example 4 - Part I
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-04.org][self-check-example-04.org]].
+
+#+BEGIN_SRC org :tangle self-check-example-04.org :noweb yes :exports none 
+  «mode-line»
+  «latex-class-epj-svjour»
+  «display-export-epj-latex-block»
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  # The abstract goes here.
+
+  ,* Introduction
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  # The introduction goes here.
+
+  ,* Methods
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  # The methods go here.
+
+  ,* Results and Discussion
+
+  ,** Results
+
+  # The results and discussion goes here.
+
+  Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non-numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+
+  ,#+CAPTION: Please write your caption here
+  | first  | second | third  |
+  |--------+--------+--------|
+  | number | number | number |
+  | number | number | number |
+
+  ,** Discussion
+
+  At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non-provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non-recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+
+  ,* Conclusions
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  # The conclusions go here
+
+  # References
+
+  ,#+BEGIN_SRC latex :exports results 
+    %
+    % BibTeX users please use
+    % \bibliographystyle{}
+    % \bibliography{}
+    %
+    % Non-BibTeX users please use
+    \begin{thebibliography}{}
+    %
+    % and use \bibitem to create references.
+    %
+    \bibitem{RefJ}
+    % Format for Journal Reference
+    Author, Journal \textbf{Volume}, (year) page numbers.
+    % Format for books
+    \bibitem{RefB}
+    Author, \textit{Book title} (Publisher, place year) page numbers
+    % etc
+    \end{thebibliography}
+  ,#+END_SRC
+
+  «template-utility-code»
+  «export-epj-latex-block-code»
+  «common-export-settings»
+
+  «file-variables()»
+#+END_SRC
+
+* Export completed =org-mode= file as =PDF=
+
+In this section, the objective is to export the org-mode template to LaTeX and create a =PDF=.
+
+** Instructions
+
+1. Export an =org-mode= file as =PDF= via built-in LaTeX exporter.
+   
+   To export an =org-mode= document to =PDF=:  
+      1. Open the =org-mode= file in =emacs=.  
+      2. Position the cursor in the buffer of the =org-mode= document in =emacs=.  
+      3. Press the following key chords and keys, ~C-c~ ~C-e~ ~l~ ~p~ to initiate the export process.
+      4. Open the exported =PDF= file to validate the export process succeeded.
+
+** Self Check - Example 4 - Part II
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-04.pdf][self-check-example-04.pdf]].
+
+#+BEGIN_QUOTE
+*Note:* The LaTeX file created during the export should be similar to [[file:self-check-example-04.tex][self-check-example-04.tex]].
+#+END_QUOTE
+
 * Common Export Settings                                           :noexport:
 
 #+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline

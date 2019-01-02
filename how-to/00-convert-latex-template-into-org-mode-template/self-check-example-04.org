@@ -1,0 +1,277 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
+
+#+LATEX_CLASS: epj-svjour
+
+#+TITLE: Title Goes Here
+
+#+SUBTITLE: Subtitle Goes Here
+
+#+CALL: export-epj-latex-block()
+
+* Authors                                                          :nolatex:
+
+#+NAME: authors-table
+| Author          | Email                | Institution-ID |
+|-----------------+----------------------+----------------|
+| Mai Deah        | mai.deah@example.edu |              1 |
+| Arthur Secondus |                      |              1 |
+| E. Tal          |                      |              2 |
+
+* Institutions                                                     :nolatex:
+
+#+NAME: institutions-table
+| Institution-ID | Institution                                                                                                      |
+|----------------+------------------------------------------------------------------------------------------------------------------|
+|              1 | New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort, Some-Sort, Some-Sort-of-Country |
+|              2 | Golden Opportunities Lab, Department of Obscure Studies, Ancient College, Olde-Locale, Stodgy-Land               |
+
+* PACS                                                             :nolatex:
+
+#+NAME: pacs-codes-table
+| PACS-KEY   | PACS-KEY-Description-Text  |
+|------------+----------------------------|
+| PACS-key01 | Text Describing PACS-key01 |
+| PACS-key02 | Text Describing PACS-key02 |
+
+* Abstract                                                         :nolatex:
+
+# The abstract goes here.
+
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+# The abstract goes here.
+
+* Introduction
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+# The introduction goes here.
+
+* Methods
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+# The methods go here.
+
+* Results and Discussion
+
+** Results
+
+# The results and discussion goes here.
+
+Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non-numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+
+#+CAPTION: Please write your caption here
+| first  | second | third  |
+|--------+--------+--------|
+| number | number | number |
+| number | number | number |
+
+** Discussion
+
+At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non-provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non-recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+
+* Conclusions
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+# The conclusions go here
+
+# References
+
+#+BEGIN_SRC latex :exports results 
+  %
+  % BibTeX users please use
+  % \bibliographystyle{}
+  % \bibliography{}
+  %
+  % Non-BibTeX users please use
+  \begin{thebibliography}{}
+  %
+  % and use \bibitem to create references.
+  %
+  \bibitem{RefJ}
+  % Format for Journal Reference
+  Author, Journal \textbf{Volume}, (year) page numbers.
+  % Format for books
+  \bibitem{RefB}
+  Author, \textit{Book title} (Publisher, place year) page numbers
+  % etc
+  \end{thebibliography}
+#+END_SRC
+
+* Template Utility Code                                            :noexport:
+
+** export-epj-latex-block
+
+ #+NAME: export-epj-latex-block
+ #+BEGIN_SRC latex :noweb yes
+   %
+   \title{«get-title-text()»}
+   \subtitle{«get-subtitle-text()»}
+   \author{«epj-authors-latex()»% etc
+   % \thanks is optional - remove next line if not needed
+   \thanks{\emph{Present address:} Insert the address here if needed}%
+   }                     % Do not remove
+   %
+   \offprints{}          % Insert a name or remove this line
+   %
+   \institute{«epj-institutions-latex()»}
+   %
+   \date{Received: date / Revised version: date}
+   % The correct dates will be entered by Springer
+   %
+   \abstract{
+   «get-abstract-text()»
+   %
+   \PACS{
+   «epj-pacs-codes-latex()»
+        } % end of PACS codes
+   } %end of abstract
+   %
+   \maketitle
+ #+END_SRC
+
+*** get-title-text
+
+ #+NAME: get-title-text
+ #+BEGIN_SRC elisp 
+   (format "%s" (car (plist-get (org-export-get-environment) ':title)))
+ #+END_SRC
+
+ #+RESULTS: get-title-text
+ : Title Goes Here
+
+*** get-subtitle-text
+
+ #+NAME: get-subtitle-text
+ #+BEGIN_SRC elisp  :results replace :var keyword="subtitle" :var delimiter=" "
+  (mapconcat 'car (org-element-map
+       (org-element-parse-buffer)
+       '(keyword)
+     (lambda (x) (if (string= (upcase keyword) (org-element-property :key x))
+                  (list (org-element-property :value x)) )
+       )
+     ) delimiter)
+ #+END_SRC
+
+ #+RESULTS: get-subtitle-text
+ : Subtitle Goes Here
+
+*** get-abstract-text
+
+ #+NAME: get-abstract-text
+ #+BEGIN_SRC elisp :results replace :var keyword="abstract"
+   (org-element-map (org-element-map
+                        (org-element-parse-buffer)
+                        '(headline)
+                      (lambda (hl) (if (string= (upcase keyword) (upcase (org-element-property :raw-value hl)))
+                                      hl)
+                        ) 
+                      nil t)
+       '(paragraph)
+     (lambda (p) 
+       (format "%s" (replace-regexp-in-string (rx (or (: bos (* (any " \t\n")))
+                                                      (: (* (any " \t\n")) eos)))
+                                              ""
+                                 (buffer-substring-no-properties (org-element-property :contents-begin p) (org-element-property :contents-end p))))
+       )
+     nil t)
+ #+END_SRC
+
+ #+RESULTS: get-abstract-text
+ : The abstract goes here.
+
+*** epj-pacs-codes-latex 
+
+ #+NAME: epj-pacs-codes-latex
+ #+BEGIN_SRC elisp  :var pacs_codes=pacs-codes-table :results latex replace :var join_delim="   \\and\n"
+   (mapconcat 'identity (mapcar (lambda (x) (format "      {%s}{%s}" (car x) (nth 1 x))) pacs_codes) join_delim)
+ #+END_SRC
+
+ #+RESULTS: epj-pacs-codes-latex
+ #+BEGIN_EXPORT latex
+       {PACS-key01}{Text Describing PACS-key01}   \and
+       {PACS-key02}{Text Describing PACS-key02}
+ #+END_EXPORT
+
+*** epj-authors-latex 
+
+ #+NAME: epj-authors-latex
+ #+BEGIN_SRC elisp  :var authors=authors-table :results latex replace :var join_delim=" \\and "
+   (mapconcat 'identity (mapcar (lambda (x) (format "%s\\inst{%s}" (car x) (nth 2 x))) authors) join_delim)
+ #+END_SRC
+
+ #+RESULTS: epj-authors-latex
+ #+BEGIN_EXPORT latex
+ Mai Deah\inst{1} \and Arthur Secondus\inst{1} \and E. Tal\inst{2}
+ #+END_EXPORT
+
+*** epj-institutions-latex 
+
+ #+NAME: epj-institutions-latex
+ #+BEGIN_SRC elisp  :var institutions=institutions-table :results latex replace :var join_delim=" \\and "
+   (mapconcat 'identity (mapcar (lambda (x) (format "%s" (nth 1 x))) institutions) join_delim)
+ #+END_SRC
+
+ #+RESULTS: epj-institutions-latex
+ #+BEGIN_EXPORT latex
+ New Discoveries Lab, Department of Something-or-Ruther, University of Some-Sort, Some-Sort, Some-Sort-of-Country \and Golden Opportunities Lab, Department of Obscure Studies, Ancient College, Olde-Locale, Stodgy-Land
+ #+END_EXPORT
+
+* Common Export Settings                                           :noexport:
+
+#+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
+#+OPTIONS: author:nil broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
+#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport nolatex
+
+# For Display when file is exported with org-ruby 
+
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+
+# Local Variables:
+# eval: (require (quote cl-lib))
+# eval: (require (quote ox))
+# eval: (require (quote ox-publish))
+# org-latex-with-hyperref: nil
+# eval: (add-to-list (quote org-latex-classes) (quote ("epj-svjour" "%%%%%%%%%%%%%%%%%%%%%%%% epj-svjour %%%%%%%%%%%%%%%%%%%%%%%%%%
+# %
+# \\begin{filecontents}{leer.eps}
+# %!PS-Adobe-2.0 EPSF-2.0
+# %%CreationDate: Mon Jul 13 16:51:17 1992
+# %%DocumentFonts: (atend)
+# %%Pages: 0 1
+# %%BoundingBox: 72 31 601 342
+# %%EndComments
+# 
+# gsave
+# 72 31 moveto
+# 72 342 lineto
+# 601 342 lineto
+# 601 31 lineto
+# 72 31 lineto
+# showpage
+# grestore
+# %%Trailer
+# %%DocumentFonts: Helvetica
+# \\end{filecontents}
+# %
+# \\documentclass[epj]{svjour}
+#  [NO-DEFAULT-PACKAGES]
+#  [PACKAGES]
+#  [EXTRA]" ("\\section{%s}" . "\\section*{%s}") ("\\subsection{%s}" . "\\subsection*{%s}") ("\\subsubsection{%s}" . "\\subsubsection*{%s}") ("\\paragraph{%s}" . "\\paragraph*{%s}") ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+# End:
