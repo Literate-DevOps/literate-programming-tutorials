@@ -225,10 +225,14 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
    #+END_SRC
    
    #+NAME: epj-template-institution-latex-code
-   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never 
+   #+BEGIN_SRC latex :exports none :eval never 
      %
      \institute{Insert the first address here \and the second here}
    #+END_SRC
+
+   #+BEGIN_SRC latex :noweb-ref template-tex-file :exports none :eval never :noweb yes 
+     «epj-template-institution-latex-code»
+   #+END_SRC  
 
    #+NAME: epj-template-date-latex-code
    #+BEGIN_SRC latex :exports none :eval never 
