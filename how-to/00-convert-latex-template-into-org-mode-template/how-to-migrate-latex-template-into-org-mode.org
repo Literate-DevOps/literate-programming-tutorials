@@ -2262,6 +2262,7 @@ These template specific =SRC= blocks will be kept under a dedicated section name
 
 After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-03.org][self-check-example-03.org]].
 
+#+NAME: journal-template
 #+BEGIN_SRC org :tangle self-check-example-03.org :noweb yes :exports none 
   «mode-line»
   «latex-class-epj-svjour»
@@ -2272,6 +2273,11 @@ After completing the instructions in this section, the contents of journal-templ
 
   «file-variables()»
 #+END_SRC
+
+#+BEGIN_SRC org :tangle journal-template.org :noweb yes :exports none 
+  «journal-template»
+#+END_SRC
+
 
 * Add Content to =org-mode= File
 
