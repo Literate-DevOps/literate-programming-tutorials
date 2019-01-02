@@ -2415,13 +2415,13 @@ After completing the instructions in this section, the contents of journal-templ
 
 * Footnotes
 
-[fn:5] Description text for svjour.cls provided by EPJ A in =read.me= instructions.
-
-[fn:4] Description text for svepj.clo provided by EPJ A in =read.me= instructions.
-
-[fn:3] Description text for template.tex provided by EPJ A in =read.me= instructions.
-
 [fn:1] https://mc.manuscriptcentral.com/societyimages/epja/EPJA_templ.zip
 
 [fn:2] https://epja.epj.org/
+
+[fn:3] Description text for template.tex provided by EPJ A in =read.me= instructions.
+
+[fn:4] Description text for svepj.clo provided by EPJ A in =read.me= instructions.
+
+[fn:5] Description text for svjour.cls provided by EPJ A in =read.me= instructions.
 
