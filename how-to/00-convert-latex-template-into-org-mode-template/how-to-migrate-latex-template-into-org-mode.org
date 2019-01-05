@@ -5,7 +5,7 @@
 
 * Summary                                                          
 
-This =How-To= tutorial provides a step by step guide on how to migrate the LaTeX template provided by an academic journal into =org-mode= syntax. 
+This =How-To= tutorial provides a step by step guide on how to migrate[fn:1] the LaTeX template provided by an academic journal into =org-mode= syntax. 
 
 ** Instructions
 
@@ -125,23 +125,23 @@ After completing the instructions in this section, the contents of journal-templ
 
 * Download LaTeX Template
 
-For this =How-To= tutorial, the LaTeX template[fn:1] provided by the European Physical Journal A (EPJ A)[fn:2] will be used.
+For this =How-To= tutorial, the LaTeX template[fn:2] provided by the European Physical Journal A (EPJ A)[fn:3] will be used.
 
 The following 3 files provided by the EPJ A will be needed in this tutorial:
 
  - *template.tex*
 
-   The =template.tex= file is provided as "[a] fill-in-form for a standard article with usage comments"[fn:3].
+   The =template.tex= file is provided as "[a] fill-in-form for a standard article with usage comments"[fn:4].
 
    The objective of this =How-To= tutorial is migrate LaTeX code from =template.tex= into the new =org-mode= file.
 
  - *svepj.clo*
 
-   The =svepj.clo= is the LaTeX "[c]lass option file for The European Physical Journal"[fn:4].
+   The =svepj.clo= is the LaTeX "[c]lass option file for The European Physical Journal"[fn:5].
 
  - *svjour.cls*
 
-   The =svjour.cls= is the LaTeX "[c]ore document class file for Springer journals"[fn:5].
+   The =svjour.cls= is the LaTeX "[c]ore document class file for Springer journals"[fn:6].
 
 ** Instructions
 
@@ -1958,7 +1958,7 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
 
 * Migrate LaTeX Template Code into =file variables=
 
-In this section, the objective is migrate LaTeX code from LaTeX template into [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html][file varibles]] syntax at the bottom of the =org-mode= file. The file varibles will be used when exporting from =org-mode= back to LaTeX.
+In this section, the objective is migrate[fn:7][fn:8] LaTeX code from LaTeX template into [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html][file varibles]] syntax at the bottom of the =org-mode= file. The file varibles will be used when exporting from =org-mode= back to LaTeX.
 
 The LaTeX code that will be migrated into file variables syntax is located near the top of [[file:template.tex][template.tex]] file:
 
@@ -2413,13 +2413,19 @@ After completing the instructions in this section, the contents of journal-templ
 
 * Footnotes
 
-[fn:1] https://mc.manuscriptcentral.com/societyimages/epja/EPJA_templ.zip
+[fn:1] https://emacs.stackexchange.com/q/46017/388
 
-[fn:2] https://epja.epj.org/
+[fn:2] https://mc.manuscriptcentral.com/societyimages/epja/EPJA_templ.zip
 
-[fn:3] Description text for template.tex provided by EPJ A in =read.me= instructions.
+[fn:3] https://epja.epj.org/
 
-[fn:4] Description text for svepj.clo provided by EPJ A in =read.me= instructions.
+[fn:4] Description text for template.tex provided by EPJ A in =read.me= instructions.
 
-[fn:5] Description text for svjour.cls provided by EPJ A in =read.me= instructions.
+[fn:5] Description text for svepj.clo provided by EPJ A in =read.me= instructions.
+
+[fn:6] Description text for svjour.cls provided by EPJ A in =read.me= instructions.
+
+[fn:7] https://github.com/jkitchin/scimax/commit/65467038c65695eb710c7203e7a99d33c4784928
+
+[fn:8] https://emacs.stackexchange.com/questions/46017/is-there-a-way-to-export-latex-template-to-scimax-template/46051#46051
 
