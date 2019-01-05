@@ -2090,7 +2090,6 @@ In this section, the object is to migrate specific snippets of LaTeX code from t
 
 These template specific =SRC= blocks will be kept under a dedicated section named =Template Utility Code= which will not be exported. 
 
-
 ** Instructions
 
 1. Add the following lines *after* the =* Template Utitily Code= section in the journal-template.org document.
@@ -2277,7 +2276,6 @@ After completing the instructions in this section, the contents of journal-templ
 #+BEGIN_SRC org :tangle journal-template.org :noweb yes :exports none 
   «journal-template»
 #+END_SRC
-
 
 * Add Content to =org-mode= File
 
