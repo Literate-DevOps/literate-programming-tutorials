@@ -31,14 +31,14 @@ To complete this tutorial successfully, please follow all steps in the order pre
 
    Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
 
-2. Download, Install, and Configure =emacs= Software
+2. Download, Install, and Configure =Emacs= Software
 
    Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
 
 3. Download, Install, and Configure =org-mode= Software
 
    #+BEGIN_QUOTE
-     *Note:* The =org-mode= application is already installed if you are using a recent version of =emacs=, i.e. versions 25 or greater.
+     *Note:* The =org-mode= application is already installed if you are using a recent version of =Emacs=, i.e. versions 25 or greater.
    #+END_QUOTE
 
    Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
@@ -47,8 +47,8 @@ To complete this tutorial successfully, please follow all steps in the order pre
    
    #+BEGIN_QUOTE
    *TIP:* To export an =org-mode= document to =PDF=:  
-      1. Open the =org-mode= file in =emacs=.  
-      2. Position the cursor in the buffer of the =org-mode= document in =emacs=.  
+      1. Open the =org-mode= file in =Emacs=.  
+      2. Position the cursor in the buffer of the =org-mode= document in =Emacs=.  
       3. Press the following key chords and keys, ~C-c~ ~C-e~ ~l~ ~p~ to initiate the export process.
       4. Open the exported =PDF= file to validate the export process succeeded.
    #+END_QUOTE
@@ -59,11 +59,11 @@ To complete this tutorial successfully, please follow all steps in the order pre
 
 ** Instructions
 
-1. Create a new =org-mode= file using =emacs=.
+1. Create a new =org-mode= file using =Emacs=.
 
    For this tutorial, the filename will be =journal-template.org=
 
-   - To create the file in emacs do the following: 
+   - To create the file in Emacs do the following: 
      1. Press the key chords ~C-x~ ~C-f~
      2. Type =journal-template.org=
      3. Press ~Return~ or ~Enter~ key
@@ -107,9 +107,9 @@ To complete this tutorial successfully, please follow all steps in the order pre
      ,#+EXPORT_EXCLUDE_TAGS: noexport
    #+END_SRC
 
-5. Save the file in =emacs=.
+5. Save the file in =Emacs=.
 
-   - To save the file in emacs do the following: 
+   - To save the file in Emacs do the following: 
      1. Press the key chords ~C-x~ ~C-s~
 
 ** Self Check - Example 1
@@ -1958,12 +1958,12 @@ The following 3 files provided by the EPJ A will be needed in this tutorial:
 
 * Migrate LaTeX Template Code into =file variables=
 
-In this section, the objective is migrate[fn:7][fn:8] LaTeX code from LaTeX template into [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html][file varibles]] syntax at the bottom of the =org-mode= file. The file varibles will be used when exporting from =org-mode= back to LaTeX.
+In this section, the objective is migrate[fn:7][fn:8] LaTeX code from LaTeX template into [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html][file variables]] syntax at the bottom of the =org-mode= file. The file variables will be used when exporting from =org-mode= back to LaTeX.
 
 The LaTeX code that will be migrated into file variables syntax is located near the top of [[file:template.tex][template.tex]] file:
 
 #+BEGIN_SRC org :noweb yes :wrap "SRC latex :eval never :exports code" :exports results  :results replace 
-  «epj-template-begin-latex-code»
+  «ups-template-begin-latex-code»
 #+END_SRC
 
 #+RESULTS:
@@ -2383,8 +2383,8 @@ In this section, the objective is to export the org-mode template to LaTeX and c
 1. Export an =org-mode= file as =PDF= via built-in LaTeX exporter.
    
    To export an =org-mode= document to =PDF=:  
-      1. Open the =org-mode= file in =emacs=.  
-      2. Position the cursor in the buffer of the =org-mode= document in =emacs=.  
+      1. Open the =org-mode= file in =Emacs=.  
+      2. Position the cursor in the buffer of the =org-mode= document in =Emacs=.  
       3. Press the following key chords and keys, ~C-c~ ~C-e~ ~l~ ~p~ to initiate the export process.
       4. Open the exported =PDF= file to validate the export process succeeded.
 
