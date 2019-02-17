@@ -60,7 +60,7 @@
      ,#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
      ,#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
      ,#+SELECT_TAGS: export
-     ,#+EXCLUDE_TAGS: noexport nolatex
+     ,#+EXCLUDE_TAGS: noexport
 
      # For Display when file is exported with org-ruby 
 
