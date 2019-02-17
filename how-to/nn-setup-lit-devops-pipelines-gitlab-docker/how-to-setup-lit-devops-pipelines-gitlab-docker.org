@@ -259,7 +259,7 @@ GitLab provides official docker images for many of their products[fn:1], includi
        done
      #+end_src
 
-     The output of the command should be similar to the example below:
+     The output of the example script should be similar to the example below:
 
      #+name: verify-gitlab-ce-local-port-not-in-use-cmd-ex1
      #+begin_src shell :exports results :noweb yes :results verbatim replace 
