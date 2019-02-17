@@ -18,6 +18,10 @@ To complete this tutorial successfully, please follow all steps in the order pre
 
    Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
 
+   #+begin_quote
+     *Note:* The version of docker used in this tutorial is =2.0.0.3 (31259)=
+   #+end_quote
+
 2. Download, Install, and Configure =Emacs= Software
 
    Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
