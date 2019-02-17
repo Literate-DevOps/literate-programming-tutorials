@@ -216,18 +216,20 @@ GitLab provides official docker images for many of their products[fn:1], includi
    |         22 |             22 |
 
 5. Verify that local ports are not in use before running the docker container.
+   
+   #+name: verify-gitlab-ce-local-port-not-in-use-msg
+   #+begin_src ruby :var data=gitlab-ce-local-port-mappings :exports results  :results raw replace 
+     "#+begin_quote\n  *Note:* For this tutorial, we need to verify that network ports =%s=, =%s= and =%s= are not in use.\n#+end_quote\n" % data.map{|d| d[0]}
+   #+end_src
 
+   #+RESULTS: verify-gitlab-ce-local-port-not-in-use-msg
+   #+begin_quote
+     *Note:* For this tutorial, we need to verify that network ports =443=, =80= and =22= are not in use.
+   #+end_quote
+
+   The following example commands may be used to verify that the network ports are not in use.
+ 
    - For Unix, Linux and MacOS users
-
-     #+name: verify-gitlab-ce-local-port-not-in-use-msg
-     #+begin_src ruby :var data=gitlab-ce-local-port-mappings :exports results  :results raw replace 
-      "#+begin_quote\n  *Note:* For this tutorial, we need to verify that network ports =%s=, =%s= and =%s= are not in use.\n#+end_quote\n" % data.map{|d| d[0]}
-     #+end_src
-
-     #+RESULTS: verify-gitlab-ce-local-port-not-in-use-msg
-     #+begin_quote
-       *Note:* For this tutorial, we need to verify that network ports =443=, =80= and =22= are not in use.
-     #+end_quote
 
      #+name: verify-gitlab-ce-local-port-not-in-use-cmd
      #+begin_src ruby :var cmd_msg="Verify Local GitLab Ports on Unix, Linux and MacOS" :var data=gitlab-ce-local-port-mappings :exports results :results replace :wrap "src shell :eval never"
