@@ -6,9 +6,29 @@
 
 ** Instructions
 
+To complete this tutorial successfully, please follow all steps in the order presented of each section listed below:
+- Requirements
+- Create New =org-mode= File
+
 * Requirements
 
 ** Instructions
+
+1. Download, Install, and Configure Docker Software
+
+   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
+
+2. Download, Install, and Configure =Emacs= Software
+
+   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
+
+3. Download, Install, and Configure =org-mode= Software
+
+   #+BEGIN_QUOTE
+     *Note:* The =org-mode= application is already installed if you are using a recent version of =Emacs=, i.e. versions 25 or greater.
+   #+END_QUOTE
+
+   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
 
 * Create New org-mode File
 
