@@ -37,7 +37,7 @@
    #+begin_quote 
      *FAQ:* Why did you customize the values for =org-babel-noweb-wrap-start= and =org-babel-noweb-wrap-end=?  
 
-     *Answer:* The default values for org-babel-noweb-wrap-start= (\lt\lt) and =org-babel-noweb-wrap-end= (\gt\gt), collide with the operators of some common programming languages. These collisions can break the syntax highlighting and interfere with code maintenance.
+     *Answer:* The default values for =org-babel-noweb-wrap-start= (\lt\lrm\lt) and =org-babel-noweb-wrap-end= (\gt\lrm\gt), collide with the operators of some common programming languages. These collisions can break the syntax highlighting and interfere with code maintenance.
    #+end_quote
 
 3. Add /Utility Code/ Section to end of file.
