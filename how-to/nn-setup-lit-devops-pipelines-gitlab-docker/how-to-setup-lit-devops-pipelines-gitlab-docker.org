@@ -107,3 +107,171 @@ After completing the instructions in this section, the contents of journal-templ
   «utility-code»
   «common-export-settings»
 #+END_SRC
+
+* Download and Configure GitLab-CE Docker Container
+
+GitLab provides official docker images for many of their products[fn:1], including GitLab-CE[fn:2].
+
+** Instructions
+
+1. Start Docker application, if needed.
+
+2. Download GitLab-CE Docker Container
+
+   #+name: download-gitlab-ce-docker-image-cmd
+   #+begin_src shell :results verbatim replace :eval never :exports both 
+     docker pull gitlab/gitlab-ce
+   #+end_src
+
+   The output from the command should similar to the example below:
+
+   #+RESULTS: download-gitlab-ce-docker-image-cmd
+   #+begin_example
+   Using default tag: latest
+   latest: Pulling from gitlab/gitlab-ce
+   7b722c1070cd: Pulling fs layer
+   5fbf74db61f1: Pulling fs layer
+   ed41cb72e5c9: Pulling fs layer
+   7ea47a67709e: Pulling fs layer
+   8425a04e3f5e: Pulling fs layer
+   8205329d9f24: Pulling fs layer
+   9b5606a820ea: Pulling fs layer
+   ea1e37360d76: Pulling fs layer
+   e93c2efd9a17: Pulling fs layer
+   de310b095c6b: Pulling fs layer
+   7ea47a67709e: Waiting
+   8425a04e3f5e: Waiting
+   8205329d9f24: Waiting
+   9b5606a820ea: Waiting
+   ea1e37360d76: Waiting
+   e93c2efd9a17: Waiting
+   de310b095c6b: Waiting
+   ed41cb72e5c9: Verifying Checksum
+   ed41cb72e5c9: Download complete
+   5fbf74db61f1: Download complete
+   7ea47a67709e: Verifying Checksum
+   7ea47a67709e: Download complete
+   8205329d9f24: Verifying Checksum
+   8205329d9f24: Download complete
+   9b5606a820ea: Verifying Checksum
+   9b5606a820ea: Download complete
+   ea1e37360d76: Verifying Checksum
+   ea1e37360d76: Download complete
+   e93c2efd9a17: Download complete
+   7b722c1070cd: Verifying Checksum
+   7b722c1070cd: Download complete
+   7b722c1070cd: Pull complete
+   5fbf74db61f1: Pull complete
+   ed41cb72e5c9: Pull complete
+   7ea47a67709e: Pull complete
+   8425a04e3f5e: Verifying Checksum
+   8425a04e3f5e: Download complete
+   8425a04e3f5e: Pull complete
+   8205329d9f24: Pull complete
+   9b5606a820ea: Pull complete
+   ea1e37360d76: Pull complete
+   e93c2efd9a17: Pull complete
+   de310b095c6b: Verifying Checksum
+   de310b095c6b: Download complete
+   de310b095c6b: Pull complete
+   Digest: sha256:9827a7f23aa9ec5310fcc4c97fddc9777ba467c61e7d7a009ec5c372a26eb0ac
+   Status: Downloaded newer image for gitlab/gitlab-ce:latest
+   #+end_example
+
+3. Create local directories to map to paths inside the Gitlab-Ce container.
+
+   For example, in this tutorial the following directories will need to be created under the tutorial directory.
+
+   #+name: gitlab-ce-local-directory-mappings
+   | Local-Path          | Container-Path  |
+   |---------------------+-----------------|
+   | ./srv/gitlab/config | /etc/gitlab     |
+   | ./srv/gitlab/logs   | /var/log/gitlab |
+   | ./srv/gitlab/data   | /var/opt/gitlab |
+
+   - For Unix, Linux and MacOS users
+
+     #+name: create-gitlab-ce-local-directories-cmd
+     #+begin_src ruby :var cmd="mkdir -p" :var cmd_msg="Create Local GitLab Directories on Unix, Linux and MacOS" :var data=gitlab-ce-local-directory-mappings :wrap "src shell :eval never" :exports results 
+      "  # %s\n  %s %s;" % [cmd_msg,cmd,data.map{|d| d[0]}.join(' ')]
+     #+end_src
+
+     #+RESULTS: create-gitlab-ce-local-directories-cmd
+     #+begin_src shell :eval never
+       # Create Local GitLab Directories on Unix, Linux and MacOS
+       mkdir -p ./srv/gitlab/config ./srv/gitlab/logs ./srv/gitlab/data;
+     #+end_src
+
+     #+begin_quote
+       *Note:* The directory mappings for this tutorial were derived directly the instructions provided by GitLab[fn:3].
+     #+end_quote
+
+4. Map local network ports to default ports inside GitLaB-CE container.
+ 
+   #+name: gitlab-ce-local-port-mappings
+   | Local-Port | Container-Port |
+   |------------+----------------|
+   |        443 |            443 |
+   |         80 |             80 |
+   |         22 |             22 |
+
+5. Verify that local ports are not in use before running the docker container.
+
+   - For Unix, Linux and MacOS users
+
+     #+name: verify-gitlab-ce-local-port-not-in-use-msg
+     #+begin_src ruby :var data=gitlab-ce-local-port-mappings :wrap "quote" :exports results :results org replace 
+      " *Note:* For this tutorial, we need to verify that network ports =%s=, =%s= and =%s= are not in use. " % data.map{|d| d[0]}
+     #+end_src
+
+     #+RESULTS: verify-gitlab-ce-local-port-not-in-use-msg
+     #+begin_quote
+      ,*Note:* For this tutorial, we need to verify that network ports =443=, =80= and =22= are not in use. 
+     #+end_quote
+
+     #+name: verify-gitlab-ce-local-port-not-in-use-cmd
+     #+begin_src ruby :var cmd_msg="Verify Local GitLab Ports on Unix, Linux and MacOS" :var data=gitlab-ce-local-port-mappings :exports results :results replace :wrap "src shell :eval never"
+       verify_cmd = %q{  # %s
+         for port in %s; do
+             if [ "0" = `netstat -an | grep -i 'tcp' | grep -i listen | grep -E "([*]|127.0.0.1)\.$port" | wc -l;` ]; then
+                 echo "$port OK";
+             else
+                 echo "$port CHOOSE_AGAIN";
+             fi
+         done
+       } % [cmd_msg,data.map{|d| d[0]}.join(' ')]
+
+       verify_cmd
+     #+end_src
+
+     #+RESULTS: verify-gitlab-ce-local-port-not-in-use-cmd
+     #+begin_src shell :eval never
+       # Verify Local GitLab Ports on Unix, Linux and MacOS
+       for port in 443 80 22; do
+           if [ "0" = `netstat -an | grep -i 'tcp' | grep -i listen | grep -E "([*]|127.0.0.1)\.$port" | wc -l;` ]; then
+               echo "$port OK";
+           else
+               echo "$port CHOOSE_AGAIN";
+           fi
+       done
+     #+end_src
+
+     The output of the command should be similar to the example below:
+
+     #+name: verify-gitlab-ce-local-port-not-in-use-cmd-ex1
+     #+begin_src shell :exports results :noweb yes :results verbatim replace 
+       «verify-gitlab-ce-local-port-not-in-use-cmd()»
+     #+end_src
+
+     #+RESULTS: verify-gitlab-ce-local-port-not-in-use-cmd-ex1
+     : 443 OK
+     : 80 OK
+     : 22 OK
+
+* Footnotes
+
+[fn:3] https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/docker/README.md
+
+[fn:2] https://hub.docker.com/r/gitlab/gitlab-ce/ 
+
+[fn:1] https://docs.gitlab.com/ee/install/docker.html 
