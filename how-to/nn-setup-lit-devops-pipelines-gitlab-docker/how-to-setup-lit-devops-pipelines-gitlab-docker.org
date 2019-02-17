@@ -42,7 +42,7 @@ To complete this tutorial successfully, please follow all steps in the order pre
 
    - To create the file in Emacs do the following: 
      1. Press the key chords ~C-x~ ~C-f~
-     2. Type ==setup-pipelines.org==
+     2. Type =setup-pipelines.org=
      3. Press ~Return~ or ~Enter~ key
 
 2. Add ~mode~ line to top of the file.
@@ -69,7 +69,6 @@ To complete this tutorial successfully, please follow all steps in the order pre
    #+NAME: utility-code
    #+BEGIN_SRC org
      ,* Utility Code                                            :noexport:
-
    #+END_SRC
 
 4. Add /Common Export Settings/ Section to end of the file.
