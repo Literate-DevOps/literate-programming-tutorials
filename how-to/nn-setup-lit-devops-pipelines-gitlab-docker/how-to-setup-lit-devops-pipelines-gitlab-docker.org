@@ -220,13 +220,13 @@ GitLab provides official docker images for many of their products[fn:1], includi
    - For Unix, Linux and MacOS users
 
      #+name: verify-gitlab-ce-local-port-not-in-use-msg
-     #+begin_src ruby :var data=gitlab-ce-local-port-mappings :wrap "quote" :exports results :results org replace 
-      " *Note:* For this tutorial, we need to verify that network ports =%s=, =%s= and =%s= are not in use. " % data.map{|d| d[0]}
+     #+begin_src ruby :var data=gitlab-ce-local-port-mappings :exports results  :results raw replace 
+      "#+begin_quote\n  *Note:* For this tutorial, we need to verify that network ports =%s=, =%s= and =%s= are not in use.\n#+end_quote\n" % data.map{|d| d[0]}
      #+end_src
 
      #+RESULTS: verify-gitlab-ce-local-port-not-in-use-msg
      #+begin_quote
-      ,*Note:* For this tutorial, we need to verify that network ports =443=, =80= and =22= are not in use. 
+       *Note:* For this tutorial, we need to verify that network ports =443=, =80= and =22= are not in use.
      #+end_quote
 
      #+name: verify-gitlab-ce-local-port-not-in-use-cmd
