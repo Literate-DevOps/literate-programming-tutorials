@@ -1,0 +1,85 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
+
+#+TITLE: How to Setup Literate DevOps Pipelines using GitLab Inside of Docker Container
+
+* Summary
+
+** Instructions
+
+* Requirements
+
+** Instructions
+
+* Create New org-mode File
+
+1. Create a new =org-mode= file using =Emacs=.
+
+   For this tutorial, the filename will be =setup-pipelines.org=
+
+   - To create the file in Emacs do the following: 
+     1. Press the key chords ~C-x~ ~C-f~
+     2. Type ==setup-pipelines.org==
+     3. Press ~Return~ or ~Enter~ key
+
+2. Add ~mode~ line to top of the file.
+   
+   #+NAME: mode-line
+   #+BEGIN_SRC org
+     # -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
+   #+END_SRC
+
+   #+BEGIN_QUOTE 
+     *TIP:* To insert =«= press key chord ~C-x~ ~8~ ~<~ and to insert =»= press key chord ~C-x~ ~8~ ~>~ 
+   #+END_QUOTE
+
+   -----
+
+   #+begin_quote 
+     *FAQ:* Why did you customize the values for =org-babel-noweb-wrap-start= and =org-babel-noweb-wrap-end=?  
+
+     *Answer:* The default values for =org-babel-noweb-wrap-start, \lt\lt,= and =org-babel-noweb-wrap-end=, \gt\gt, collide with the operators of some common programming languages. These collisions can break the syntax highlighting and interfere with code maintenance.
+   #+end_quote
+
+3. Add /Utility Code/ Section to end of file.
+   
+   #+NAME: utility-code
+   #+BEGIN_SRC org
+     ,* Utility Code                                            :noexport:
+
+   #+END_SRC
+
+4. Add /Common Export Settings/ Section to end of the file.
+
+   #+NAME: common-export-settings
+   #+BEGIN_SRC org
+     ,* Common Export Settings                                           :noexport:
+
+     ,#+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
+     ,#+OPTIONS: author:nil broken-links:nil c:nil creator:nil
+     ,#+OPTIONS: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+     ,#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
+     ,#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
+     ,#+SELECT_TAGS: export
+     ,#+EXCLUDE_TAGS: noexport nolatex
+
+     # For Display when file is exported with org-ruby 
+
+     ,#+EXPORT_SELECT_TAGS: export
+     ,#+EXPORT_EXCLUDE_TAGS: noexport
+   #+END_SRC
+
+5. Save the file in =Emacs=.
+
+   - To save the file in Emacs do the following: 
+     1. Press the key chords ~C-x~ ~C-s~
+
+** Self Check - Example 1
+
+After completing the instructions in this section, the contents of journal-template.org should be similar to [[file:self-check-example-01.org][self-check-example-01.org]].
+
+#+BEGIN_SRC org :tangle self-check-example-01.org :noweb yes :exports none 
+  «mode-line»
+
+  «utility-code»
+  «common-export-settings»
+#+END_SRC
