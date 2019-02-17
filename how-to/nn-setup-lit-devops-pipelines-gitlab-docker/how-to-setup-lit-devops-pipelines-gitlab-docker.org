@@ -207,6 +207,8 @@ GitLab provides official docker images for many of their products[fn:1], includi
 
 4. Map local network ports to default ports inside GitLaB-CE container.
  
+   The table below contains the network port mappings that will be used for the GitLab-CE container.
+
    #+name: gitlab-ce-local-port-mappings
    | Local-Port | Container-Port |
    |------------+----------------|
