@@ -254,7 +254,7 @@ GitLab provides official docker images for many of their products[fn:1], includi
            if [ "0" = `netstat -an | grep -i 'tcp' | grep -i listen | grep -E "([*]|127.0.0.1)\.$port" | wc -l;` ]; then
                echo "$port OK";
            else
-               echo "$port CHOOSE_AGAIN";
+               echo "$port IN_USE";
            fi
        done
      #+end_src
@@ -270,6 +270,10 @@ GitLab provides official docker images for many of their products[fn:1], includi
      : 443 OK
      : 80 OK
      : 22 OK
+
+     #+begin_quote
+       *Important:* If output shows any network ports are already in use, then you will need to pick an new port numbers and manually adjust the ~docker run~ command parameters in future tutorial steps as a workaround for your specific setup.
+     #+end_quote
 
 * Common Export Settings                                           :noexport:
 
