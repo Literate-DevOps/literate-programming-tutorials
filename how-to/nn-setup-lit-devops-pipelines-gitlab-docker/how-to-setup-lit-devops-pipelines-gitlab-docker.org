@@ -228,7 +228,7 @@ GitLab provides official docker images for many of their products[fn:1], includi
      *Note:* For this tutorial, we need to verify that network ports =443=, =80= and =22= are not in use.
    #+end_quote
 
-   The following example commands may be used to verify that the network ports are not in use.
+   The following example script may be used to verify that the network ports are not in use.
  
    - For Unix, Linux and MacOS users
 
