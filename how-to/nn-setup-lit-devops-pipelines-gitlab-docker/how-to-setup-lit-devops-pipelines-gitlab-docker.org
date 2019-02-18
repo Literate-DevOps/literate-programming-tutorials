@@ -272,7 +272,7 @@ GitLab provides official docker images for many of their products[fn:1], includi
      : 22 OK
 
      #+begin_quote
-       *Important:* If output shows any network ports are already in use, then you will need to pick an new port numbers and manually adjust the ~docker run~ command parameters in future tutorial steps as a workaround for your specific setup.
+       *Important:* If the output from the example script shows any of the network ports are already in use, then you will need to pick new port numbers and manually adjust the port numbers in the ~docker run~ command parameters which are specified in future tutorial steps. This workaround for your specific network setup should allow the tutorial to continue.
      #+end_quote
 
 * Common Export Settings                                           :noexport:
