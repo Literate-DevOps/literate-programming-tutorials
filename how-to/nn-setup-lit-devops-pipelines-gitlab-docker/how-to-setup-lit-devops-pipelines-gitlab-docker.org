@@ -23,18 +23,6 @@ To complete this tutorial successfully, please follow all steps in the order pre
      *Note:* The version of docker used in this tutorial is =2.0.0.3 (31259)=
    #+end_quote
 
-2. Download, Install, and Configure =Emacs= Software
-
-   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
-
-3. Download, Install, and Configure =org-mode= Software
-
-   #+BEGIN_QUOTE
-     *Note:* The =org-mode= application is already installed if you are using a recent version of =Emacs=, i.e. versions 25 or greater.
-   #+END_QUOTE
-
-   Unfortunately, this requirement is beyond the scope of this =How-To= tutorial.
-
 * Download and Configure GitLab-CE Docker Container
 
 GitLab provides official docker images for many of their products[fn:1], including GitLab-CE[fn:2].
