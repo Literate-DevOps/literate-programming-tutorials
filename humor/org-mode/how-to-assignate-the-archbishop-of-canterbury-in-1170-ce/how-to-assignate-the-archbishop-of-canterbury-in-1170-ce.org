@@ -90,7 +90,7 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
 
 * To see the correct answer execute the following Literate Program
 
-1. Encode What the King Said as Literate Program
+1. Encode What the King Said as Literate Program[fn:2]
 
    #+NAME: what_the_king_said
    #+BEGIN_SRC ruby :var the_king_said=plausible-deniability :wrap "SRC css :noweb yes" :exports results 
@@ -129,7 +129,7 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
        «will_no_one» «rid_me_of» «this_turbulent_priest?»
      #+end_SRC
 
-   - *What the King Wanted*[fn:2]
+   - *What the King Wanted*
 
      #+BEGIN_SRC css :noweb yes :exports both 
        «what_the_king_wanted()»
