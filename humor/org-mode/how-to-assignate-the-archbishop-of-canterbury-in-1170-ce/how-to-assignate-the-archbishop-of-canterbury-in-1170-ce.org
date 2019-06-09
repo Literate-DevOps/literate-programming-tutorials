@@ -36,6 +36,10 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
 
 1. Guess meaning of =Will no one= using Christmas Party Royal Guest List as Input.
 
+   #+BEGIN_QUOTE
+     *Hint:* Use the following =ruby= code
+   #+END_QUOTE
+   
    #+NAME: will_no_one_code
    #+BEGIN_SRC ruby :var guests=royal-guest-list-x-mas-1170-ce
      special_friends = guests.select!{|guest| guest[1] == 'Knight'}.map{|row| [row[0].split(/ /)[0]]}.sort
@@ -52,6 +56,10 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
    | request excommunication be undone by        |
    | use those pointy sharp sticks I gave you on |
 
+   #+BEGIN_QUOTE
+     *Hint:* Use the following =ruby= code
+   #+END_QUOTE
+
    #+NAME: rid_me_of_code
    #+BEGIN_SRC ruby :var guests=royal-guest-list-x-mas-1170-ce :var list_of_phrases=list-of-phrases
      list_of_phrases[guests.select!{|guest| not guest[1] == 'King'}.map{|row| [row[0].split(/ /)[0]]}.count - 1].join(' ')
@@ -66,6 +74,10 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
    | Jesus                                       |
    | Holy Ghost                                  |
    | Thomas Becket, the Archbishop of Canterbury |
+
+   #+BEGIN_QUOTE
+     *Hint:* Use the following =ruby= code
+   #+END_QUOTE
 
    #+NAME: this_turbulent_priest?_code
    #+BEGIN_SRC ruby :var guests=royal-guest-list-x-mas-1170-ce :var favorite_religious_personages=favorite-religious-personages
