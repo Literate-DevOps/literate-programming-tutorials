@@ -123,9 +123,6 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
      «what_the_king_said()»
      #+end_SRC
 
-     #+RESULTS:
-     : «will_no_one» «rid_me_of» «this_turbulent_priest?»
-
      #+NAME: what_the_king_wanted
      #+RESULTS: what_the_king_said
      #+begin_SRC css :noweb yes
