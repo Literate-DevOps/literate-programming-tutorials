@@ -118,13 +118,13 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
    #+END_SRC
 
    - *What the King Said*
-
-     #+CALL: what_the_king_said()
+     
+     #+begin_SRC css :noweb yes :exports both
+     «what_the_king_said()»
+     #+end_SRC
 
      #+RESULTS:
-     #+begin_SRC css :noweb yes
-     «will_no_one» «rid_me_of» «this_turbulent_priest?»
-     #+end_SRC
+     : «will_no_one» «rid_me_of» «this_turbulent_priest?»
 
      #+NAME: what_the_king_wanted
      #+RESULTS: what_the_king_said
