@@ -124,6 +124,14 @@ After completing the instructions in this section, the contents of =tutorial-exa
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 
+* Raw Training Notes
+
+From Ansible Workshop 2019/11/07 by Sirius[fn:2] sponsored RedHat[fn:3] 
+
 * Footnotes
+
+[fn:3] https://www.redhat.com/en 
+
+[fn:2] https://www.siriuscom.com/ 
 
 [fn:1] https://www.ansible.com/
