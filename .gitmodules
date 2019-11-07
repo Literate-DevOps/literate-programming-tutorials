@@ -1,3 +1,6 @@
 [submodule "mysidlab-infra"]
 	path = mysidlab-infra
 	url = https://github.com/Questions-and-Answers/mysidlab-infra
+[submodule "mysidlab-security"]
+	path = mysidlab-security
+	url = https://github.com/Questions-and-Answers/mysidlab-security.git
