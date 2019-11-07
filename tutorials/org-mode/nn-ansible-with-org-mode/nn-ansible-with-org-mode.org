@@ -1,0 +1,127 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
+
+#+TITLE: Ansible with Literate DevOps Tutorial
+
+
+* Summary                                                          
+
+This tutorial provides a step by step guide on how to use =ansible= with Literate DevOps. 
+
+** Instructions
+
+To complete this tutorial successfully, please follow all steps in the order presented of each section listed below:
+- Requirements
+- Create New =org-mode= File
+
+* Requirements
+
+#+BEGIN_QUOTE
+  *Note:* All the requirements /must/ be completed successfully before continuing with the steps in this tutorial.
+#+END_QUOTE
+
+** Instructions
+
+1. Download, Install, and Configure =ansible= Software
+
+   Unfortunately, this requirement is beyond the scope of this tutorial.
+
+2. Download, Install, and Configure =Emacs= Software
+
+   Unfortunately, this requirement is beyond the scope of this tutorial.
+
+3. Download, Install, and Configure =org-mode= Software
+
+   #+BEGIN_QUOTE
+     *Note:* The =org-mode= application is already installed if you are using a recent version of =Emacs=, i.e. versions 25 or greater.
+   #+END_QUOTE
+
+   Unfortunately, this requirement is beyond the scope of this tutorial.
+
+4. Validate =Emacs=, =org-mode= and =gnupg= are configured to work together.
+
+   Unfortunately, this requirement is beyond the scope of this tutorial.
+
+* Create New org-mode File
+
+** Instructions
+
+1. Create a new =org-mode= file using =Emacs=.
+
+   For this tutorial, the filename will be =tutorial-example1.org=
+
+   - To create the file in Emacs do the following: 
+     1. Press the key chords ~C-x~ ~C-f~
+     2. Type =tutorial-example1.org=
+     3. Press ~Return~ or ~Enter~ key
+
+2. Add ~mode~ line to top of the file.
+   
+   #+NAME: mode-line
+   #+BEGIN_SRC org
+     # -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; -*-
+   #+END_SRC
+
+   #+BEGIN_QUOTE 
+     *TIP:* To insert =«= press key chord ~C-x~ ~8~ ~<~ and to insert =»= press key chord ~C-x~ ~8~ ~>~ 
+   #+END_QUOTE
+
+3. Add /Utility Code/ Section to end of file.
+   
+   #+NAME: utility-code
+   #+BEGIN_SRC org
+     ,* Utility Code                                            :noexport:
+
+   #+END_SRC
+
+4. Add /Common Export Settings/ Section to end of the file.
+
+   #+NAME: common-export-settings
+   #+BEGIN_SRC org
+     ,* Common Export Settings                                           :noexport:
+
+     ,#+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
+     ,#+OPTIONS: author:nil broken-links:nil c:nil creator:nil
+     ,#+OPTIONS: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+     ,#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
+     ,#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
+     ,#+SELECT_TAGS: export
+     ,#+EXCLUDE_TAGS: noexport nolatex
+
+     # For Display when file is exported with org-ruby 
+
+     ,#+EXPORT_SELECT_TAGS: export
+     ,#+EXPORT_EXCLUDE_TAGS: noexport
+   #+END_SRC
+
+5. Save the file in =Emacs=.
+
+   - To save the file in Emacs do the following: 
+     1. Press the key chords ~C-x~ ~C-s~
+
+** Self Check - Example 1
+
+After completing the instructions in this section, the contents of =tutorial-example1.org= should be similar to [[file:self-check-example-01.org][self-check-example-01.org]].
+
+#+BEGIN_SRC org :tangle self-check-example-01.org :noweb yes :exports none 
+  «mode-line»
+
+  «utility-code»
+  «common-export-settings»
+#+END_SRC
+
+* Common Export Settings                                           :noexport:
+
+#+OPTIONS: ':nil *:t -:t ::t <:nil H:4 \n:nil ^:{} arch:headline
+#+OPTIONS: author:nil broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+#+OPTIONS: p:nil pri:nil prop:t stat:nil tags:t tasks:nil tex:t
+#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:t
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport nolatex
+
+# For Display when file is exported with org-ruby 
+
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+* Footnotes
