@@ -128,6 +128,29 @@ After completing the instructions in this section, the contents of =tutorial-exa
 
 From Ansible Workshop 2019/11/07 by Sirius[fn:2] sponsored RedHat[fn:3] 
 
+** Intro 
+
+User -> Playbooks -> Ansible software ->  Infrastructure(?)
+
+- Users
+  Write Playbooks
+  - Playbooks
+    Call features of Open Source Ansible engine
+    - inventory
+    - plugins
+    - Modules
+      - git
+      - Package
+      - get_url
+      - copy
+      - cloudformation
+      - azure_rm_resource
+      - vmware_guest
+      - aci_rest
+    - API (Ansible Tower project wraps around the Open Source Ansible engine)
+
+** Lab Infrastructure Automation 
+
 * Footnotes
 
 [fn:3] https://www.redhat.com/en 
