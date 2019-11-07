@@ -159,7 +159,7 @@ fork https://github.com/fiveout/mysidlab-infra
 - projects :: pointer to source reposity of ansible artifacts?
 - templates :: templates for jobs 
 
-
+Open Source AWX has similar UI to Tower interface
 
 *** Repo
 
