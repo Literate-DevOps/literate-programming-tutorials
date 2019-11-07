@@ -166,6 +166,112 @@ fork https://github.com/fiveout/mysidlab-infra
 https://github.com/Questions-and-Answers/mysidlab-infra
 
 
+* Utility Code 
+
+** Creating yaml from a Properties Table
+
+
+
+#+NAME: example1-data
+| property-name           | property-value                       |
+|-------------------------+--------------------------------------|
+| job00(0)                | echo "Hello World!"                  |
+| job00(1)                | echo "Howdy Terra!"                  |
+| job01.stage             | test                                 |
+| job01.artifact.paths(0) | my-scripts                           |
+| job01.artifact.paths(1) | my-code                              |
+| job01.environment.name  | env-name                             |
+| job01.environment.url   | https://example.com                  |
+| job01.script(0)         | echo "For example run a lint test"   |
+| job01.script(1)         | echo "Do another parallel test here" |
+| job01.only(0)           | only-on-branch                       |
+| job02(0)                | echo "Hello Again!"                  |
+| job03(0)                | echo "Index at 12?"                  |
+
+
+#+NAME: ruby/properties-to-yaml
+#+BEGIN_SRC ruby :var data=example1-data :exports both 
+  require 'yaml'
+
+  def get_hash (txt, value , delim=".")
+
+    if txt.is_a? String and txt =~ /[(]\d+[)]/
+        b = txt.split(/[()]/,3)
+
+        c = Array.new 
+        c[b[1].to_i] = value
+
+        if b.is_a? Array and not b[0].nil? and b[0].include?(".")
+          get_hash(b[0], c)
+        else
+          [[[b[0],c]].to_h]
+        end
+    else
+      #
+      # just hash and No array
+      #
+      a = txt.split('.', 2)
+
+      if a.is_a? Array and not a[1].nil? and a[1].include?(".")
+         [[[a[0], get_hash(a[1],value)[0]]].to_h]
+      else
+        [[[a[0], [[a[1], value]].to_h]].to_h]
+      end
+    end
+
+  end
+
+  def merge_recursively(a, b)
+    a.merge(b) {|key, a_item, b_item|
+      if a_item.kind_of?(Hash) and b_item.kind_of?(Hash)
+        merge_recursively(a_item, b_item) 
+      elsif a_item.kind_of?(Array) and b_item.kind_of?(Array)
+        a_item + b_item.compact
+      else
+        b_item
+      end
+      }
+  end
+
+  h = Hash.new  
+
+  data.map{|d| 
+    r = get_hash(d[0],d[1])
+    h = merge_recursively(h,r[0])
+
+  }
+
+  h.to_yaml
+  my_yaml = h.to_yaml
+  my_yaml.gsub(/( *- )/,"  \\1")
+
+#+END_SRC
+
+#+RESULTS: ruby/properties-to-yaml
+#+begin_example
+---
+job00:
+  - echo "Hello World!"
+  - echo "Howdy Terra!"
+job01:
+  stage: test
+  artifact:
+    paths:
+      - my-scripts
+      - my-code
+  environment:
+    name: env-name
+    url: https://example.com
+  script:
+    - echo "For example run a lint test"
+    - echo "Do another parallel test here"
+  only:
+    - only-on-branch
+job02:
+  - echo "Hello Again!"
+job03:
+  - echo "Index at 12?"
+#+end_example
 * Footnotes
 
 [fn:3] https://www.redhat.com/en 
