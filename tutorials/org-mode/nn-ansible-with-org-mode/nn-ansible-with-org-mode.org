@@ -147,7 +147,7 @@ User -> Playbooks -> Ansible software ->  Infrastructure(?)
       - azure_rm_resource
       - vmware_guest
       - aci_rest
-    - API (Ansible Tower project wraps around the Open Source Ansible engine)
+    - API[fn:4] (Ansible Tower[fn:5] project wraps around the Open Source Ansible engine)
 
 ** Lab Infrastructure Automation 
 
@@ -166,6 +166,11 @@ Open Source AWX has similar UI to Tower interface
 https://github.com/Questions-and-Answers/mysidlab-infra
 
 file:./repos
+
+*** References
+
+https://docs.ansible.com/ansible/latest/dev_guide/developing_api.html
+https://docs.ansible.com/
 
 * Utility Code 
 
@@ -274,6 +279,10 @@ job03:
   - echo "Index at 12?"
 #+end_example
 * Footnotes
+
+[fn:5] https://docs.ansible.com/ansible-tower/latest/html/towerapi/index.html 
+
+[fn:4] https://docs.ansible.com/ansible/latest/api/index.html
 
 [fn:3] https://www.redhat.com/en 
 
