@@ -5,7 +5,7 @@
 
 * Summary                                                          
 
-This tutorial provides a step by step guide on how to use =ansible= with Literate DevOps. 
+This tutorial provides a step by step guide on how to use =ansible=[fn:1] with Literate DevOps. 
 
 ** Instructions
 
@@ -125,3 +125,5 @@ After completing the instructions in this section, the contents of =tutorial-exa
 #+EXPORT_EXCLUDE_TAGS: noexport
 
 * Footnotes
+
+[fn:1] https://www.ansible.com/
