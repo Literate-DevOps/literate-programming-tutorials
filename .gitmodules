@@ -1,0 +1,3 @@
+[submodule "mysidlab-infra"]
+	path = mysidlab-infra
+	url = https://github.com/Questions-and-Answers/mysidlab-infra
