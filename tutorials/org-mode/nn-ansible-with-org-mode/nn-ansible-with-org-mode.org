@@ -151,6 +151,23 @@ User -> Playbooks -> Ansible software ->  Infrastructure(?)
 
 ** Lab Infrastructure Automation 
 
+SidUser #4 pw Sirius2019
+
+http://tower.mysidlabs.com
+https://github.com/fiveout
+
+fork https://github.com/fiveout/mysidlab-infra
+
+- projects :: pointer to source reposity of ansible artifacts?
+- templates :: templates for jobs 
+
+
+
+*** Repo
+
+https://github.com/Questions-and-Answers/mysidlab-infra
+
+
 * Footnotes
 
 [fn:3] https://www.redhat.com/en 
