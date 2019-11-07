@@ -165,6 +165,7 @@ Open Source AWX has similar UI to Tower interface
 
 https://github.com/Questions-and-Answers/mysidlab-infra
 
+file:./repos
 
 * Utility Code 
 
