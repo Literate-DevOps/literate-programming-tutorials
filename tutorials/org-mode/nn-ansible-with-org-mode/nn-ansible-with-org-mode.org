@@ -167,6 +167,11 @@ https://github.com/Questions-and-Answers/mysidlab-infra
 
 file:./repos
 
+*** Tips 
+
+- Use instance groups to scale horizontally (Matt)
+- Playbooks act on facts?
+
 *** References
 
 https://docs.ansible.com/ansible/latest/dev_guide/developing_api.html
