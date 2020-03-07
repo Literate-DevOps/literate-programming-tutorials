@@ -7,7 +7,7 @@
 This =How-To= tutorial provides a step by step guide on how to assignate the Archbishop of Canterbury in 1170 CE if you are Henry II of England. 
 
 #+BEGIN_QUOTE
-If you are not Henry II of England, then this tutorial is really about how literate programming can be used enhance undestanding by writing and structuring code for a human audience instead of a computer. After you read this tutorial, you should read the raw code of this document as well. 
+*Note:* If you are not Henry II of England, then this tutorial is really about how literate programming can be used enhance undestanding by writing and structuring code for a human audience instead of a computer. After you finish this tutorial, you should read the raw code of this document as well to see the full syntax of the literate program. 
 #+END_QUOTE
 
 * Setup Instructions
@@ -43,12 +43,12 @@ The =royal-guest-list-x-mas-1170-ce= table contains the guest list.
 #+END_SRC
 
 #+BEGIN_QUOTE
-  *Hint:* If the date is after 1170 CE, then let's puts this party phrase is inside a code block is named =plausible-deniability=.
+  *Hint:* If the date is after 1170 CE, then let's put this phrase is inside a code block is named =plausible-deniability=.
 #+END_QUOTE
 
 ** Have Guests Play the Popular =Read between the Lines= Party Game
 
-1. Guess meaning of =Will no one= using Christmas Party Royal Guest List as Input.
+1. Guess meaning of the words, =Will no one=, using =Christmas Party Royal Guest List= as a clue.
 
    #+BEGIN_QUOTE
      *Hint:* If the date is after 1170 CE, then use the following =ruby= code block which is named =will_no_one_code=.
@@ -60,7 +60,7 @@ The =royal-guest-list-x-mas-1170-ce= table contains the guest list.
      [special_friends[0..2].join(', '), special_friends[3]].join(' & ')
    #+END_SRC
 
-2. Guess the meaning of =rid me of= using the =Christmas Party Royal Guest List= and the following =List of Phrases=
+2. Guess the meaning of the words, =rid me of=, using the =Christmas Party Royal Guest List= and the following =List of Phrases= as clues.
 
    The =list-of-phrases= table contains the phrases available to the guests.
 
@@ -81,7 +81,7 @@ The =royal-guest-list-x-mas-1170-ce= table contains the guest list.
      list_of_phrases[guests.select!{|guest| not guest[1] == 'King'}.map{|row| [row[0].split(/ /)[0]]}.count - 1].join(' ')
    #+END_SRC
 
-3. Guess the meaning of =this turbulent priest?= using the =Christmas Party Royal Guest List= and the following =Famous Religious Personages=
+3. Guess the meaning of the words, =this turbulent priest?=, using the =Christmas Party Royal Guest List= and the following =Famous Religious Personages= as clues.
    
    The =favorite-religious-personages= table contains a list of famous religious personages for the party game.
    
