@@ -8,13 +8,14 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
 
 * Setup Instructions
 
-- Appoint your friendly chancellor as Archbishop of Canterbury in 1162 CE to reassert royal supremancy of English Church[fn:1].
-- When your plan falls part, get into 10 year pissing match with lots of other historical figures.
-- In 1170 CE
-  - Get really upset when the Archbishop of Canterbury excommunicates a bunch of people you like.
-  - Hold a Christmas party
+1. Appoint your friendly chancellor as Archbishop of Canterbury in 1162 CE to reassert royal supremancy of English Church[fn:1].
+2. When your plan falls apart, get into 10 year pissing match with lots of other historical figures.
+3. In 1170 CE
+  1. Get really upset when the Archbishop of Canterbury excommunicates a bunch of people you like.
+  2. Hold a Christmas party
 
-* Christmas Party Royal Guest List
+* Plan Details
+** Christmas Party Royal Guest List
 
 #+NAME: royal-guest-list-x-mas-1170-ce
 | Name              | Title  |
@@ -25,14 +26,14 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
 | Richard le Breton | Knight |
 | Henry II          | King   |
 
-* At the Party, Say this Phrase
+** At the Party, Say this Phrase
 
 #+NAME: plausible-deniability
 #+BEGIN_SRC css :noweb yes
   "Will no one rid me of this turbulent priest?" 
 #+END_SRC
 
-* Have Guests Play the Popular =Read between the Lines= Party Game
+** Have Guests Play the Popular =Read between the Lines= Party Game
 
 1. Guess meaning of =Will no one= using Christmas Party Royal Guest List as Input.
 
@@ -88,7 +89,7 @@ This =How-To= tutorial provides a step by step guide on how to assignate the Arc
 
 5. Reward Everyone that Guessed the Correct Answer to =Read between the Lines= Game
 
-* To see the correct answer execute the following Literate Program
+** To see the correct answer execute the following Literate Program
 
 1. Encode What the King Said as Literate Program[fn:2]
 
