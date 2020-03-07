@@ -7,7 +7,7 @@
 This =How-To= tutorial provides a step by step guide on how to assignate the Archbishop of Canterbury in 1170 CE if you are Henry II of England. 
 
 #+BEGIN_QUOTE
-*Note:* If you are not Henry II of England, then this tutorial is really about how literate programming can be used enhance undestanding by writing and structuring code for a human audience instead of a computer. After you finish this tutorial, you should read the raw code of this document as well to see the full syntax of the literate program. 
+*Note:* If you are not Henry II of England, then this tutorial is really about how literate programming can be used enhance understanding by writing and structuring code for a human audience instead of a computer. After you finish this tutorial, you should read the raw code of this document as well to see the full syntax of the literate program. 
 #+END_QUOTE
 
 * Setup Instructions
