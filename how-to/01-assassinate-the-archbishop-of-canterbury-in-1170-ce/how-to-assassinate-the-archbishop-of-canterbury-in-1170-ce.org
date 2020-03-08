@@ -114,10 +114,10 @@ The =royal-guest-list-x-mas-1170-ce= table contains the guest list.
 
 1. Encode What the King Said as Literate Program[fn:2]
 
-   - The following =ruby= code block which is named =what_the_king_said=. The ~the_king_said~ variable value is set to the output of the =plausible-deniability= code block. 
+   - The following =ruby= code block which is named =what_the_king_said_code=. The ~the_king_said~ variable value is set to the output of the =plausible-deniability= code block. 
 
-     #+NAME: what_the_king_said
-     #+BEGIN_SRC ruby :var the_king_said=plausible-deniability :wrap "SRC css :noweb yes" :exports both 
+     #+NAME: what_the_king_said_code
+     #+BEGIN_SRC ruby :var the_king_said=plausible-deniability 
      the_king_said.downcase!
      the_king_said.gsub!(/(will no one)/i,'«\1»')
      the_king_said.gsub!(/(rid me of)/i,'«\1»')
@@ -149,19 +149,20 @@ The =royal-guest-list-x-mas-1170-ce= table contains the guest list.
 
 2. Translate *What the King Said* into *What the King Wanted*
      
-   - The following code block will execute the =what_the_king_said= =ruby= code.
+   - The following =what_the_king_said= code block will execute the =what_the_king_said_code= =ruby= code.
 
-     #+begin_SRC css :noweb yes :exports both
-     «what_the_king_said()»
+     #+NAME: what_the_king_said
+     #+begin_SRC css :noweb yes :wrap "SRC css :noweb yes" :exports both
+     «what_the_king_said_code()»
      #+end_SRC
 
    - The following code block renames the results of the =what_the_king_said= =ruby= code to a new code block named =what_the_king_wanted=.
 
      #+NAME: what_the_king_wanted
      #+RESULTS: what_the_king_said
-     #+begin_SRC css :noweb yes
-       «will_no_one» «rid_me_of» «this_turbulent_priest?»
-     #+end_SRC
+     #+BEGIN_SRC css :noweb yes
+     «will_no_one» «rid_me_of» «this_turbulent_priest?»
+     #+END_SRC
 
 3. Now we can learn *What the King Wanted*.
 
@@ -176,6 +177,7 @@ The =royal-guest-list-x-mas-1170-ce= table contains the guest list.
 
      #+RESULTS: the_correct_answer
      : Hugh, Reginald, Richard & William use those pointy sharp sticks I gave you on Thomas Becket, the Archbishop of Canterbury
+
 
 
 * Common Export Settings                                           :noexport:
