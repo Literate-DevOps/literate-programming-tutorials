@@ -24,6 +24,7 @@
      #+RESULTS:
      :RESULTS:
      - [[file:how-to/00-convert-latex-template-into-org-mode-template][00-convert-latex-template-into-org-mode-template]]
+     - [[file:how-to/01-assassinate-the-archbishop-of-canterbury-in-1170-ce][01-assassinate-the-archbishop-of-canterbury-in-1170-ce]]
      :END:
 
 ** Useful Resources
