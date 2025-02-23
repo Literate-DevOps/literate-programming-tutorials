@@ -26,6 +26,7 @@ This =How-To= tutorial provides a step by step guide on how to assassinate the A
 
 The =royal-guest-list-x-mas-1170-ce= table contains the guest list. 
 
+#+caption: this is caption
 #+NAME: royal-guest-list-x-mas-1170-ce
 | Name              | Title  |
 |-------------------+--------|
